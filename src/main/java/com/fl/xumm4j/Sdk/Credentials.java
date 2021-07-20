@@ -1,8 +1,8 @@
-package com.fl.xumm4j.impl;
+package com.fl.xumm4j.Sdk;
 
-import com.fl.xumm4j.api.credentials;
+import com.fl.xumm4j.api.AppCredentials;
 
-public class ICredentials {
+public class Credentials {
     private String apiKey;
     private String secretKey;
 
@@ -14,7 +14,7 @@ public class ICredentials {
         return secretKey;
     }
 
-    public static class Builder implements credentials {
+    public static class Builder implements AppCredentials {
         private String apiKey;
         private String secretKey;
 
@@ -34,9 +34,9 @@ public class ICredentials {
         public void validate() {
             try {
                 if (this.apiKey == null || this.apiKey == "") {
-                    throw new Exception(credentials.EMPTY_APIKEY);
+                    throw new Exception(AppCredentials.EMPTY_APIKEY);
                 } else if (this.secretKey == null || this.secretKey == "") {
-                    throw new Exception(credentials.EMPTY_SECRETKEY);
+                    throw new Exception(AppCredentials.EMPTY_SECRETKEY);
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -44,8 +44,8 @@ public class ICredentials {
         }
 
         @Override
-        public ICredentials build() {
-            ICredentials credentials = new ICredentials();
+        public Credentials build() {
+            Credentials credentials = new Credentials();
             credentials.apiKey = this.apiKey;
             credentials.secretKey = this.secretKey;
             validate();
@@ -54,7 +54,7 @@ public class ICredentials {
         }
 
     }
-    private ICredentials() {
+    private Credentials() {
 
     }
 }
