@@ -14,6 +14,8 @@ public class testMain {
 
         System.out.println(misc.getCurratedAssets());
         System.out.println(misc.doPing());
+        System.out.println(misc.getRates("sar"));
         System.out.println(misc.getKycStatus("rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB"));
+        System.out.println(misc.getTransaction("3661492C20982D84B53594C06C79C9AF93EA3FC8CFB27506CEDC4B3ECD1FBCB3"));
     }
 }

@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Misc implements Miscellaneous {
     Http http;
     ObjectMapper mapper;
+    String response;
 
     public Misc(Credentials iCredentials) {
         this.http = new Http(iCredentials);
@@ -22,7 +23,6 @@ public class Misc implements Miscellaneous {
 
     @Override
     public String doPing() {
-        String response = "";
         try {
             response = Objects.requireNonNull(http.doGet(PING_ENDPOINT).body()).string();
             response = getToPrettyString(response);
@@ -34,7 +34,6 @@ public class Misc implements Miscellaneous {
 
     @Override
     public String getCurratedAssets() {
-        String response = "";
         try {
             response = Objects.requireNonNull(http.doGet(CURRATED_ASSETS_ENDPOINT).body()).string();
             response = getToPrettyString(response);
@@ -45,10 +44,31 @@ public class Misc implements Miscellaneous {
     }
 
     @Override
+    public String getRates(String currencyCode) {
+        try {
+            response = Objects.requireNonNull(http.doGet(RATES_ENDPOINT+currencyCode).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
     public String getKycStatus(String accountAddress) {
-        String response = "";
         try {
             response = Objects.requireNonNull(http.doGet(KYC_STATUS_ENDPOINT+accountAddress).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public String getTransaction(String txHash) {
+        try {
+            response = Objects.requireNonNull(http.doGet(TXID_ENDPOINT+txHash).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
