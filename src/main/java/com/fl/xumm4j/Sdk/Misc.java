@@ -3,6 +3,7 @@ package com.fl.xumm4j.Sdk;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.api.Miscellaneous;
+import com.jcabi.aspects.Async;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -20,6 +21,8 @@ public class Misc implements Miscellaneous {
     private String getToPrettyString(String response) throws JsonProcessingException {
         return mapper.readTree(response).toPrettyString();
     }
+
+
 
     @Override
     public String doPing() {
