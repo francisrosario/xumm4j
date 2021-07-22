@@ -19,10 +19,9 @@ public class testMain {
                 .secretKey("fa44ffc6-d59f-44ef-89ce-dc4528da442c")
                 .build();
         Misc misc = new Misc(myAccess);
-
+        //at org.xrpl.xrpl4j.model.transactions.ImmutablePayment$Builder.build(ImmutablePayment.java:2567)
         Payment payment = Payment.builder()
                 .account(Address.of("dsadsadsadass"))
-                .sequence(UnsignedInteger.valueOf(23))
                 .fee(XrpCurrencyAmount.of(UnsignedLong.valueOf(32)))
                 .destination(Address.of("asddasdad"))
                 .amount(XrpCurrencyAmount.ofXrp(BigDecimal.valueOf(8787)))
