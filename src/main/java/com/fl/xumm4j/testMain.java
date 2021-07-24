@@ -1,5 +1,6 @@
 package com.fl.xumm4j;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.Sdk.builder.Credentials;
 import com.fl.xumm4j.Sdk.Misc;
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 
 public class testMain {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)  {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
         // Don't worry about this key being exposed... I built it for testing. keys not being used in production env.
         Credentials myAccess = new Credentials.builder()
@@ -26,7 +27,12 @@ public class testMain {
                 .destination(Address.of("ra5nK24KXen9AHvsdFTKHSANinZseWnPcX"))
                 .amount(XrpCurrencyAmount.ofXrp(BigDecimal.valueOf(8787)))
                 .build();
-        String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(payment);
+        String json = null;
+        try {
+            json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(payment);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
         Payload payload = new Payload.builder()
                 .txjson(json)
@@ -34,7 +40,6 @@ public class testMain {
                 .returnURL_App("www.google.com")
                 .user_token("My Token")
                 .expire(75)
-                .identifier("Identify me 12345")
                 .instruction("Instruct me")
                 .returnURL_Web("www.twitter.com")
                 .build();

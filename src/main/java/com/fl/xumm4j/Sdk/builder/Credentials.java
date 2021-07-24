@@ -30,13 +30,12 @@ public class Credentials {
             return this;
         }
 
-        @Override
-        public void validate() {
+        private void validate() {
             try {
                 if (this.apiKey == null || this.apiKey == "") {
-                    throw new Exception(AppCredentials.EMPTY_APIKEY);
+                    throw new Exception(AppCredentials.ERROR_APIKEY);
                 } else if (this.secretKey == null || this.secretKey == "") {
-                    throw new Exception(AppCredentials.EMPTY_SECRETKEY);
+                    throw new Exception(AppCredentials.ERROR_SECRETKEY);
                 }
             }catch (Exception e){
                 e.printStackTrace();
