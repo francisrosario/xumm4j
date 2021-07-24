@@ -95,7 +95,7 @@ public class Payload {
 
         private void validate() {
             if (!txblob.equals("") && !txjson.equals("")) {
-                throw new IllegalStateException(Payloads.ERROR_AMBIGOUS_PAYLOAD);
+                throw new IllegalStateException(Payloads.ERROR_AMBIGUOUS_PAYLOAD);
             }
             if (txblob.equals("") && txjson.equals("")) {
                 throw new IllegalStateException(Payloads.ERROR_MISSING_PROPERTIES);
