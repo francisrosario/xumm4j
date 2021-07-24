@@ -2,10 +2,9 @@ package com.fl.xumm4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.Sdk.builder.Credentials;
 import com.fl.xumm4j.Sdk.Misc;
-import com.fl.xumm4j.Sdk.builder.Payload;
-import org.json.JSONObject;
+import com.fl.xumm4j.Sdk.builder.CredentialsBuilder;
+import com.fl.xumm4j.Sdk.builder.PayloadBuilder;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 import org.xrpl.xrpl4j.model.fl.transactions.*;
 
@@ -16,7 +15,7 @@ public class testMain {
     public static void main(String[] args)  {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
         // Don't worry about this key being exposed... I built it for testing. keys not being used in production env.
-        Credentials myAccess = new Credentials.builder()
+        CredentialsBuilder myAccess = new CredentialsBuilder.builder()
                 .apiKey("7208fca5-4ac3-4638-b006-897dfcc0ab29")
                 .secretKey("6dab854e-b317-47f7-8453-490b8bd171ad")
                 .build();
@@ -34,7 +33,7 @@ public class testMain {
             e.printStackTrace();
         }
 
-        Payload payload = new Payload.builder()
+        PayloadBuilder payload = new PayloadBuilder.builder()
                 .txjson(json)
                 .instruction("ZUPP...")
                 .returnURL_App("www.google.com")
