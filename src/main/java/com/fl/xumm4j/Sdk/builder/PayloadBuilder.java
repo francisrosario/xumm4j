@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
 
-public class Payload {
+public class PayloadBuilder {
     private String json;
 
     public String getGeneratedPayload() {
@@ -103,7 +103,7 @@ public class Payload {
         }
 
         @Override
-        public Payload build(){
+        public PayloadBuilder build(){
             StringBuilder sb = new StringBuilder();
             ObjectMapper objectMapper = ObjectMapperFactory.create();
             JSONObject main = new JSONObject();
@@ -111,7 +111,7 @@ public class Payload {
             JSONObject return_url = new JSONObject();
             JSONObject custom_meta = new JSONObject();
 
-            Payload payload = new Payload();
+            PayloadBuilder payload = new PayloadBuilder();
             validate();
             try {
                 if (!user_token.equals("")) {
@@ -187,7 +187,7 @@ public class Payload {
         }
 
     }
-    private Payload() {
+    private PayloadBuilder() {
 
     }
 }

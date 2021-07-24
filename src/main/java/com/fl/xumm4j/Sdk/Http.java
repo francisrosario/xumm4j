@@ -1,6 +1,6 @@
 package com.fl.xumm4j.Sdk;
 
-import com.fl.xumm4j.Sdk.builder.Credentials;
+import com.fl.xumm4j.Sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.OkHttp;
 import okhttp3.*;
 
@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class Http implements OkHttp {
     private OkHttpClient okHttpClient;
-    private Credentials ic;
+    private CredentialsBuilder ic;
 
-    public Http(Credentials iCredentials) {
+    public Http(CredentialsBuilder iCredentials) {
         this.ic = iCredentials;
     }
 

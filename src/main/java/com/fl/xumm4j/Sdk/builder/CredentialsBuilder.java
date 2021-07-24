@@ -2,7 +2,7 @@ package com.fl.xumm4j.Sdk.builder;
 
 import com.fl.xumm4j.api.AppCredentials;
 
-public class Credentials {
+public class CredentialsBuilder {
     private String apiKey;
     private String secretKey;
 
@@ -43,8 +43,8 @@ public class Credentials {
         }
 
         @Override
-        public Credentials build() {
-            Credentials credentials = new Credentials();
+        public CredentialsBuilder build() {
+            CredentialsBuilder credentials = new CredentialsBuilder();
             credentials.apiKey = this.apiKey;
             credentials.secretKey = this.secretKey;
             validate();
@@ -53,7 +53,7 @@ public class Credentials {
         }
 
     }
-    private Credentials() {
+    private CredentialsBuilder() {
 
     }
 }

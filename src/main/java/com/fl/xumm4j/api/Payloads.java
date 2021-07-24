@@ -1,24 +1,25 @@
 package com.fl.xumm4j.api;
 
-import com.fl.xumm4j.Sdk.builder.Payload;
+import com.fl.xumm4j.Sdk.builder.PayloadBuilder;
 
 public interface Payloads {
+    String TXJSON_SIGNIN = "{\"TransactionType\": \"SignIn\"}";
     String ERROR_AMBIGUOUS_PAYLOAD = "Error: Ambiguous payload, please specify either txblob or txjson";
     String ERROR_MISSING_PROPERTIES = "Error: txblob or txjson is missing, please add either one of txjson or txblob";
     boolean SUBMIT_TRANSACTION = true;
     boolean MULTISIGN = true;
-    double EXPIRE = 60l;
+    double EXPIRE = 60;
 
-    Payload.builder identifier(String identifier);
-    Payload.builder blob(String blob);
-    Payload.builder instruction(String instruction);
-    Payload.builder user_token(String user_token);
-    Payload.builder returnURL_App(String return_url);
-    Payload.builder returnURL_Web(String return_url);
-    Payload.builder txjson(String json);
-    Payload.builder txblob(String blob);
-    Payload.builder submit(boolean submit);
-    Payload.builder multisign(boolean multisign);
-    Payload.builder expire(double expire);
-    Payload build();
+    PayloadBuilder.builder identifier(String identifier);
+    PayloadBuilder.builder blob(String blob);
+    PayloadBuilder.builder instruction(String instruction);
+    PayloadBuilder.builder user_token(String user_token);
+    PayloadBuilder.builder returnURL_App(String return_url);
+    PayloadBuilder.builder returnURL_Web(String return_url);
+    PayloadBuilder.builder txjson(String json);
+    PayloadBuilder.builder txblob(String blob);
+    PayloadBuilder.builder submit(boolean submit);
+    PayloadBuilder.builder multisign(boolean multisign);
+    PayloadBuilder.builder expire(double expire);
+    PayloadBuilder build();
 }

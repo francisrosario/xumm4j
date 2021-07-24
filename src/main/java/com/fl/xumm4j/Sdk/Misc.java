@@ -2,7 +2,7 @@ package com.fl.xumm4j.Sdk;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.Sdk.builder.Credentials;
+import com.fl.xumm4j.Sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.Miscellaneous;
 import org.xrpl.xrpl4j.model.jackson.ObjectMapperFactory;
 
@@ -14,7 +14,7 @@ public class Misc implements Miscellaneous {
     ObjectMapper mapper;
     String response;
 
-    public Misc(Credentials iCredentials) {
+    public Misc(CredentialsBuilder iCredentials) {
         this.http = new Http(iCredentials);
         mapper = ObjectMapperFactory.create();
     }
