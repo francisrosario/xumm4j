@@ -3,13 +3,13 @@ package com.fl.xumm4j.Sdk;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.Sdk.builder.CredentialsBuilder;
-import com.fl.xumm4j.api.Miscellaneous;
+import com.fl.xumm4j.api.IMiscellaneous;
 import org.xrpl.xrpl4j.model.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class Misc implements Miscellaneous {
+public class Misc implements IMiscellaneous {
     Http http;
     ObjectMapper mapper;
     String response;

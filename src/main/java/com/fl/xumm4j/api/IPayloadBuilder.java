@@ -2,7 +2,7 @@ package com.fl.xumm4j.api;
 
 import com.fl.xumm4j.Sdk.builder.PayloadBuilder;
 
-public interface Payloads {
+public interface IPayloadBuilder {
     String TXJSON_SIGNIN = "{\"TransactionType\": \"SignIn\"}";
     String ERROR_AMBIGUOUS_PAYLOAD = "Error: Ambiguous payload, please specify either txblob or txjson";
     String ERROR_MISSING_PROPERTIES = "Error: txblob or txjson is missing, please add either one of txjson or txblob";

@@ -1,6 +1,6 @@
 package com.fl.xumm4j.api;
 
-public interface Miscellaneous {
+public interface IMiscellaneous {
     String PING_ENDPOINT = "https://xumm.app/api/v1/platform/ping";
     String CURRATED_ASSETS_ENDPOINT = "https://xumm.app/api/v1/platform/curated-assets";
     String TXID_ENDPOINT = "https://xumm.app/api/v1/platform/xrpl-tx/";

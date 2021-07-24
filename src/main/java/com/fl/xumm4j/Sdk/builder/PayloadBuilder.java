@@ -2,7 +2,7 @@ package com.fl.xumm4j.Sdk.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.api.Payloads;
+import com.fl.xumm4j.api.IPayloadBuilder;
 import org.json.JSONObject;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
@@ -14,10 +14,10 @@ public class PayloadBuilder {
         return json;
     }
 
-    public static class builder implements Payloads {
-        private boolean submit = Payloads.SUBMIT_TRANSACTION;
-        private boolean multisign = Payloads.MULTISIGN;
-        private double expire = Payloads.EXPIRE;
+    public static class builder implements IPayloadBuilder {
+        private boolean submit = IPayloadBuilder.SUBMIT_TRANSACTION;
+        private boolean multisign = IPayloadBuilder.MULTISIGN;
+        private double expire = IPayloadBuilder.EXPIRE;
         private String user_token = "";
         private String txjson = "";
         private String txblob = "";
@@ -95,10 +95,10 @@ public class PayloadBuilder {
 
         private void validate() {
             if (!txblob.equals("") && !txjson.equals("")) {
-                throw new IllegalStateException(Payloads.ERROR_AMBIGUOUS_PAYLOAD);
+                throw new IllegalStateException(IPayloadBuilder.ERROR_AMBIGUOUS_PAYLOAD);
             }
             if (txblob.equals("") && txjson.equals("")) {
-                throw new IllegalStateException(Payloads.ERROR_MISSING_PROPERTIES);
+                throw new IllegalStateException(IPayloadBuilder.ERROR_MISSING_PROPERTIES);
             }
         }
 
