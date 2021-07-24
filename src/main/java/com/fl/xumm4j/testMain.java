@@ -34,13 +34,6 @@ public class testMain {
         }
 
         PayloadBuilder payload = new PayloadBuilder.builder()
-                .txjson(json)
-                .instruction("ZUPP...")
-                .returnURL_App("www.google.com")
-                .user_token("My Token")
-                .expire(75)
-                .instruction("Instruct me")
-                .returnURL_Web("www.twitter.com")
                 .build();
 
         //System.out.println("Generated Payload: \n" + payload.getGeneratedPayload());

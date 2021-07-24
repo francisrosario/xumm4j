@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.Sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IMiscellaneous;
-import org.xrpl.xrpl4j.model.jackson.ObjectMapperFactory;
+import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
 import java.util.Objects;

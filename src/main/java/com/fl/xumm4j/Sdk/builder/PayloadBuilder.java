@@ -121,11 +121,9 @@ public class PayloadBuilder {
                 if (!txblob.equals("")) {
                     main.put("txblob", txblob);
                 }
-                //Inner Option
                 Option.put("submit", submit);
                 Option.put("multisign", multisign);
                 Option.put("expire", expire);
-
                 if (!returnURL_Web.equals("") || !returnURL_App.equals("")) {
                     if (!returnURL_App.equals("")) {
                         return_url.put("app", returnURL_App);
@@ -137,7 +135,6 @@ public class PayloadBuilder {
 
                 }
                 main.put("options", Option);
-
                 if (!identifier.equals("") || !blob.equals("") || !instruction.equals("")) {
                     if (!identifier.equals("")) {
                         custom_meta.put("identifier", identifier);
@@ -150,14 +147,12 @@ public class PayloadBuilder {
                     }
                     main.put("custom_meta", custom_meta);
                 }
-
                 String mainJson = null;
                 try {
                     mainJson = objectMapper.readTree(main.toString()).toPrettyString();
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 }
-
                 if (!txjson.equals("") && txblob.equals("")) {
                     String[] JSONParts = mainJson.split("\n");
                     for (int x = 1; x < JSONParts.length; x++) {
