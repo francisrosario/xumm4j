@@ -1,44 +1,48 @@
 package com.fl.xumm4j;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.Sdk.Credentials;
+import com.fl.xumm4j.Sdk.builder.Credentials;
 import com.fl.xumm4j.Sdk.Misc;
-import com.google.common.primitives.UnsignedInteger;
-import com.google.common.primitives.UnsignedLong;
-import org.xrpl.xrpl4j.model.jackson.ObjectMapperFactory;
-import org.xrpl.xrpl4j.model.transactions.*;
+import com.fl.xumm4j.Sdk.builder.Payload;
+import org.json.JSONObject;
+import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
+import org.xrpl.xrpl4j.model.fl.transactions.*;
 
 import java.math.BigDecimal;
 
 public class testMain {
 
     public static void main(String[] args) throws Exception {
-
-        Credentials myAccess = new Credentials.Builder()
+        ObjectMapper objectMapper = ObjectMapperFactory.create();
+        // Don't worry about this key being exposed... I built it for testing. keys not being used in production env.
+        Credentials myAccess = new Credentials.builder()
                 .apiKey("7208fca5-4ac3-4638-b006-897dfcc0ab29")
-                .secretKey("fa44ffc6-d59f-44ef-89ce-dc4528da442c")
+                .secretKey("6dab854e-b317-47f7-8453-490b8bd171ad")
                 .build();
         Misc misc = new Misc(myAccess);
-        //at org.xrpl.xrpl4j.model.transactions.ImmutablePayment$Builder.build(ImmutablePayment.java:2567)
+
         Payment payment = Payment.builder()
-                .account(Address.of("dsadsadsadass"))
-                .fee(XrpCurrencyAmount.of(UnsignedLong.valueOf(32)))
-                .destination(Address.of("asddasdad"))
+                .fee(XrpCurrencyAmount.ofDrops(12))
+                .destination(Address.of("ra5nK24KXen9AHvsdFTKHSANinZseWnPcX"))
                 .amount(XrpCurrencyAmount.ofXrp(BigDecimal.valueOf(8787)))
                 .build();
+        String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(payment);
 
-        System.out.println(payment);
-        ObjectMapper objectMapper = new ObjectMapper();
+        Payload payload = new Payload.builder()
+                .txjson(json)
+                .instruction("ZUPP...")
+                .returnURL_App("www.google.com")
+                .user_token("My Token")
+                .expire(75)
+                .identifier("Identify me 12345")
+                .instruction("Instruct me")
+                .returnURL_Web("www.twitter.com")
+                .build();
 
-        String transactionJson = objectMapper.readTree(objectMapper.writeValueAsString(payment)).toPrettyString();
-        System.out.println(transactionJson);
-
-
-        try{
-
-        }catch (IllegalStateException ignored){
-
-        }
+        //System.out.println("Generated Payload: \n" + payload.getGeneratedPayload());
+        String GenPayload = payload.getGeneratedPayload();
+        System.out.println(GenPayload);
+        System.out.println(misc.postPayload(GenPayload));
 
         //System.out.println(misc.getCurratedAssets());
         //System.out.println(misc.doPing());

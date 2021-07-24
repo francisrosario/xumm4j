@@ -1,13 +1,13 @@
 package com.fl.xumm4j.api;
 
-import com.fl.xumm4j.Sdk.Credentials;
+import com.fl.xumm4j.Sdk.builder.Credentials;
 
 public interface AppCredentials {
     String EMPTY_APIKEY = "Empty API Key";
     String EMPTY_SECRETKEY = "Empty API Key";
 
-    Credentials.Builder apiKey(String apiKey);
-    Credentials.Builder secretKey(String secretKey);
+    Credentials.builder apiKey(String apiKey);
+    Credentials.builder secretKey(String secretKey);
     void validate();
     Credentials build();
 }

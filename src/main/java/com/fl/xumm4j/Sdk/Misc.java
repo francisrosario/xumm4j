@@ -2,8 +2,9 @@ package com.fl.xumm4j.Sdk;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fl.xumm4j.Sdk.builder.Credentials;
 import com.fl.xumm4j.api.Miscellaneous;
-import com.jcabi.aspects.Async;
+import org.xrpl.xrpl4j.model.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -15,13 +16,12 @@ public class Misc implements Miscellaneous {
 
     public Misc(Credentials iCredentials) {
         this.http = new Http(iCredentials);
-        mapper = new ObjectMapper();
+        mapper = ObjectMapperFactory.create();
     }
 
     private String getToPrettyString(String response) throws JsonProcessingException {
         return mapper.readTree(response).toPrettyString();
     }
-
 
 
     @Override
@@ -72,6 +72,17 @@ public class Misc implements Miscellaneous {
     public String getTransaction(String txHash) {
         try {
             response = Objects.requireNonNull(http.doGet(TXID_ENDPOINT+txHash).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public String postPayload(String txJson) {
+        try {
+            response = http.doPost(txJson).body().string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();

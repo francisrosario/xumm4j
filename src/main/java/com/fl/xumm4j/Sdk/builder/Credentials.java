@@ -1,4 +1,4 @@
-package com.fl.xumm4j.Sdk;
+package com.fl.xumm4j.Sdk.builder;
 
 import com.fl.xumm4j.api.AppCredentials;
 
@@ -14,18 +14,18 @@ public class Credentials {
         return secretKey;
     }
 
-    public static class Builder implements AppCredentials {
+    public static class builder implements AppCredentials {
         private String apiKey;
         private String secretKey;
 
         @Override
-        public Builder apiKey(String apiKey){
+        public builder apiKey(String apiKey){
             this.apiKey = apiKey;
             return this;
         }
 
         @Override
-        public Builder secretKey(String secretKey){
+        public builder secretKey(String secretKey){
             this.secretKey = secretKey;
             return this;
         }

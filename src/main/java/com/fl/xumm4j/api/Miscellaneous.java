@@ -35,4 +35,6 @@ public interface Miscellaneous {
      */
     String getTransaction(String txHash);
     //To do App-Storage
+
+    String postPayload(String txJson);
 }

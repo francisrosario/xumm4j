@@ -1,9 +1,8 @@
 package com.fl.xumm4j.Sdk;
 
+import com.fl.xumm4j.Sdk.builder.Credentials;
 import com.fl.xumm4j.api.OkHttp;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 
 import java.io.IOException;
 
@@ -27,10 +26,29 @@ public class Http implements OkHttp {
     public Response doGet(String url) {
         Response response = null;
         Request request = new Request.Builder()
-
                 .url(url)
                 .addHeader("X-API-Key", ic.getApiKey())
                 .addHeader("X-API-Secret", ic.getSecretKey())
+                .build();
+        try {
+            response = okHttpClient().newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public Response doPost(String payload) {
+        Response response = null;
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(JSON, payload);
+
+        Request request = new Request.Builder()
+                .url("https://xumm.app/api/v1/platform/payload")
+                .addHeader("X-API-Key", ic.getApiKey())
+                .addHeader("X-API-Secret", ic.getSecretKey())
+                .method("POST", body)
                 .build();
         try {
             response = okHttpClient().newCall(request).execute();
