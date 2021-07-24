@@ -32,9 +32,9 @@ public class CredentialsBuilder {
 
         private void validate() {
             try {
-                if (this.apiKey == null || this.apiKey == "") {
+                if (apiKey == null || apiKey == "") {
                     throw new Exception(ICredentials.ERROR_APIKEY);
-                } else if (this.secretKey == null || this.secretKey == "") {
+                } else if (secretKey == null || secretKey == "") {
                     throw new Exception(ICredentials.ERROR_SECRETKEY);
                 }
             }catch (Exception e){
@@ -45,8 +45,8 @@ public class CredentialsBuilder {
         @Override
         public CredentialsBuilder build() {
             CredentialsBuilder credentials = new CredentialsBuilder();
-            credentials.apiKey = this.apiKey;
-            credentials.secretKey = this.secretKey;
+            credentials.apiKey = apiKey;
+            credentials.secretKey = secretKey;
             validate();
 
             return credentials;
