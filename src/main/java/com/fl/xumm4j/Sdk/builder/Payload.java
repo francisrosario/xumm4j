@@ -15,12 +15,12 @@ public class Payload {
     }
 
     public static class builder implements Payloads {
+        private boolean submit = Payloads.SUBMIT_TRANSACTION;
+        private boolean multisign = Payloads.MULTISIGN;
+        private double expire = Payloads.EXPIRE;
         private String user_token = "";
         private String txjson = "";
         private String txblob = "";
-        private boolean submit = true;
-        private boolean multisign = false;
-        private double expire = 60;
         private String returnURL_App = "";
         private String returnURL_Web = "";
         private String identifier = "";
@@ -95,10 +95,10 @@ public class Payload {
 
         private void validate() {
             if (!txblob.equals("") && !txjson.equals("")) {
-                throw new IllegalStateException("Error: Ambiguous payload, please specify either txblob or txjson");
+                throw new IllegalStateException(Payloads.ERROR_AMBIGOUS_PAYLOAD);
             }
             if (txblob.equals("") && txjson.equals("")) {
-                throw new IllegalStateException("Error: txblob or txjson is missing, please add either one of txjson or txblob");
+                throw new IllegalStateException(Payloads.ERROR_MISSING_PROPERTIES);
             }
         }
 
