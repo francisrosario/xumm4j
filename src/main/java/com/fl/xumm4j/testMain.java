@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.Sdk.Misc;
 import com.fl.xumm4j.Sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.Sdk.builder.PayloadBuilder;
+import com.fl.xumm4j.api.IPayloadBuilder;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 import org.xrpl.xrpl4j.model.fl.transactions.*;
 
@@ -34,6 +35,8 @@ public class testMain {
         }
 
         PayloadBuilder payload = new PayloadBuilder.builder()
+                .txjson(IPayloadBuilder.TXJSON_SIGNIN)
+                .blob(IPayloadBuilder.TXJSON_SIGNIN)
                 .build();
 
         //System.out.println("Generated Payload: \n" + payload.getGeneratedPayload());

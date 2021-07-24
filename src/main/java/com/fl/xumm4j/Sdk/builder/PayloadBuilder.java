@@ -147,20 +147,19 @@ public class PayloadBuilder {
                     }
                     main.put("custom_meta", custom_meta);
                 }
-                String mainJson = null;
+                String manipulateMainJson = null;
                 try {
-                    mainJson = objectMapper.readTree(main.toString()).toPrettyString();
+                    manipulateMainJson = objectMapper.readTree(main.toString()).toPrettyString();
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 }
                 if (!txjson.equals("") && txblob.equals("")) {
-                    String[] JSONParts = mainJson.split("\n");
+                    String[] JSONParts = manipulateMainJson.split("\n");
                     for (int x = 1; x < JSONParts.length; x++) {
                         sb.append(JSONParts[x]);
                     }
                     String PartOne = sb.toString();
                     sb.setLength(0);
-
                     String PartTwo;
                     sb.append("{");
                     sb.append("\"txjson\":");
@@ -172,8 +171,6 @@ public class PayloadBuilder {
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }
-                } else if (!txblob.equals("") && txjson.equals("")) {
-                    payload.json = mainJson;
                 }
             }catch(IllegalStateException err){
                 err.printStackTrace();
