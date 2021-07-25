@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IMiscellaneous;
 import com.fl.xumm4j.jackson.CuratedAssets;
@@ -13,8 +12,6 @@ import com.fl.xumm4j.jackson.Ping;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Objects;
 
 public class Misc implements IMiscellaneous {
@@ -22,11 +19,11 @@ public class Misc implements IMiscellaneous {
     ObjectMapper mapper;
     String response;
     JsonNode jsonNode;
-    CuratedAssets curratedAssets;
+    CuratedAssets curatedAssets;
 
     public Misc(CredentialsBuilder iCredentials) {
         http = new Http(iCredentials);
-        curratedAssets = new CuratedAssets();
+        curatedAssets = new CuratedAssets();
         mapper = ObjectMapperFactory.create()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES);
@@ -48,7 +45,7 @@ public class Misc implements IMiscellaneous {
     }
 
     @Override
-    public String getCurratedAssets() {
+    public String getCuratedAssets() {
         try {
             response = Objects.requireNonNull(http.doGet(CURRATED_ASSETS_ENDPOINT).body()).string();
             response = getToPrettyString(response);
@@ -94,7 +91,7 @@ public class Misc implements IMiscellaneous {
     @Override
     public String postPayload(String txJson) {
         try {
-            response = http.doPost(txJson).body().string();
+            response = Objects.requireNonNull(http.doPost(txJson).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -120,10 +117,10 @@ public class Misc implements IMiscellaneous {
     public CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException {
         jsonNode = mapper.readTree(json);
 
-        jsonNode.withArray("issuers").iterator().forEachRemaining(x -> curratedAssets.addIssuer(x.asText()));
-        jsonNode.withArray("currencies").iterator().forEachRemaining(x -> curratedAssets.addCurrencies(x.asText()));
-        jsonNode.get("details").iterator().forEachRemaining(x -> curratedAssets.addDetails(x.toString()));
+        jsonNode.withArray("issuers").iterator().forEachRemaining(x -> curatedAssets.addIssuer(x.asText()));
+        jsonNode.withArray("currencies").iterator().forEachRemaining(x -> curatedAssets.addCurrencies(x.asText()));
+        jsonNode.get("details").iterator().forEachRemaining(x -> curatedAssets.addDetails(x.toString()));
 
-        return curratedAssets;
+        return curatedAssets;
     }
 }
