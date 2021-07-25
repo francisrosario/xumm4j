@@ -112,6 +112,7 @@ public class Misc implements IMiscellaneous {
         return ping;
     }
 
+    @Override
     public CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException {
         CuratedAssets curatedAssets = new CuratedAssets();
         jsonNode = mapper.readTree(json);

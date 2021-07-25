@@ -1,6 +1,7 @@
 package com.fl.xumm4j.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fl.xumm4j.jackson.CuratedAssets;
 import com.fl.xumm4j.jackson.Ping;
 
 public interface IMiscellaneous {
@@ -42,4 +43,6 @@ public interface IMiscellaneous {
     String postPayload(String txJson);
 
     Ping deserializePing(String json) throws JsonProcessingException;
+
+    CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException;
 }
