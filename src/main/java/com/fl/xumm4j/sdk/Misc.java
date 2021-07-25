@@ -19,13 +19,9 @@ public class Misc implements IMiscellaneous {
     ObjectMapper mapper;
     String response;
     JsonNode jsonNode;
-    CuratedAssets curatedAssets;
-    Ping ping;
 
     public Misc(CredentialsBuilder iCredentials) {
         http = new Http(iCredentials);
-        curatedAssets = new CuratedAssets();
-        ping = new Ping();
         mapper = ObjectMapperFactory.create()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES);
@@ -103,6 +99,7 @@ public class Misc implements IMiscellaneous {
 
     @Override
     public Ping deserializerPing(String json) throws JsonProcessingException {
+        Ping ping = new Ping();
         jsonNode = mapper.readTree(json);
 
         ping.setPong(jsonNode.get("pong").asBoolean());
@@ -116,11 +113,12 @@ public class Misc implements IMiscellaneous {
     }
 
     public CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException {
+        CuratedAssets curatedAssets = new CuratedAssets();
         jsonNode = mapper.readTree(json);
 
-        jsonNode.withArray("issuers").iterator().forEachRemaining(x -> curatedAssets.addIssuer(x.asText()));
-        jsonNode.withArray("currencies").iterator().forEachRemaining(x -> curatedAssets.addCurrencies(x.asText()));
-        jsonNode.get("details").iterator().forEachRemaining(x -> curatedAssets.addDetails(x.toString()));
+        jsonNode.withArray("issuers").elements().forEachRemaining(a -> curatedAssets.addI(a.asText()));
+        jsonNode.withArray("currencies").elements().forEachRemaining(b -> curatedAssets.addC(b.asText()));
+        jsonNode.get("details").iterator().forEachRemaining(c -> curatedAssets.addD(c.toString()));
 
         return curatedAssets;
     }
