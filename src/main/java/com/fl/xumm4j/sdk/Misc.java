@@ -116,9 +116,9 @@ public class Misc implements IMiscellaneous {
         CuratedAssets curatedAssets = new CuratedAssets();
         jsonNode = mapper.readTree(json);
 
-        jsonNode.withArray("issuers").elements().forEachRemaining(a -> curatedAssets.addIssuer(a.asText()));
-        jsonNode.withArray("currencies").elements().forEachRemaining(b -> curatedAssets.addCurrencies(b.asText()));
-        jsonNode.get("details").iterator().forEachRemaining(c -> curatedAssets.addDetails(c.toString()));
+        jsonNode.withArray("issuers").elements().forEachRemaining(x -> curatedAssets.addIssuer(x.asText()));
+        jsonNode.withArray("currencies").elements().forEachRemaining(x -> curatedAssets.addCurrencies(x.asText()));
+        jsonNode.get("details").iterator().forEachRemaining(x -> curatedAssets.addDetails(x.toString()));
 
         return curatedAssets;
     }
