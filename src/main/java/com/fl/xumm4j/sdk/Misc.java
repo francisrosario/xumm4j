@@ -98,7 +98,7 @@ public class Misc implements IMiscellaneous {
     }
 
     @Override
-    public Ping deserializerPing(String json) throws JsonProcessingException {
+    public Ping deserializePing(String json) throws JsonProcessingException {
         Ping ping = new Ping();
         jsonNode = mapper.readTree(json);
 
