@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Misc implements IMiscellaneous {
-    Http http;
-    ObjectMapper mapper;
-    String response;
-    JsonNode jsonNode;
+    private final Http http;
+    private final ObjectMapper mapper;
+    private String response;
+    private JsonNode jsonNode;
 
     public Misc(CredentialsBuilder iCredentials) {
         http = new Http(iCredentials);
@@ -99,7 +99,7 @@ public class Misc implements IMiscellaneous {
 
     @Override
     public Ping deserializePing(String json) {
-        Ping ping = new Ping();
+        final Ping ping = new Ping();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
@@ -118,7 +118,7 @@ public class Misc implements IMiscellaneous {
 
     @Override
     public CuratedAssets deserializeCuratedAssets(String json) {
-        CuratedAssets curatedAssets = new CuratedAssets();
+        final CuratedAssets curatedAssets = new CuratedAssets();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {

@@ -8,18 +8,18 @@ import java.io.IOException;
 
 public class Http implements IOkHttp {
     private OkHttpClient okHttpClient;
-    private CredentialsBuilder ic;
+    private final CredentialsBuilder ic;
 
     public Http(CredentialsBuilder iCredentials) {
         this.ic = iCredentials;
     }
 
     private OkHttpClient okHttpClient(){
-        if(this.okHttpClient == null){
-            return this.okHttpClient = new OkHttpClient().newBuilder()
+        if(okHttpClient == null){
+            return okHttpClient = new OkHttpClient().newBuilder()
                     .build();
         }
-        return this.okHttpClient;
+        return okHttpClient;
     }
 
     @Override
