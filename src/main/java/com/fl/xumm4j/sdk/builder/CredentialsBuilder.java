@@ -1,6 +1,6 @@
 package com.fl.xumm4j.sdk.builder;
 
-import com.fl.xumm4j.api.ICredentials;
+import com.fl.xumm4j.api.ICredentialsBuilder;
 
 public class CredentialsBuilder {
     private String apiKey;
@@ -14,7 +14,7 @@ public class CredentialsBuilder {
         return secretKey;
     }
 
-    public static class builder implements ICredentials {
+    public static class builder implements ICredentialsBuilder {
         private String apiKey;
         private String secretKey;
 
@@ -33,9 +33,9 @@ public class CredentialsBuilder {
         private void validate() {
             try {
                 if (apiKey == null || apiKey.equals("")) {
-                    throw new Exception(ICredentials.ERROR_APIKEY);
+                    throw new Exception(ICredentialsBuilder.ERROR_APIKEY);
                 } else if (secretKey == null || secretKey.equals("")) {
-                    throw new Exception(ICredentials.ERROR_SECRET_KEY);
+                    throw new Exception(ICredentialsBuilder.ERROR_SECRET_KEY);
                 }
             }catch (Exception e){
                 e.printStackTrace();
