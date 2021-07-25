@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class CuratedAssets {
-    ArrayList<String> issuers = new ArrayList<>();
-    ArrayList<String> currencies = new ArrayList<>();
+    private ArrayList<String> issuers = new ArrayList<>();
+    private ArrayList<String> currencies = new ArrayList<>();
+    private ArrayList<String> details = new ArrayList<>();
 
     public void addIssuer(int index, String element) {
         issuers.add(index, element);
@@ -20,7 +21,11 @@ public class CuratedAssets {
         return issuers.get(index);
     }
 
-    public String get(int index) {
+    public int issuerSize() {
+        return issuers.size();
+    }
+
+    public String getCurrencies(int index) {
         return currencies.get(index);
     }
 
@@ -30,5 +35,25 @@ public class CuratedAssets {
 
     public void forEachCurrencies(Consumer<? super String> action) {
         currencies.forEach(action);
+    }
+
+    public int currenciesSize() {
+        return currencies.size();
+    }
+
+    public String getDetails(int index) {
+        return details.get(index);
+    }
+
+    public void forEachDetails(Consumer<? super String> action) {
+        details.forEach(action);
+    }
+
+    public boolean addDetails(String s) {
+        return details.add(s);
+    }
+
+    public int detailsSize() {
+        return details.size();
     }
 }
