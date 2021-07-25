@@ -2,8 +2,6 @@ package com.fl.xumm4j.sdk.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.api.ICredentials;
-import com.fl.xumm4j.api.IPayloadBuilder;
 import com.fl.xumm4j.api.IPayloadBuilder;
 import org.json.JSONObject;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
@@ -17,9 +15,9 @@ public class PayloadBuilder {
     }
 
     public static class builder implements IPayloadBuilder {
-        private boolean submit = IPayloadBuilder.SUBMIT_TRANSACTION_DEFAULT_VALUE;
-        private boolean multisign = IPayloadBuilder.MULTISIGN_DEFAULT_VALUE;
-        private double expire = IPayloadBuilder.EXPIRE_DEFAULT_VALUE;
+        private boolean submit = IPayloadBuilder.SUBMIT_TRANSACTION_DEFAULT;
+        private boolean multisign = IPayloadBuilder.MULTISIGN_DEFAULT;
+        private double expire = IPayloadBuilder.EXPIRE_DEFAULT;
         private String user_token = "";
         private String txjson = "";
         private String txblob = "";

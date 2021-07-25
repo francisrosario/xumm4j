@@ -22,9 +22,9 @@ public interface IPayloadBuilder {
     String INSTRUCTION = "instruction";
     String CUSTOM_META = "custom_meta";
 
-    boolean SUBMIT_TRANSACTION_DEFAULT_VALUE = true;
-    boolean MULTISIGN_DEFAULT_VALUE = true;
-    double EXPIRE_DEFAULT_VALUE = 60;
+    boolean SUBMIT_TRANSACTION_DEFAULT = true;
+    boolean MULTISIGN_DEFAULT = true;
+    double EXPIRE_DEFAULT = 60;
 
     PayloadBuilder.builder identifier(String identifier);
     PayloadBuilder.builder blob(String blob);
