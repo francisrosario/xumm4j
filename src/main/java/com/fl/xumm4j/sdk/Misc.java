@@ -20,12 +20,12 @@ public class Misc implements IMiscellaneous {
     String response;
     JsonNode jsonNode;
     CuratedAssets curatedAssets;
-    Ping p;
+    Ping ping;
 
     public Misc(CredentialsBuilder iCredentials) {
         http = new Http(iCredentials);
         curatedAssets = new CuratedAssets();
-        p = new Ping();
+        ping = new Ping();
         mapper = ObjectMapperFactory.create()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES);
@@ -105,14 +105,14 @@ public class Misc implements IMiscellaneous {
     public Ping deserializerPing(String json) throws JsonProcessingException {
         jsonNode = mapper.readTree(json);
 
-        p.setPong(jsonNode.get("pong").asBoolean());
-        p.setUuidv4(jsonNode.get("auth").get("application").get("uuidv4").asText());
-        p.setName(jsonNode.get("auth").get("application").get("name").asText());
-        p.setWebhookurl(jsonNode.get("auth").get("application").get("webhookurl").asText());
-        p.setDisabled(jsonNode.get("auth").get("application").get("disabled").asInt());
-        p.setCall_uuidv4(jsonNode.get("auth").get("call").get("uuidv4").asText());
+        ping.setPong(jsonNode.get("pong").asBoolean());
+        ping.setUuidv4(jsonNode.get("auth").get("application").get("uuidv4").asText());
+        ping.setName(jsonNode.get("auth").get("application").get("name").asText());
+        ping.setWebhookurl(jsonNode.get("auth").get("application").get("webhookurl").asText());
+        ping.setDisabled(jsonNode.get("auth").get("application").get("disabled").asInt());
+        ping.setCall_uuidv4(jsonNode.get("auth").get("call").get("uuidv4").asText());
 
-        return p;
+        return ping;
     }
 
     public CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException {
