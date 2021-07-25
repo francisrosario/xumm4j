@@ -1,28 +1,39 @@
-package com.fl.xumm4j.Sdk;
+package com.fl.xumm4j.sdk;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.Sdk.builder.CredentialsBuilder;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IMiscellaneous;
+import com.fl.xumm4j.jackson.CuratedAssets;
+import com.fl.xumm4j.jackson.Ping;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Misc implements IMiscellaneous {
     Http http;
     ObjectMapper mapper;
     String response;
+    JsonNode jsonNode;
+    CuratedAssets curratedAssets;
 
     public Misc(CredentialsBuilder iCredentials) {
-        this.http = new Http(iCredentials);
-        mapper = ObjectMapperFactory.create();
+        http = new Http(iCredentials);
+        curratedAssets = new CuratedAssets();
+        mapper = ObjectMapperFactory.create()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES);
     }
 
     private String getToPrettyString(String response) throws JsonProcessingException {
         return mapper.readTree(response).toPrettyString();
     }
-
 
     @Override
     public String doPing() {
@@ -88,5 +99,46 @@ public class Misc implements IMiscellaneous {
             e.printStackTrace();
         }
         return response;
+    }
+
+    @Override
+    public Ping deserializerPing(String json) throws JsonProcessingException {
+        jsonNode = mapper.readTree(json);
+        Ping dp = new Ping();
+
+        dp.setPong(jsonNode.get("pong").asBoolean());
+        dp.setUuidv4(jsonNode.get("auth").get("application").get("uuidv4").asText());
+        dp.setName(jsonNode.get("auth").get("application").get("name").asText());
+        dp.setWebhookurl(jsonNode.get("auth").get("application").get("webhookurl").asText());
+        dp.setDisabled(jsonNode.get("auth").get("application").get("disabled").asInt());
+        dp.setCall_uuidv4(jsonNode.get("auth").get("call").get("uuidv4").asText());
+
+        return dp;
+    }
+
+    public CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException {
+        jsonNode = mapper.readTree(json);
+        ArrayNode array;
+        Iterator<JsonNode> Iterator;
+        //CuratedAssets curratedAssets = new CuratedAssets();
+
+        //Get Issuers
+        array = (ArrayNode) jsonNode.get("issuers");
+        Iterator = array.elements();
+        for(int x = 0; x < array.size(); x++){
+            JsonNode issuer = Iterator.next();
+            curratedAssets.addIssuer(x, issuer.asText());
+        }
+        //Currencies
+        array = (ArrayNode) jsonNode.get("currencies");
+        Iterator = array.elements();
+        for(int x = 0; x < array.size(); x++){
+            JsonNode currencies = Iterator.next();
+            curratedAssets.addCurrencies(x, currencies.asText());
+        }
+        //Details
+        jsonNode.get("details").iterator().forEachRemaining(x -> curratedAssets.addDetails(x.toString()));
+
+        return curratedAssets;
     }
 }
