@@ -4,6 +4,15 @@ import okhttp3.Response;
 
 public interface IOkHttp {
 
+    /**
+     * @param url
+     * @return
+     */
     Response doGet(String url);
+
+    /**
+     * @param payload
+     * @return
+     */
     Response doPost(String payload);
 }

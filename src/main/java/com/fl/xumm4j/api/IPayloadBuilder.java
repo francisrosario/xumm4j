@@ -26,16 +26,74 @@ public interface IPayloadBuilder {
     boolean MULTISIGN_DEFAULT = true;
     double EXPIRE_DEFAULT = 60;
 
+    /**
+     * @param identifier
+     * @return
+     */
     PayloadBuilder.builder identifier(String identifier);
+
+    /**
+     * @param blob
+     * @return
+     */
     PayloadBuilder.builder blob(String blob);
+
+    /**
+     * @param instruction
+     * @return
+     */
     PayloadBuilder.builder instruction(String instruction);
+
+    /**
+     * @param user_token
+     * @return
+     */
     PayloadBuilder.builder user_token(String user_token);
+
+    /**
+     * @param return_url
+     * @return
+     */
     PayloadBuilder.builder returnURL_App(String return_url);
+
+    /**
+     * @param return_url
+     * @return
+     */
     PayloadBuilder.builder returnURL_Web(String return_url);
+
+    /**
+     * @param json
+     * @return
+     */
     PayloadBuilder.builder txjson(String json);
+
+    /**
+     * @param blob
+     * @return
+     */
     PayloadBuilder.builder txblob(String blob);
+
+    /**
+     * @param submit
+     * @return
+     */
     PayloadBuilder.builder submit(boolean submit);
+
+    /**
+     * @param multisign
+     * @return
+     */
     PayloadBuilder.builder multisign(boolean multisign);
+
+    /**
+     * @param expire
+     * @return
+     */
     PayloadBuilder.builder expire(double expire);
+
+    /**
+     * @return
+     */
     PayloadBuilder build();
 }

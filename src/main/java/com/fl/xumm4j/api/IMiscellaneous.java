@@ -40,9 +40,21 @@ public interface IMiscellaneous {
     String getTransaction(String txHash);
     //To do App-Storage
 
+    /**
+     * @param txJson
+     * @return
+     */
     String postPayload(String txJson);
 
+    /**
+     * @param json
+     * @return
+     */
     Ping deserializePing(String json);
 
+    /**
+     * @param json
+     * @return
+     */
     CuratedAssets deserializeCuratedAssets(String json);
 }
