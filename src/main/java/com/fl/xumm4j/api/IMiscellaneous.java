@@ -42,7 +42,7 @@ public interface IMiscellaneous {
 
     String postPayload(String txJson);
 
-    Ping deserializePing(String json) throws JsonProcessingException;
+    Ping deserializePing(String json);
 
-    CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException;
+    CuratedAssets deserializeCuratedAssets(String json);
 }

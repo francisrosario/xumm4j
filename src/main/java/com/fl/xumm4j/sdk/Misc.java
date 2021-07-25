@@ -98,9 +98,13 @@ public class Misc implements IMiscellaneous {
     }
 
     @Override
-    public Ping deserializePing(String json) throws JsonProcessingException {
+    public Ping deserializePing(String json) {
         Ping ping = new Ping();
-        jsonNode = mapper.readTree(json);
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
         ping.setPong(jsonNode.get("pong").asBoolean());
         ping.setUuidv4(jsonNode.get("auth").get("application").get("uuidv4").asText());
@@ -113,9 +117,13 @@ public class Misc implements IMiscellaneous {
     }
 
     @Override
-    public CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException {
+    public CuratedAssets deserializeCuratedAssets(String json) {
         CuratedAssets curatedAssets = new CuratedAssets();
-        jsonNode = mapper.readTree(json);
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
         jsonNode.withArray("issuers").elements().forEachRemaining(x -> curatedAssets.addIssuer(x.asText()));
         jsonNode.withArray("currencies").elements().forEachRemaining(x -> curatedAssets.addCurrencies(x.asText()));
