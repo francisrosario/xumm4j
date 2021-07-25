@@ -1,6 +1,6 @@
 package com.fl.xumm4j.api;
 
-import com.fl.xumm4j.Sdk.builder.PayloadBuilder;
+import com.fl.xumm4j.sdk.builder.PayloadBuilder;
 
 public interface IPayloadBuilder {
     String TXJSON_SIGNIN = "{\"TransactionType\": \"SignIn\"}";

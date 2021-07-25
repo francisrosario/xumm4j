@@ -1,4 +1,4 @@
-package com.fl.xumm4j.Sdk.builder;
+package com.fl.xumm4j.sdk.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -147,12 +147,7 @@ public class PayloadBuilder {
                     }
                     main.put("custom_meta", custom_meta);
                 }
-                String manipulateMainJson = null;
-                try {
-                    manipulateMainJson = objectMapper.readTree(main.toString()).toPrettyString();
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
+                String manipulateMainJson = objectMapper.readTree(main.toString()).toPrettyString();
                 if (!txjson.equals("") && txblob.equals("")) {
                     String[] JSONParts = manipulateMainJson.split("\n");
                     for (int x = 1; x < JSONParts.length; x++) {
@@ -166,13 +161,9 @@ public class PayloadBuilder {
                     sb.append(txjson);
                     sb.append(",");
                     PartTwo = sb.toString();
-                    try {
-                        payload.json = objectMapper.readTree(PartTwo + PartOne).toPrettyString();
-                    } catch (JsonProcessingException e) {
-                        e.printStackTrace();
-                    }
+                    payload.json = objectMapper.readTree(PartTwo + PartOne).toPrettyString();
                 }
-            }catch(IllegalStateException err){
+            }catch(IllegalStateException | JsonProcessingException err){
                 err.printStackTrace();
             }
             return payload;
