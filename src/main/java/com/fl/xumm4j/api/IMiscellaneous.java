@@ -33,7 +33,7 @@ public interface IMiscellaneous {
     /**
      * @return
      */
-    String getCurratedAssets();
+    String getCuratedAssets();
 
     /**
      * @param currencyCode

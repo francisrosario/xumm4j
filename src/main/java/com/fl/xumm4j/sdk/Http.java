@@ -1,6 +1,6 @@
-package com.fl.xumm4j.Sdk;
+package com.fl.xumm4j.sdk;
 
-import com.fl.xumm4j.Sdk.builder.CredentialsBuilder;
+import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IOkHttp;
 import okhttp3.*;
 

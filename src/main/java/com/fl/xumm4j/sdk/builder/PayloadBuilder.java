@@ -2,6 +2,8 @@ package com.fl.xumm4j.sdk.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fl.xumm4j.api.ICredentials;
+import com.fl.xumm4j.api.IMiscellaneous;
 import com.fl.xumm4j.api.IPayloadBuilder;
 import org.json.JSONObject;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
@@ -115,37 +117,37 @@ public class PayloadBuilder {
             validate();
             try {
                 if (!user_token.equals("")) {
-                    main.put("user_token", user_token);
+                    main.put(IMiscellaneous.USER_TOKEN, user_token);
                 }
 
                 if (!txblob.equals("")) {
-                    main.put("txblob", txblob);
+                    main.put(IMiscellaneous.TX_BLOB, txblob);
                 }
-                Option.put("submit", submit);
-                Option.put("multisign", multisign);
-                Option.put("expire", expire);
+                Option.put(IMiscellaneous.SUBMIT, submit);
+                Option.put(IMiscellaneous.MULTISIGN, multisign);
+                Option.put(IMiscellaneous.EXPIRE, expire);
                 if (!returnURL_Web.equals("") || !returnURL_App.equals("")) {
                     if (!returnURL_App.equals("")) {
-                        return_url.put("app", returnURL_App);
+                        return_url.put(IMiscellaneous.APP, returnURL_App);
                     }
                     if (!returnURL_Web.equals("")) {
-                        return_url.put("web", returnURL_Web);
+                        return_url.put(IMiscellaneous.WEB, returnURL_Web);
                     }
-                    Option.put("return_url", return_url);
+                    Option.put(IMiscellaneous.RETURN_URL, return_url);
 
                 }
-                main.put("options", Option);
+                main.put(IMiscellaneous.OPTIONS, Option);
                 if (!identifier.equals("") || !blob.equals("") || !instruction.equals("")) {
                     if (!identifier.equals("")) {
-                        custom_meta.put("identifier", identifier);
+                        custom_meta.put(IMiscellaneous.IDENTIFIER, identifier);
                     }
                     if (!blob.equals("")) {
-                        custom_meta.put("blob", blob);
+                        custom_meta.put(IMiscellaneous.BLOB, blob);
                     }
                     if (!instruction.equals("")) {
-                        custom_meta.put("instruction", instruction);
+                        custom_meta.put(IMiscellaneous.INSTRUCTION, instruction);
                     }
-                    main.put("custom_meta", custom_meta);
+                    main.put(IMiscellaneous.CUSTOM_META, custom_meta);
                 }
                 String manipulateMainJson = objectMapper.readTree(main.toString()).toPrettyString();
                 if (!txjson.equals("") && txblob.equals("")) {
@@ -157,7 +159,7 @@ public class PayloadBuilder {
                     sb.setLength(0);
                     String PartTwo;
                     sb.append("{");
-                    sb.append("\"txjson\":");
+                    sb.append("\""+IMiscellaneous.TX_JSON+"\":");
                     sb.append(txjson);
                     sb.append(",");
                     PartTwo = sb.toString();
