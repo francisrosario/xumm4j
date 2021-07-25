@@ -1,12 +1,12 @@
 package com.fl.xumm4j.jackson;
 
 public class Ping {
-    private static boolean pong;
-    private static String uuidv4;
-    private static String name;
-    private static String webhookurl;
-    private static int disabled;
-    private static String call_uuidv4;
+    private boolean pong;
+    private String uuidv4;
+    private String name;
+    private String webhookurl;
+    private int disabled;
+    private String call_uuidv4;
 
     public boolean isPong() {
         return pong;
