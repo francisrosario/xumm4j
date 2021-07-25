@@ -13,6 +13,7 @@ import com.fl.xumm4j.jackson.Ping;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -118,25 +119,9 @@ public class Misc implements IMiscellaneous {
 
     public CuratedAssets deserializeCuratedAssets(String json) throws JsonProcessingException {
         jsonNode = mapper.readTree(json);
-        ArrayNode array;
-        Iterator<JsonNode> Iterator;
-        //CuratedAssets curratedAssets = new CuratedAssets();
 
-        //Get Issuers
-        array = (ArrayNode) jsonNode.get("issuers");
-        Iterator = array.elements();
-        for(int x = 0; x < array.size(); x++){
-            JsonNode issuer = Iterator.next();
-            curratedAssets.addIssuer(x, issuer.asText());
-        }
-        //Currencies
-        array = (ArrayNode) jsonNode.get("currencies");
-        Iterator = array.elements();
-        for(int x = 0; x < array.size(); x++){
-            JsonNode currencies = Iterator.next();
-            curratedAssets.addCurrencies(x, currencies.asText());
-        }
-        //Details
+        jsonNode.withArray("issuers").iterator().forEachRemaining(x -> curratedAssets.addIssuer(x.asText()));
+        jsonNode.withArray("currencies").iterator().forEachRemaining(x -> curratedAssets.addCurrencies(x.asText()));
         jsonNode.get("details").iterator().forEachRemaining(x -> curratedAssets.addDetails(x.toString()));
 
         return curratedAssets;

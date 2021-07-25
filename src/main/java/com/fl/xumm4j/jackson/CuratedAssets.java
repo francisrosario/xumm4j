@@ -9,8 +9,9 @@ public class CuratedAssets {
     private ArrayList<String> currencies = new ArrayList<>();
     private ArrayList<String> details = new ArrayList<>();
 
-    public void addIssuer(int index, String element) {
-        issuers.add(index, element);
+
+    public void addIssuer(String s) {
+        issuers.add(s);
     }
 
     public void forEachIssuer(Consumer<? super String> action) {
@@ -29,8 +30,8 @@ public class CuratedAssets {
         return currencies.get(index);
     }
 
-    public void addCurrencies(int index, String element) {
-        currencies.add(index, element);
+    public void addCurrencies(String s) {
+        currencies.add(s);
     }
 
     public void forEachCurrencies(Consumer<? super String> action) {
@@ -49,8 +50,8 @@ public class CuratedAssets {
         details.forEach(action);
     }
 
-    public boolean addDetails(String s) {
-        return details.add(s);
+    public void addDetails(String s) {
+        details.add(s);
     }
 
     public int detailsSize() {
