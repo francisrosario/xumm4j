@@ -6,9 +6,25 @@ public interface IPayloadBuilder {
     String TXJSON_SIGNIN = "{\"TransactionType\": \"SignIn\"}";
     String ERROR_AMBIGUOUS_PAYLOAD = "Error: Ambiguous payload, please specify either txblob or txjson";
     String ERROR_MISSING_PROPERTIES = "Error: txblob or txjson is missing, please add either one of txjson or txblob";
-    boolean SUBMIT_TRANSACTION = true;
-    boolean MULTISIGN = true;
-    double EXPIRE = 60;
+
+    String USER_TOKEN = "user_token";
+    String TX_BLOB = "txblob";
+    String TX_JSON = "txjson";
+    String SUBMIT = "submit";
+    String MULTISIGN = "multisign";
+    String EXPIRE = "expire";
+    String APP = "app";
+    String WEB = "web";
+    String RETURN_URL = "return_url";
+    String OPTIONS = "options";
+    String IDENTIFIER = "identifier";
+    String BLOB = "blob";
+    String INSTRUCTION = "instruction";
+    String CUSTOM_META = "custom_meta";
+
+    boolean SUBMIT_TRANSACTION_DEFAULT_VALUE = true;
+    boolean MULTISIGN_DEFAULT_VALUE = true;
+    double EXPIRE_DEFAULT_VALUE = 60;
 
     PayloadBuilder.builder identifier(String identifier);
     PayloadBuilder.builder blob(String blob);

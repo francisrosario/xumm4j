@@ -3,7 +3,7 @@ package com.fl.xumm4j.sdk.builder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.api.ICredentials;
-import com.fl.xumm4j.api.IMiscellaneous;
+import com.fl.xumm4j.api.IPayloadBuilder;
 import com.fl.xumm4j.api.IPayloadBuilder;
 import org.json.JSONObject;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
@@ -17,9 +17,9 @@ public class PayloadBuilder {
     }
 
     public static class builder implements IPayloadBuilder {
-        private boolean submit = IPayloadBuilder.SUBMIT_TRANSACTION;
-        private boolean multisign = IPayloadBuilder.MULTISIGN;
-        private double expire = IPayloadBuilder.EXPIRE;
+        private boolean submit = IPayloadBuilder.SUBMIT_TRANSACTION_DEFAULT_VALUE;
+        private boolean multisign = IPayloadBuilder.MULTISIGN_DEFAULT_VALUE;
+        private double expire = IPayloadBuilder.EXPIRE_DEFAULT_VALUE;
         private String user_token = "";
         private String txjson = "";
         private String txblob = "";
@@ -117,37 +117,37 @@ public class PayloadBuilder {
             validate();
             try {
                 if (!user_token.equals("")) {
-                    main.put(IMiscellaneous.USER_TOKEN, user_token);
+                    main.put(IPayloadBuilder.USER_TOKEN, user_token);
                 }
 
                 if (!txblob.equals("")) {
-                    main.put(IMiscellaneous.TX_BLOB, txblob);
+                    main.put(IPayloadBuilder.TX_BLOB, txblob);
                 }
-                Option.put(IMiscellaneous.SUBMIT, submit);
-                Option.put(IMiscellaneous.MULTISIGN, multisign);
-                Option.put(IMiscellaneous.EXPIRE, expire);
+                Option.put(IPayloadBuilder.SUBMIT, submit);
+                Option.put(IPayloadBuilder.MULTISIGN, multisign);
+                Option.put(IPayloadBuilder.EXPIRE, expire);
                 if (!returnURL_Web.equals("") || !returnURL_App.equals("")) {
                     if (!returnURL_App.equals("")) {
-                        return_url.put(IMiscellaneous.APP, returnURL_App);
+                        return_url.put(IPayloadBuilder.APP, returnURL_App);
                     }
                     if (!returnURL_Web.equals("")) {
-                        return_url.put(IMiscellaneous.WEB, returnURL_Web);
+                        return_url.put(IPayloadBuilder.WEB, returnURL_Web);
                     }
-                    Option.put(IMiscellaneous.RETURN_URL, return_url);
+                    Option.put(IPayloadBuilder.RETURN_URL, return_url);
 
                 }
-                main.put(IMiscellaneous.OPTIONS, Option);
+                main.put(IPayloadBuilder.OPTIONS, Option);
                 if (!identifier.equals("") || !blob.equals("") || !instruction.equals("")) {
                     if (!identifier.equals("")) {
-                        custom_meta.put(IMiscellaneous.IDENTIFIER, identifier);
+                        custom_meta.put(IPayloadBuilder.IDENTIFIER, identifier);
                     }
                     if (!blob.equals("")) {
-                        custom_meta.put(IMiscellaneous.BLOB, blob);
+                        custom_meta.put(IPayloadBuilder.BLOB, blob);
                     }
                     if (!instruction.equals("")) {
-                        custom_meta.put(IMiscellaneous.INSTRUCTION, instruction);
+                        custom_meta.put(IPayloadBuilder.INSTRUCTION, instruction);
                     }
-                    main.put(IMiscellaneous.CUSTOM_META, custom_meta);
+                    main.put(IPayloadBuilder.CUSTOM_META, custom_meta);
                 }
                 String manipulateMainJson = objectMapper.readTree(main.toString()).toPrettyString();
                 if (!txjson.equals("") && txblob.equals("")) {
@@ -159,7 +159,7 @@ public class PayloadBuilder {
                     sb.setLength(0);
                     String PartTwo;
                     sb.append("{");
-                    sb.append("\""+IMiscellaneous.TX_JSON+"\":");
+                    sb.append("\""+IPayloadBuilder.TX_JSON+"\":");
                     sb.append(txjson);
                     sb.append(",");
                     PartTwo = sb.toString();
