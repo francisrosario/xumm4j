@@ -122,21 +122,26 @@ public class PayloadBuilder {
             try {
                 if (!user_token.equals("")) main.put(IPayloadBuilder.USER_TOKEN, user_token);
                 if (!txblob.equals("")) main.put(IPayloadBuilder.TX_BLOB, txblob);
+
                 Option.put(IPayloadBuilder.SUBMIT, submit);
                 Option.put(IPayloadBuilder.MULTISIGN, multisign);
                 Option.put(IPayloadBuilder.EXPIRE, expire);
+
                 if (!returnURL_Web.equals("") || !returnURL_App.equals("")) {
                     if (!returnURL_App.equals("")) return_url.put(IPayloadBuilder.APP, returnURL_App);
                     if (!returnURL_Web.equals("")) return_url.put(IPayloadBuilder.WEB, returnURL_Web);
                     Option.put(IPayloadBuilder.RETURN_URL, return_url);
                 }
+
                 main.put(IPayloadBuilder.OPTIONS, Option);
+
                 if (!identifier.equals("") || !blob.equals("") || !instruction.equals("")) {
                     if (!identifier.equals("")) custom_meta.put(IPayloadBuilder.IDENTIFIER, identifier);
                     if (!blob.equals("")) custom_meta.put(IPayloadBuilder.BLOB, blob);
                     if (!instruction.equals("")) custom_meta.put(IPayloadBuilder.INSTRUCTION, instruction);
                     main.put(IPayloadBuilder.CUSTOM_META, custom_meta);
                 }
+
                 String manipulateJSON = objectMapper.readTree(main.toString()).toPrettyString();
                 if (!txjson.equals("") && txblob.equals("")) {
                     String[] JSONParts = manipulateJSON.split("\n");
