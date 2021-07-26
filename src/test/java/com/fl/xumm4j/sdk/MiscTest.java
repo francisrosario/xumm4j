@@ -1,7 +1,7 @@
 package com.fl.xumm4j.sdk;
 
-import com.fl.xumm4j.jackson.CuratedAssets;
-import com.fl.xumm4j.jackson.Ping;
+import com.fl.xumm4j.jackson.CuratedAssetsDAO;
+import com.fl.xumm4j.jackson.PingDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import org.junit.jupiter.api.Test;
 
@@ -81,7 +81,7 @@ class MiscTest {
     @Test
     void deserializePing() {
         String JSON = misc.doPing();
-        Ping ping = misc.deserializePing(JSON);
+        PingDAO ping = misc.deserializePing(JSON);
         assertNotNull(ping.getCall_uuidv4());
         assertNotNull(ping.getName());
         assertNotNull(ping.getUuidv4());
@@ -91,7 +91,7 @@ class MiscTest {
     @Test
     void deserializeCuratedAssets() {
         String JSON = misc.getCuratedAssets();
-        CuratedAssets curratedAssets = misc.deserializeCuratedAssets(JSON);
+        CuratedAssetsDAO curratedAssets = misc.deserializeCuratedAssets(JSON);
         assertNotNull(curratedAssets.getCurrencies(0));
         assertNotNull(curratedAssets.getDetails(0));
         assertNotNull(curratedAssets.getIssuer(0));

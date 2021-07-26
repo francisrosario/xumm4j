@@ -1,6 +1,6 @@
 package com.fl.xumm4j.jackson;
 
-public class Ping {
+public class PingDAO {
     private boolean pong;
     private String uuidv4;
     private String name;

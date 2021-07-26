@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IMiscellaneous;
-import com.fl.xumm4j.jackson.CuratedAssets;
-import com.fl.xumm4j.jackson.Ping;
+import com.fl.xumm4j.jackson.CuratedAssetsDAO;
+import com.fl.xumm4j.jackson.PingDAO;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
@@ -98,8 +98,8 @@ public class Misc implements IMiscellaneous {
     }
 
     @Override
-    public Ping deserializePing(String json) {
-        final Ping ping = new Ping();
+    public PingDAO deserializePing(String json) {
+        final PingDAO ping = new PingDAO();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
@@ -117,8 +117,8 @@ public class Misc implements IMiscellaneous {
     }
 
     @Override
-    public CuratedAssets deserializeCuratedAssets(String json) {
-        final CuratedAssets curatedAssets = new CuratedAssets();
+    public CuratedAssetsDAO deserializeCuratedAssets(String json) {
+        final CuratedAssetsDAO curatedAssets = new CuratedAssetsDAO();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {

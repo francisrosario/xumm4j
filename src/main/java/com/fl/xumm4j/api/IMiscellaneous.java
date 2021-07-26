@@ -1,8 +1,7 @@
 package com.fl.xumm4j.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fl.xumm4j.jackson.CuratedAssets;
-import com.fl.xumm4j.jackson.Ping;
+import com.fl.xumm4j.jackson.CuratedAssetsDAO;
+import com.fl.xumm4j.jackson.PingDAO;
 
 public interface IMiscellaneous {
     String PING_ENDPOINT = "https://xumm.app/api/v1/platform/ping";
@@ -50,11 +49,11 @@ public interface IMiscellaneous {
      * @param json
      * @return
      */
-    Ping deserializePing(String json);
+    PingDAO deserializePing(String json);
 
     /**
      * @param json
      * @return
      */
-    CuratedAssets deserializeCuratedAssets(String json);
+    CuratedAssetsDAO deserializeCuratedAssets(String json);
 }

@@ -4,7 +4,7 @@ package com.fl.xumm4j.jackson;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class CuratedAssets {
+public class CuratedAssetsDAO {
     private ArrayList<String> issuers = new ArrayList<>();
     private ArrayList<String> currencies = new ArrayList<>();
     private ArrayList<String> details = new ArrayList<>();
