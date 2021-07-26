@@ -28,7 +28,7 @@ String pingJSON = misc.doPing();
 
 //Performs curarated assets request https://xumm.readme.io/reference/curated-assets
 String curratedJSON = misc.getCuratedAssets());
-CuratedAssetsDAO  = misc.deserializeCuratedAssets(curratedJSON);
+CuratedAssetsDAO curatedAssetsDAO = misc.deserializeCuratedAssets(curratedJSON);
 curatedAssetsDAO.forEachCurrencies(System.out::println);
 curatedAssetsDAO.forEachDetails(System.out::println);
 curatedAssetsDAO.forEachIssuer(System.out::println);
