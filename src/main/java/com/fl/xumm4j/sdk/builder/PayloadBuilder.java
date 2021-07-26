@@ -3,6 +3,7 @@ package com.fl.xumm4j.sdk.builder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.api.IPayloadBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
@@ -104,6 +105,11 @@ public class PayloadBuilder {
 
         @Override
         public PayloadBuilder build(){
+            return getPayloadBuilder();
+        }
+
+        @NotNull
+        private PayloadBuilder getPayloadBuilder() {
             StringBuilder sb = new StringBuilder();
             ObjectMapper objectMapper = ObjectMapperFactory.create();
             JSONObject main = new JSONObject();
@@ -113,11 +119,6 @@ public class PayloadBuilder {
 
             PayloadBuilder payload = new PayloadBuilder();
             validate();
-            generatePayload(sb, objectMapper, main, Option, return_url, custom_meta, payload);
-            return payload;
-        }
-
-        private void generatePayload(StringBuilder sb, ObjectMapper objectMapper, JSONObject main, JSONObject Option, JSONObject return_url, JSONObject custom_meta, PayloadBuilder payload) {
             try {
                 if (!user_token.equals("")) {
                     main.put(IPayloadBuilder.USER_TOKEN, user_token);
@@ -171,6 +172,7 @@ public class PayloadBuilder {
             }catch(IllegalStateException | JsonProcessingException err){
                 err.printStackTrace();
             }
+            return payload;
         }
 
     }
