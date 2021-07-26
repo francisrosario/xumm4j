@@ -1,7 +1,7 @@
 package com.fl.xumm4j.api;
 
-import com.fl.xumm4j.jackson.CuratedAssetsDAO;
-import com.fl.xumm4j.jackson.PingDAO;
+import com.fl.xumm4j.dao.CuratedAssetsDAO;
+import com.fl.xumm4j.dao.PingDAO;
 
 public interface IMiscellaneous {
     String PING_ENDPOINT = "https://xumm.app/api/v1/platform/ping";

@@ -1,4 +1,4 @@
-package com.fl.xumm4j.jackson;
+package com.fl.xumm4j.dao;
 
 public class PingDAO {
     private boolean pong;

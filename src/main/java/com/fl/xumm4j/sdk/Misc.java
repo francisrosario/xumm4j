@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fl.xumm4j.dao.DetailsCurrenciesDAO;
+import com.fl.xumm4j.dao.DetailsDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IMiscellaneous;
-import com.fl.xumm4j.jackson.CuratedAssetsDAO;
-import com.fl.xumm4j.jackson.PingDAO;
+import com.fl.xumm4j.dao.CuratedAssetsDAO;
+import com.fl.xumm4j.dao.PingDAO;
 import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
@@ -130,5 +132,44 @@ public class Misc implements IMiscellaneous {
         jsonNode.get("details").iterator().forEachRemaining(x -> curatedAssets.addDetails(x.toString()));
 
         return curatedAssets;
+    }
+
+    public DetailsDAO deserializeDetails(String json) {
+        final DetailsDAO detailsDAO = new DetailsDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        detailsDAO.setId(jsonNode.get("id").asInt());
+        detailsDAO.setName(jsonNode.get("name").asText());
+        detailsDAO.setDomain(jsonNode.get("domain").asText());
+        detailsDAO.setAvatar(jsonNode.get("avatar").asText());
+        detailsDAO.setShortlist(jsonNode.get("shortlist").asInt());
+
+        jsonNode.get("currencies").fieldNames().forEachRemaining(detailsDAO::addCurrenciesFieldNames);
+        jsonNode.get("currencies").iterator().forEachRemaining(x -> detailsDAO.addCurrencies(x.toPrettyString()));
+
+        return detailsDAO;
+    }
+
+    public DetailsCurrenciesDAO deserializeDetailsCurrencies(String json){
+        final DetailsCurrenciesDAO DetailsCurrenciesDAO = new DetailsCurrenciesDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        DetailsCurrenciesDAO.setId(jsonNode.get("id").asInt());
+        DetailsCurrenciesDAO.setIssuerId(jsonNode.get("issuerId").asInt());
+        DetailsCurrenciesDAO.setIssuer(jsonNode.get("issuer").asText());
+        DetailsCurrenciesDAO.setCurrency(jsonNode.get("currency").asText());
+        DetailsCurrenciesDAO.setName(jsonNode.get("name").asText());
+        DetailsCurrenciesDAO.setAvatar(jsonNode.get("avatar").asText());
+        DetailsCurrenciesDAO.setShortlist(jsonNode.get("shortlist").asInt());
+
+        return DetailsCurrenciesDAO;
     }
 }
