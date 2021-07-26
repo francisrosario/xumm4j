@@ -32,11 +32,9 @@ public class CredentialsBuilder {
 
         private void validate() {
             try {
-                if (apiKey == null || apiKey.equals("")) {
-                    throw new Exception(ICredentialsBuilder.ERROR_APIKEY);
-                } else if (secretKey == null || secretKey.equals("")) {
+                if (apiKey == null || apiKey.equals("")) throw new Exception(ICredentialsBuilder.ERROR_APIKEY);
+                else if (secretKey == null || secretKey.equals(""))
                     throw new Exception(ICredentialsBuilder.ERROR_SECRET_KEY);
-                }
             }catch (Exception e){
                 e.printStackTrace();
             }

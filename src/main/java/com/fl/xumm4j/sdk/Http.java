@@ -15,10 +15,8 @@ public class Http implements IOkHttp {
     }
 
     private OkHttpClient okHttpClient(){
-        if(okHttpClient == null){
-            return okHttpClient = new OkHttpClient().newBuilder()
-                    .build();
-        }
+        if(okHttpClient == null) return okHttpClient = new OkHttpClient().newBuilder()
+                .build();
         return okHttpClient;
     }
 
