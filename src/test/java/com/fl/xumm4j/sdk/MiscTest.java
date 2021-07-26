@@ -91,9 +91,9 @@ class MiscTest {
     @Test
     void deserializeCuratedAssets() {
         String JSON = misc.getCuratedAssets();
-        CuratedAssetsDAO curratedAssets = misc.deserializeCuratedAssets(JSON);
-        assertNotNull(curratedAssets.getCurrencies(0));
-        assertNotNull(curratedAssets.getDetails(0));
-        assertNotNull(curratedAssets.getIssuer(0));
+        CuratedAssetsDAO curatedAssets = misc.deserializeCuratedAssets(JSON);
+        assertNotNull(curatedAssets.getCurrencies(0));
+        assertNotNull(curatedAssets.getDetails(0));
+        assertNotNull(curatedAssets.getIssuer(0));
     }
 }
