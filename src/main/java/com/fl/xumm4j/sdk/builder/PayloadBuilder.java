@@ -2,11 +2,10 @@ package com.fl.xumm4j.sdk.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
 import com.fl.xumm4j.api.IPayloadBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
-import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
-
 
 public class PayloadBuilder {
     private String json;
