@@ -151,8 +151,8 @@ public class Misc implements IMiscellaneous {
         detailsDAO.setAvatar(jsonNode.findPath("avatar").asText());
         detailsDAO.setShortlist(jsonNode.findPath("shortlist").asInt());
 
-        jsonNode.get("currencies").fieldNames().forEachRemaining(detailsDAO::addCurrenciesFieldNames);
-        jsonNode.get("currencies").iterator().forEachRemaining(x -> detailsDAO.addCurrencies(x.toPrettyString()));
+        jsonNode.findPath("currencies").fieldNames().forEachRemaining(detailsDAO::addCurrenciesFieldNames);
+        jsonNode.findPath("currencies").iterator().forEachRemaining(x -> detailsDAO.addCurrencies(x.toPrettyString()));
 
         return detailsDAO;
     }
