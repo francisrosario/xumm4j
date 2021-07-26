@@ -108,12 +108,12 @@ public class Misc implements IMiscellaneous {
             e.printStackTrace();
         }
 
-        ping.setPong(jsonNode.get("pong").asBoolean());
-        ping.setUuidv4(jsonNode.get("auth").get("application").get("uuidv4").asText());
-        ping.setName(jsonNode.get("auth").get("application").get("name").asText());
-        ping.setWebhookurl(jsonNode.get("auth").get("application").get("webhookurl").asText());
-        ping.setDisabled(jsonNode.get("auth").get("application").get("disabled").asInt());
-        ping.setCall_uuidv4(jsonNode.get("auth").get("call").get("uuidv4").asText());
+        ping.setPong(jsonNode.findPath("pong").asBoolean());
+        ping.setUuidv4(jsonNode.findPath("auth").findPath("application").findPath("uuidv4").asText());
+        ping.setName(jsonNode.findPath("auth").findPath("application").findPath("name").asText());
+        ping.setWebhookurl(jsonNode.findPath("auth").findPath("application").findPath("webhookurl").asText());
+        ping.setDisabled(jsonNode.findPath("auth").findPath("application").findPath("disabled").asInt());
+        ping.setCall_uuidv4(jsonNode.findPath("auth").findPath("call").findPath("uuidv4").asText());
 
         return ping;
     }
@@ -132,7 +132,7 @@ public class Misc implements IMiscellaneous {
 
         jsonNode.withArray("issuers").elements().forEachRemaining(x -> curatedAssets.addIssuer(x.asText()));
         jsonNode.withArray("currencies").elements().forEachRemaining(x -> curatedAssets.addCurrencies(x.asText()));
-        jsonNode.get("details").iterator().forEachRemaining(x -> curatedAssets.addDetails(x.toString()));
+        jsonNode.findPath("details").iterator().forEachRemaining(x -> curatedAssets.addDetails(x.toString()));
 
         return curatedAssets;
     }
@@ -145,11 +145,11 @@ public class Misc implements IMiscellaneous {
             e.printStackTrace();
         }
 
-        detailsDAO.setId(jsonNode.get("id").asInt());
-        detailsDAO.setName(jsonNode.get("name").asText());
-        detailsDAO.setDomain(jsonNode.get("domain").asText());
-        detailsDAO.setAvatar(jsonNode.get("avatar").asText());
-        detailsDAO.setShortlist(jsonNode.get("shortlist").asInt());
+        detailsDAO.setId(jsonNode.findPath("id").asInt());
+        detailsDAO.setName(jsonNode.findPath("name").asText());
+        detailsDAO.setDomain(jsonNode.findPath("domain").asText());
+        detailsDAO.setAvatar(jsonNode.findPath("avatar").asText());
+        detailsDAO.setShortlist(jsonNode.findPath("shortlist").asInt());
 
         jsonNode.get("currencies").fieldNames().forEachRemaining(detailsDAO::addCurrenciesFieldNames);
         jsonNode.get("currencies").iterator().forEachRemaining(x -> detailsDAO.addCurrencies(x.toPrettyString()));
@@ -165,13 +165,13 @@ public class Misc implements IMiscellaneous {
             e.printStackTrace();
         }
 
-        DetailsCurrenciesDAO.setId(jsonNode.get("id").asInt());
-        DetailsCurrenciesDAO.setIssuerId(jsonNode.get("issuer_id").asInt());
-        DetailsCurrenciesDAO.setIssuer(jsonNode.get("issuer").asText());
-        DetailsCurrenciesDAO.setCurrency(jsonNode.get("currency").asText());
-        DetailsCurrenciesDAO.setName(jsonNode.get("name").asText());
-        DetailsCurrenciesDAO.setAvatar(jsonNode.get("avatar").asText());
-        DetailsCurrenciesDAO.setShortlist(jsonNode.get("shortlist").asInt());
+        DetailsCurrenciesDAO.setId(jsonNode.findPath("id").asInt());
+        DetailsCurrenciesDAO.setIssuerId(jsonNode.findPath("issuer_id").asInt());
+        DetailsCurrenciesDAO.setIssuer(jsonNode.findPath("issuer").asText());
+        DetailsCurrenciesDAO.setCurrency(jsonNode.findPath("currency").asText());
+        DetailsCurrenciesDAO.setName(jsonNode.findPath("name").asText());
+        DetailsCurrenciesDAO.setAvatar(jsonNode.findPath("avatar").asText());
+        DetailsCurrenciesDAO.setShortlist(jsonNode.findPath("shortlist").asInt());
 
         return DetailsCurrenciesDAO;
     }
