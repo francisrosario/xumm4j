@@ -2,6 +2,7 @@ package com.fl.xumm4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fl.xumm4j.jackson.CuratedAssets;
 import com.fl.xumm4j.sdk.Misc;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.sdk.builder.PayloadBuilder;
@@ -39,27 +40,28 @@ public class testMain {
                 .instruction("This is a login transaction.")
                 .build();
 
-        System.out.println("Generated Payload: \n" + payload.getGeneratedPayload());
-        String Payload = payload.getGeneratedPayload();
-        System.out.println(Payload+"\n");
-        System.out.println(misc.postPayload(Payload));
-        
+        //System.out.println("Generated Payload: \n" + payload.getGeneratedPayload());
+        //String Payload = payload.getGeneratedPayload();
+        //System.out.println(Payload+"\n");
+        //System.out.println(misc.postPayload(Payload));
 
         //System.out.println(misc.getCuratedAssets());
         //System.out.println(misc.doPing());
         //System.out.println(misc.deserializeCuratedAssets(jsonResponse));
 
-       //System.out.println(misc.deserializePing(jsonResponse).getUuidv4());
+        //System.out.println(misc.deserializePing(jsonResponse).getUuidv4());
         //System.out.println(misc.getRates("sar"));
         //System.out.println(misc.getKycStatus("rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB"));
-        //System.out.println(misc.getTransaction("3661492C20982D84B53594C06C79C9AF93EA3FC8CFB27506CEDC4B3ECD1FBCB3"));
+        //System.out.println(misc.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021"));
 
         String jsonResponse = misc.getCuratedAssets();
-        //System.out.println(jsonResponse+"\n\n");
-        misc.deserializeCuratedAssets(jsonResponse).forEachDetails(System.out::println);
-        System.out.println();
-        misc.deserializeCuratedAssets(jsonResponse).forEachCurrencies(System.out::println);
-        System.out.println();
-        misc.deserializeCuratedAssets(jsonResponse).forEachIssuer(System.out::println);
+        CuratedAssets result = misc.deserializeCuratedAssets(jsonResponse);
+        result.forEachCurrencies(System.out::println);
+        result.forEachDetails(System.out::println);
+        result.forEachIssuer(System.out::println);
+
+        String Issuer = result.getIssuer(0);
+        System.out.println(Issuer);
+
     }
 }
