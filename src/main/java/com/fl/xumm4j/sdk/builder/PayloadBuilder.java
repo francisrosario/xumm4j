@@ -113,6 +113,11 @@ public class PayloadBuilder {
 
             PayloadBuilder payload = new PayloadBuilder();
             validate();
+            generatePayload(sb, objectMapper, main, Option, return_url, custom_meta, payload);
+            return payload;
+        }
+
+        private void generatePayload(StringBuilder sb, ObjectMapper objectMapper, JSONObject main, JSONObject Option, JSONObject return_url, JSONObject custom_meta, PayloadBuilder payload) {
             try {
                 if (!user_token.equals("")) {
                     main.put(IPayloadBuilder.USER_TOKEN, user_token);
@@ -166,7 +171,6 @@ public class PayloadBuilder {
             }catch(IllegalStateException | JsonProcessingException err){
                 err.printStackTrace();
             }
-            return payload;
         }
 
     }
