@@ -12,6 +12,19 @@ xumm4j interacts with XUMM API. It can do almost anything similar to xumm sdk (j
 
 ### How to use xumm4j?
 ```java
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
+import com.fl.xrpl4j.model.transactions.Address;
+import com.fl.xrpl4j.model.transactions.Payment;
+import com.fl.xrpl4j.model.transactions.XrpCurrencyAmount;
+import com.fl.xumm4j.dao.CuratedAssetsDAO;
+import com.fl.xumm4j.sdk.Misc;
+import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
+import com.fl.xumm4j.sdk.builder.PayloadBuilder;
+import com.fl.xumm4j.api.IPayloadBuilder;
+import java.math.BigDecimal;
+
 // Create an instance of CredentialBuilder, This is where XUMM API Key and SecretKey are stored.
 // Secret Key and XUMM API is available in https://apps.xumm.dev/
 CredentialsBuilder myAccess = new CredentialsBuilder.builder()
@@ -26,8 +39,8 @@ Misc misc = new Misc(myAccess);
 //Performs ping request https://xumm.readme.io/reference/testinput
 String pingJSON = misc.doPing();
 
-//Performs curarated assets request https://xumm.readme.io/reference/curated-assets
-String curratedJSON = misc.getCuratedAssets());
+//Performs curated assets request https://xumm.readme.io/reference/curated-assets
+String curatedJSON = misc.getCuratedAssets());
 CuratedAssetsDAO curatedAssetsDAO = misc.deserializeCuratedAssets(curratedJSON);
 curatedAssetsDAO.forEachCurrencies(System.out::println);
 curatedAssetsDAO.forEachDetails(System.out::println);
