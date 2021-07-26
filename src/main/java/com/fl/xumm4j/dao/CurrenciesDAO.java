@@ -1,6 +1,6 @@
 package com.fl.xumm4j.dao;
 
-public class DetailsCurrenciesDAO {
+public class CurrenciesDAO {
     private int id;
     private int issuerId;
     private String issuer;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.dao.DetailsCurrenciesDAO;
+import com.fl.xumm4j.dao.CurrenciesDAO;
 import com.fl.xumm4j.dao.DetailsDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IMiscellaneous;
@@ -156,8 +156,8 @@ public class Misc implements IMiscellaneous {
     }
 
     @Override
-    public DetailsCurrenciesDAO deserializeDetailsCurrencies(String json){
-        final DetailsCurrenciesDAO DetailsCurrenciesDAO = new DetailsCurrenciesDAO();
+    public CurrenciesDAO deserializeCurrencies(String json){
+        final CurrenciesDAO DetailsCurrenciesDAO = new CurrenciesDAO();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
