@@ -137,9 +137,9 @@ public class PayloadBuilder {
                     if (!instruction.equals("")) custom_meta.put(IPayloadBuilder.INSTRUCTION, instruction);
                     main.put(IPayloadBuilder.CUSTOM_META, custom_meta);
                 }
-                String manipulateMainJson = objectMapper.readTree(main.toString()).toPrettyString();
+                String manipulateJSON = objectMapper.readTree(main.toString()).toPrettyString();
                 if (!txjson.equals("") && txblob.equals("")) {
-                    String[] JSONParts = manipulateMainJson.split("\n");
+                    String[] JSONParts = manipulateJSON.split("\n");
                     for (int x = 1; x < JSONParts.length; x++) sb.append(JSONParts[x]);
                     String stageOne = sb.toString();
                     sb.setLength(0);
