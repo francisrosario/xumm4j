@@ -1,6 +1,8 @@
 package com.fl.xumm4j.api;
 
 import com.fl.xumm4j.dao.CuratedAssetsDAO;
+import com.fl.xumm4j.dao.DetailsCurrenciesDAO;
+import com.fl.xumm4j.dao.DetailsDAO;
 import com.fl.xumm4j.dao.PingDAO;
 
 public interface IMiscellaneous {
@@ -56,4 +58,8 @@ public interface IMiscellaneous {
      * @return
      */
     CuratedAssetsDAO deserializeCuratedAssets(String json);
+
+    DetailsDAO deserializeDetails(String json);
+
+    DetailsCurrenciesDAO deserializeDetailsCurrencies(String json);
 }

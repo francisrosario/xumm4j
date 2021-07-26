@@ -3,7 +3,6 @@ package com.fl.xumm4j.sdk;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.dao.DetailsCurrenciesDAO;
 import com.fl.xumm4j.dao.DetailsDAO;
@@ -11,7 +10,6 @@ import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IMiscellaneous;
 import com.fl.xumm4j.dao.CuratedAssetsDAO;
 import com.fl.xumm4j.dao.PingDAO;
-import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -24,9 +22,8 @@ public class Misc implements IMiscellaneous {
 
     public Misc(CredentialsBuilder iCredentials) {
         http = new Http(iCredentials);
-        mapper = ObjectMapperFactory.create()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES);
+        mapper = new ObjectMapper()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     private String getToPrettyString(String response) throws JsonProcessingException {
@@ -137,6 +134,7 @@ public class Misc implements IMiscellaneous {
         return curatedAssets;
     }
 
+    @Override
     public DetailsDAO deserializeDetails(String json) {
         final DetailsDAO detailsDAO = new DetailsDAO();
         try {
@@ -157,6 +155,7 @@ public class Misc implements IMiscellaneous {
         return detailsDAO;
     }
 
+    @Override
     public DetailsCurrenciesDAO deserializeDetailsCurrencies(String json){
         final DetailsCurrenciesDAO DetailsCurrenciesDAO = new DetailsCurrenciesDAO();
         try {
