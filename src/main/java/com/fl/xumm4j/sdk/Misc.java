@@ -118,6 +118,9 @@ public class Misc implements IMiscellaneous {
         return ping;
     }
 
+    //////////////
+    //Deserializer
+
     @Override
     public CuratedAssetsDAO deserializeCuratedAssets(String json) {
         final CuratedAssetsDAO curatedAssets = new CuratedAssetsDAO();
@@ -163,7 +166,7 @@ public class Misc implements IMiscellaneous {
         }
 
         DetailsCurrenciesDAO.setId(jsonNode.get("id").asInt());
-        DetailsCurrenciesDAO.setIssuerId(jsonNode.get("issuerId").asInt());
+        DetailsCurrenciesDAO.setIssuerId(jsonNode.get("issuer_id").asInt());
         DetailsCurrenciesDAO.setIssuer(jsonNode.get("issuer").asText());
         DetailsCurrenciesDAO.setCurrency(jsonNode.get("currency").asText());
         DetailsCurrenciesDAO.setName(jsonNode.get("name").asText());

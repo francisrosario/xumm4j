@@ -1,7 +1,7 @@
 package com.fl.xumm4j.sdk;
 
-import com.fl.xumm4j.jackson.CuratedAssetsDAO;
-import com.fl.xumm4j.jackson.PingDAO;
+import com.fl.xumm4j.dao.CuratedAssetsDAO;
+import com.fl.xumm4j.dao.PingDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import org.junit.jupiter.api.Test;
 
