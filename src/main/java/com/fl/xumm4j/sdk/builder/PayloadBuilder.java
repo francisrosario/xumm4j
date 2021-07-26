@@ -120,54 +120,36 @@ public class PayloadBuilder {
             PayloadBuilder payload = new PayloadBuilder();
             validate();
             try {
-                if (!user_token.equals("")) {
-                    main.put(IPayloadBuilder.USER_TOKEN, user_token);
-                }
-
-                if (!txblob.equals("")) {
-                    main.put(IPayloadBuilder.TX_BLOB, txblob);
-                }
+                if (!user_token.equals("")) main.put(IPayloadBuilder.USER_TOKEN, user_token);
+                if (!txblob.equals("")) main.put(IPayloadBuilder.TX_BLOB, txblob);
                 Option.put(IPayloadBuilder.SUBMIT, submit);
                 Option.put(IPayloadBuilder.MULTISIGN, multisign);
                 Option.put(IPayloadBuilder.EXPIRE, expire);
                 if (!returnURL_Web.equals("") || !returnURL_App.equals("")) {
-                    if (!returnURL_App.equals("")) {
-                        return_url.put(IPayloadBuilder.APP, returnURL_App);
-                    }
-                    if (!returnURL_Web.equals("")) {
-                        return_url.put(IPayloadBuilder.WEB, returnURL_Web);
-                    }
+                    if (!returnURL_App.equals("")) return_url.put(IPayloadBuilder.APP, returnURL_App);
+                    if (!returnURL_Web.equals("")) return_url.put(IPayloadBuilder.WEB, returnURL_Web);
                     Option.put(IPayloadBuilder.RETURN_URL, return_url);
-
                 }
                 main.put(IPayloadBuilder.OPTIONS, Option);
                 if (!identifier.equals("") || !blob.equals("") || !instruction.equals("")) {
-                    if (!identifier.equals("")) {
-                        custom_meta.put(IPayloadBuilder.IDENTIFIER, identifier);
-                    }
-                    if (!blob.equals("")) {
-                        custom_meta.put(IPayloadBuilder.BLOB, blob);
-                    }
-                    if (!instruction.equals("")) {
-                        custom_meta.put(IPayloadBuilder.INSTRUCTION, instruction);
-                    }
+                    if (!identifier.equals("")) custom_meta.put(IPayloadBuilder.IDENTIFIER, identifier);
+                    if (!blob.equals("")) custom_meta.put(IPayloadBuilder.BLOB, blob);
+                    if (!instruction.equals("")) custom_meta.put(IPayloadBuilder.INSTRUCTION, instruction);
                     main.put(IPayloadBuilder.CUSTOM_META, custom_meta);
                 }
                 String manipulateMainJson = objectMapper.readTree(main.toString()).toPrettyString();
                 if (!txjson.equals("") && txblob.equals("")) {
                     String[] JSONParts = manipulateMainJson.split("\n");
-                    for (int x = 1; x < JSONParts.length; x++) {
-                        sb.append(JSONParts[x]);
-                    }
-                    String PartOne = sb.toString();
+                    for (int x = 1; x < JSONParts.length; x++) sb.append(JSONParts[x]);
+                    String stageOne = sb.toString();
                     sb.setLength(0);
-                    String PartTwo;
+                    String stageTwo;
                     sb.append("{");
                     sb.append("\""+IPayloadBuilder.TX_JSON+"\":");
                     sb.append(txjson);
                     sb.append(",");
-                    PartTwo = sb.toString();
-                    payload.json = objectMapper.readTree(PartTwo + PartOne).toPrettyString();
+                    stageTwo = sb.toString();
+                    payload.json = objectMapper.readTree(stageTwo + stageOne).toPrettyString();
                 }
             }catch(IllegalStateException | JsonProcessingException err){
                 err.printStackTrace();
