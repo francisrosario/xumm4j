@@ -32,7 +32,7 @@ CuratedAssetsDAO  = misc.deserializeCuratedAssets(curratedJSON);
 curatedAssetsDAO.forEachCurrencies(System.out::println);
 curatedAssetsDAO.forEachDetails(System.out::println);
 curatedAssetsDAO.forEachIssuer(System.out::println);
-//Other delegates methods are available such as ArrayList size, add, get.
+//Other delegate methods are available such as ArrayList size, add, get.
 
 //Create JSON using modified xrp4j model.
 Payment payment = Payment.builder()
@@ -45,7 +45,7 @@ String PaymentJSON = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsS
 
 //Create a txjson using PayloadBuilder
 PayloadBuilder payload = new PayloadBuilder.builder()
-      .txjson(IPayloadBuilder.TXJSON_SIGNIN)
+      .txjson(PaymentJSON)
       .instruction("Hi!!")
       .expire(50)
       .identifier("My Identifier")
@@ -55,5 +55,5 @@ PayloadBuilder payload = new PayloadBuilder.builder()
       .build();
 
 //Temporary stored postPayload method in com.fl.xumm4j.sdk.Misc
-String Result = misc.postPayload(Payload);
+String Result = misc.postPayload(payload);
 ```
