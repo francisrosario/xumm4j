@@ -13,17 +13,21 @@ Import required class.
 ```java
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.sdk.XummClient;
+import com.fl.xumm4j.sdk.Deserialize
 ```
 
-Now continue by creating an instance of CredentialsBuilder and XummClient:
+Now continue by creating an instance of CredentialsBuilder, XummClient and Deserialize:
 ```java
 CredentialsBuilder myAccess = new CredentialsBuilder.builder()
   .apiKey("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
   .secretKey("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
   .build();
 
-//Pass the created CredentialsBuilder object to XummClient
+//Pass the created CredentialsBuilder object to XummClient.
 XummClient xummclient = new XummClient(myAccess);
+
+//Use the instance of Deserialize for Deserializing JSON response.
+Deserialize deserialize = new Deserialize();
 ```
 
 ### Credentials
@@ -41,22 +45,21 @@ More information about the XUMM API, payloads, the API workflow, sending Push no
 
 ### Methods & params (+ samples)
 
-After constructing the SDK, you can call the methods:
+After creating an instance of XummClient and Deserialize, you can call the methods:
 
-- `Sdk.*` for the helper methods (see below)
-- `Sdk.payload.*` to get/update/create payloads for users to sign
-- `Sdk.storage.*` for your XUMM app storage (to store meta info for headless applications)
+- `xummclient.*` for the helper methods; Along with get/update payloads for users to sign.
+- `deserialize.*` for JSON deserialization.
 
-Please note all snippets below assume you constructed the XUMM SDK into the `Sdk` constant, as the [How to use the XUMM SDK](#how-to-use-the-xumm-sdk) section outlines.
+Please note all snippets below assume you created an instance of the XummClient into the `xummclient` object name and Deserialize into the `deserialize` object name, as the [How to use the xumm4j](#how-to-use-the-xumm-sdk) section outlines.
 
 #### Helper methods
 
-##### Sdk.ping()
+##### xummclient.doPing()
 
 The `ping` method allows you to verify API access (valid credentials) and returns some info on your XUMM APP:
 
-```typescript
-const pong = await Sdk.ping()
+```java
+System.out.println(xummclient.doPing());
 ```
 
 Returns [`<ApplicationDetails>`](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/src/types/Meta/ApplicationDetails.ts):
