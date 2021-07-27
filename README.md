@@ -1,4 +1,4 @@
-# XUMM SDK (JS/TS)
+# XUMM SDK (Java)
 
 Interact with the XUMM SDK from Java environments.
 
