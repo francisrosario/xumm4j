@@ -47,23 +47,24 @@ More information about the XUMM API, payloads, the API workflow, sending Push no
 
 After creating an instance of XummClient and Deserialize, you can call the methods:
 
-- `xummclient.*` for the helper methods; Along with get/update payloads for users to sign.
+- `xummclient.*` for the helper methods; Along with methods to get/update payloads for users to sign.
 - `deserialize.*` for JSON deserialization.
 
 Please note all snippets below assume you created an instance of the XummClient into the `xummclient` object name and Deserialize into the `deserialize` object name, as the [How to use the xumm4j](#how-to-use-the-xumm-sdk) section outlines.
 
-#### Helper methods
+#### XummClient methods
 
 ##### xummclient.doPing()
 
 The `ping` method allows you to verify API access (valid credentials) and returns some info on your XUMM APP:
 
 ```java
-System.out.println(xummclient.doPing());
+String JSON = xummclient.doPing();
 ```
 
-Returns [`<ApplicationDetails>`](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/src/types/Meta/ApplicationDetails.ts):
-```javascript
+Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html):
+```java
+System.out.println(JSON);
 {
   quota: {},
   application: {
@@ -76,17 +77,18 @@ Returns [`<ApplicationDetails>`](https://github.com/XRPL-Labs/XUMM-SDK/blob/mast
 }
 ```
 
-##### Sdk.getCuratedAssets()
+##### xummclient.getCuratedAssets()
 
 The `getCuratedAssets` method allows you to get the list of trusted issuers and IOU's. This is the same list used to
 populate the "Add Asset" button at the XUMM home screan.
 
-```typescript
-const curatedAssets = await Sdk.getCuratedAssets()
+```java
+String JSON = xummclient.getCuratedAssets();
 ```
 
-Returns [`<CuratedAssetsResponse>`](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/src/types/Meta/CuratedAssetsResponse.ts):
-```javascript
+Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html):
+```java
+System.out.println(JSON);
 {
   curatedAssets: {
     issuers: [ 'Bitstamp', 'GateHub' ],
