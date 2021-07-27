@@ -23,8 +23,7 @@ public class XummClient implements IXummClient {
     }
 
     private StorageDAO getStorageDao() {
-        StorageDAO storagedao = deserialize.Storage(response);
-        return storagedao;
+        return deserialize.Storage(response);
     }
 
     private String getToPrettyString(String response) throws JsonProcessingException {
