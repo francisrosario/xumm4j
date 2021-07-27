@@ -6,12 +6,12 @@ import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-class XummClientTest {
+class testAll {
     CredentialsBuilder credentialsBuilder;
     XummClient xummclient;
     Deserialize deserialize;
 
-    public XummClientTest() {
+    public testAll() {
         String apiKey = "7208fca5-4ac3-4638-b006-897dfcc0ab29";
         String secretKey = "6dab854e-b317-47f7-8453-490b8bd171ad";
         credentialsBuilder = new CredentialsBuilder.builder()
@@ -66,6 +66,7 @@ class XummClientTest {
                 "    } ]\n" +
                 "  }";
         String getTransactionResponse = xummclient.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021");
+        assertNotNull(getTransactionResponse);
         assertTrue(getTransactionResponse.contains(expectedTransactionResponse));
     }
 
@@ -84,8 +85,8 @@ class XummClientTest {
     void deserializeCuratedAssets() {
         String JSON = xummclient.getCuratedAssets();
         CuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
-        assertNotNull(curatedAssets.getCurrencies(0));
-        assertNotNull(curatedAssets.getDetails(0));
-        assertNotNull(curatedAssets.getIssuer(0));
+        assertNotNull(curatedAssets.getCurrencies(3));
+        assertNotNull(curatedAssets.getDetails(3));
+        assertNotNull(curatedAssets.getIssuer(3));
     }
 }
