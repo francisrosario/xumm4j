@@ -21,10 +21,7 @@ public interface IXummClient {
     String getKycStatus(String UserToken_ClassicAddress);
     String getTransaction(String txHash);
     String postPayload(String payload);
-
     String getPayload(String payloadUUID);
-
     String getCustomIdentifier(String payloadUUID);
-
     String deletePayload(String payloadUUID);
 }
