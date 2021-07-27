@@ -3,7 +3,7 @@ package com.fl.xumm4j.sdk.builder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
-import com.fl.xumm4j.api.IPayloadBuilder;
+import com.fl.xumm4j.api.ITXBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
@@ -14,10 +14,10 @@ public class TXBuilder {
         return json;
     }
 
-    public static class builder implements IPayloadBuilder {
-        private boolean submit = IPayloadBuilder.SUBMIT_TRANSACTION_DEFAULT;
-        private boolean multisign = IPayloadBuilder.MULTISIGN_DEFAULT;
-        private double expire = IPayloadBuilder.EXPIRE_DEFAULT;
+    public static class builder implements ITXBuilder {
+        private boolean submit = ITXBuilder.DEFAULT_SUBMIT_TRANSACTION;
+        private boolean multisign = ITXBuilder.DEFAULT_MULTISIGN;
+        private double expire = ITXBuilder.DEFAULT_EXPIRE;
         private String user_token = "";
         private String txjson = "";
         private String txblob = "";
@@ -46,7 +46,7 @@ public class TXBuilder {
         }
 
         @Override
-        public builder user_token(String user_token){
+        public builder userToken(String user_token){
             this.user_token = user_token;
             return this;
         }
@@ -95,10 +95,10 @@ public class TXBuilder {
 
         private void validate() {
             if (!txblob.equals("") && !txjson.equals("")) {
-                throw new IllegalStateException(IPayloadBuilder.ERROR_AMBIGUOUS_PAYLOAD);
+                throw new IllegalStateException(ITXBuilder.ERROR_AMBIGUOUS_PAYLOAD);
             }
             if (txblob.equals("") && txjson.equals("")) {
-                throw new IllegalStateException(IPayloadBuilder.ERROR_MISSING_PROPERTIES);
+                throw new IllegalStateException(ITXBuilder.ERROR_MISSING_PROPERTIES);
             }
         }
 
@@ -119,26 +119,26 @@ public class TXBuilder {
 
             validate();
             try {
-                if (!user_token.equals("")) main.put(IPayloadBuilder.USER_TOKEN, user_token);
-                if (!txblob.equals("")) main.put(IPayloadBuilder.TX_BLOB, txblob);
+                if (!user_token.equals("")) main.put(ITXBuilder.KEY_USER_TOKEN, user_token);
+                if (!txblob.equals("")) main.put(ITXBuilder.KEY_TX_BLOB, txblob);
 
-                Option.put(IPayloadBuilder.SUBMIT, submit);
-                Option.put(IPayloadBuilder.MULTISIGN, multisign);
-                Option.put(IPayloadBuilder.EXPIRE, expire);
+                Option.put(ITXBuilder.KEY_SUBMIT, submit);
+                Option.put(ITXBuilder.KEY_MULTISIGN, multisign);
+                Option.put(ITXBuilder.KEY_EXPIRE, expire);
 
                 if (!returnURL_Web.equals("") || !returnURL_App.equals("")) {
-                    if (!returnURL_App.equals("")) return_url.put(IPayloadBuilder.APP, returnURL_App);
-                    if (!returnURL_Web.equals("")) return_url.put(IPayloadBuilder.WEB, returnURL_Web);
-                    Option.put(IPayloadBuilder.RETURN_URL, return_url);
+                    if (!returnURL_App.equals("")) return_url.put(ITXBuilder.KEY_APP, returnURL_App);
+                    if (!returnURL_Web.equals("")) return_url.put(ITXBuilder.KEY_WEB, returnURL_Web);
+                    Option.put(ITXBuilder.KEY_RETURN_URL, return_url);
                 }
 
-                main.put(IPayloadBuilder.OPTIONS, Option);
+                main.put(ITXBuilder.KEY_OPTIONS, Option);
 
                 if (!identifier.equals("") || !blob.equals("") || !instruction.equals("")) {
-                    if (!identifier.equals("")) custom_meta.put(IPayloadBuilder.IDENTIFIER, identifier);
-                    if (!blob.equals("")) custom_meta.put(IPayloadBuilder.BLOB, blob);
-                    if (!instruction.equals("")) custom_meta.put(IPayloadBuilder.INSTRUCTION, instruction);
-                    main.put(IPayloadBuilder.CUSTOM_META, custom_meta);
+                    if (!identifier.equals("")) custom_meta.put(ITXBuilder.KEY_IDENTIFIER, identifier);
+                    if (!blob.equals("")) custom_meta.put(ITXBuilder.KEY_BLOB, blob);
+                    if (!instruction.equals("")) custom_meta.put(ITXBuilder.KEY_INSTRUCTION, instruction);
+                    main.put(ITXBuilder.KEY_CUSTOM_META, custom_meta);
                 }
 
                 String manipulateJSON = objectMapper.readTree(main.toString()).toPrettyString();
@@ -149,7 +149,7 @@ public class TXBuilder {
                     sb.setLength(0);
                     String stageTwo;
                     sb.append("{");
-                    sb.append("\""+IPayloadBuilder.TX_JSON+"\":");
+                    sb.append("\""+ ITXBuilder.KEY_TXJSON +"\":");
                     sb.append(txjson);
                     sb.append(",");
                     stageTwo = sb.toString();
