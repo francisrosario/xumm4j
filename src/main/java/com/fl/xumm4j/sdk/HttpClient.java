@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class HttpClient implements IOkHttp {
     private OkHttpClient okHttpClient;
-    private final CredentialsBuilder ic;
+    private final CredentialsBuilder credentials;
 
-    public HttpClient(CredentialsBuilder iCredentials) {
-        this.ic = iCredentials;
+    public HttpClient(CredentialsBuilder credentials) {
+        this.credentials = credentials;
     }
 
     private OkHttpClient okHttpClient(){
@@ -25,8 +25,8 @@ public class HttpClient implements IOkHttp {
         Response response = null;
         Request request = new Request.Builder()
                 .url(url)
-                .addHeader("X-API-Key", ic.getApiKey())
-                .addHeader("X-API-Secret", ic.getSecretKey())
+                .addHeader("X-API-Key", credentials.getApiKey())
+                .addHeader("X-API-Secret", credentials.getSecretKey())
                 .build();
         try {
             response = okHttpClient().newCall(request).execute();
@@ -44,8 +44,8 @@ public class HttpClient implements IOkHttp {
 
         Request request = new Request.Builder()
                 .url("https://xumm.app/api/v1/platform/payload")
-                .addHeader("X-API-Key", ic.getApiKey())
-                .addHeader("X-API-Secret", ic.getSecretKey())
+                .addHeader("X-API-Key", credentials.getApiKey())
+                .addHeader("X-API-Secret", credentials.getSecretKey())
                 .method("POST", body)
                 .build();
         try {
