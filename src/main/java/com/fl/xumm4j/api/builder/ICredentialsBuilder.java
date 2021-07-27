@@ -1,4 +1,4 @@
-package com.fl.xumm4j.api;
+package com.fl.xumm4j.api.builder;
 
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 
