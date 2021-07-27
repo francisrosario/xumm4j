@@ -2,7 +2,7 @@ package com.fl.xumm4j.api;
 
 import okhttp3.Response;
 
-public interface IOkHttp {
+public interface IHttpClient {
 
     /**
      * @param url
