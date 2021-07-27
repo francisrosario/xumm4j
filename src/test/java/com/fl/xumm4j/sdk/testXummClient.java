@@ -6,34 +6,52 @@ import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-class testAll {
+class testXummClient {
     CredentialsBuilder credentialsBuilder;
     XummClient xummclient;
     Deserialize deserialize;
 
-    public testAll() {
-        String apiKey = "7208fca5-4ac3-4638-b006-897dfcc0ab29";
-        String secretKey = "6dab854e-b317-47f7-8453-490b8bd171ad";
+    public testXummClient() {
+        //These Keys aren't used for production only in TESTING purposes.
+        String ExpectedApiKey = "7208fca5-4ac3-4638-b006-897dfcc0ab29";
+        String ExptectedSecretKey = "6dab854e-b317-47f7-8453-490b8bd171ad";
+
         credentialsBuilder = new CredentialsBuilder.builder()
                 .apiKey("7208fca5-4ac3-4638-b006-897dfcc0ab29")
                 .secretKey("6dab854e-b317-47f7-8453-490b8bd171ad")
                 .build();
-        assertEquals(apiKey, credentialsBuilder.getApiKey());
-        assertEquals(secretKey, credentialsBuilder.getSecretKey());
+        assertEquals(ExpectedApiKey, credentialsBuilder.getApiKey());
+        assertEquals(ExptectedSecretKey, credentialsBuilder.getSecretKey());
+
         xummclient = new XummClient(credentialsBuilder);
         deserialize = new Deserialize();
     }
 
     @Test
     void doPing() {
+        String expectedPingResponse = "{\n" +
+                "  \"pong\" : true,\n" +
+                "  \"auth\" : {\n" +
+                "    \"quota\" : { },\n" +
+                "    \"application\" : {\n" +
+                "      \"uuidv4\" : \"7208fca5-4ac3-4638-b006-897dfcc0ab29\",\n" +
+                "      \"name\" : \"xumm4j sandbox\",\n" +
+                "      \"webhookurl\" : \"http://localhost:8080\",\n" +
+                "      \"disabled\" : 0\n" +
+                "    },";
         String doPingResponse = xummclient.doPing();
-        assertNotNull(doPingResponse);
+        assertTrue(doPingResponse.contains(expectedPingResponse));
     }
 
     @Test
     void getCuratedAssets() {
+        String expectedCuratedAssetsResponse = "\"details\" : {\n" +
+                "    \"Bitstamp\" : {\n" +
+                "      \"id\" : 185,\n" +
+                "      \"name\" : \"Bitstamp\",\n" +
+                "      \"domain\" : \"bitstamp.net\",";
         String getCuratedAssets = xummclient.getCuratedAssets();
-        assertNotNull(getCuratedAssets);
+        assertTrue(getCuratedAssets.contains(expectedCuratedAssetsResponse));
     }
 
     @Test
@@ -44,11 +62,15 @@ class testAll {
         assertTrue(getRatesResponse.contains(expectedRatesResponse));
     }
 
-    /**
     @Test
-    void getKycStatus() {
+    void getKycPublic() {
+        String expectedKYCResponse = "{\n" +
+                "  \"account\" : \"rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB\",\n" +
+                "  \"kycApproved\" : true\n" +
+                "}";
+        String getKYCResponse = xummclient.getKycStatus("rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB");
+        assertEquals(expectedKYCResponse, getKYCResponse);
     }
-    **/
 
     @Test
     void getTransaction() {
@@ -66,27 +88,22 @@ class testAll {
                 "    } ]\n" +
                 "  }";
         String getTransactionResponse = xummclient.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021");
-        assertNotNull(getTransactionResponse);
         assertTrue(getTransactionResponse.contains(expectedTransactionResponse));
     }
 
-
+    ///////////
+    //Temp. deserializeTest zone
     @Test
     void deserializePing() {
         String JSON = xummclient.doPing();
         PingDAO ping = deserialize.Ping(JSON);
-        assertNotNull(ping.getCall_uuidv4());
-        assertNotNull(ping.getName());
-        assertNotNull(ping.getUuidv4());
-        assertNotNull(ping.getWebhookurl());
+        assertEquals("http://localhost:8080", ping.getWebhookurl());
     }
 
     @Test
     void deserializeCuratedAssets() {
         String JSON = xummclient.getCuratedAssets();
         CuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
-        assertNotNull(curatedAssets.getCurrencies(3));
-        assertNotNull(curatedAssets.getDetails(3));
-        assertNotNull(curatedAssets.getIssuer(3));
+        assertEquals("USD", curatedAssets.getCurrencies(0));
     }
 }
