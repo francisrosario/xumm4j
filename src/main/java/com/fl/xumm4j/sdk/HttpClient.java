@@ -37,10 +37,10 @@ public class HttpClient implements IHttpClient {
     }
 
     @Override
-    public Response doPost(String url, String payload) {
+    public Response doPost(String url, String data) {
         Response response = null;
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, payload);
+        RequestBody body = RequestBody.create(JSON, data);
 
         Request request = new Request.Builder()
                 .url(url)

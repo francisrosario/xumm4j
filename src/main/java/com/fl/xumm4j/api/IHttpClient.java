@@ -4,15 +4,6 @@ import okhttp3.Response;
 
 public interface IHttpClient {
 
-    /**
-     * @param url
-     * @return
-     */
     Response doGet(String url);
-
-    /**
-     * @param payload
-     * @return
-     */
-    Response doPost(String url, String payload);
+    Response doPost(String url, String data);
 }
