@@ -13,7 +13,6 @@ Import required class.
 ```java
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.sdk.XummClient;
-import com.fl.xumm4j.sdk.builder.TXBuilder;
 ```
 
 Now continue by creating an instance of CredentialsBuilder and XummClient:
