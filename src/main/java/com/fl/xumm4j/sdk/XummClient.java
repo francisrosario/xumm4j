@@ -24,7 +24,7 @@ public class XummClient implements IXummClient {
     @Override
     public String doPing() {
         try {
-            response = Objects.requireNonNull(http.doGet(PING_ENDPOINT).body()).string();
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_PING).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,7 +35,7 @@ public class XummClient implements IXummClient {
     @Override
     public String getCuratedAssets() {
         try {
-            response = Objects.requireNonNull(http.doGet(CURRATED_ASSETS_ENDPOINT).body()).string();
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_CURATED_ASSETS).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class XummClient implements IXummClient {
     @Override
     public String getRates(String currencyCode) {
         try {
-            response = Objects.requireNonNull(http.doGet(RATES_ENDPOINT+currencyCode).body()).string();
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_RATES +currencyCode).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class XummClient implements IXummClient {
     @Override
     public String getKycStatus(String accountAddress) {
         try {
-            response = Objects.requireNonNull(http.doGet(KYC_STATUS_ENDPOINT+accountAddress).body()).string();
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_KYC_STATUS +accountAddress).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,7 +68,7 @@ public class XummClient implements IXummClient {
     @Override
     public String getTransaction(String txHash) {
         try {
-            response = Objects.requireNonNull(http.doGet(TXID_ENDPOINT+txHash).body()).string();
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_TXID +txHash).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
