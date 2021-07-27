@@ -2,6 +2,7 @@ package com.fl.xumm4j.sdk;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fl.xumm4j.dao.StorageDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IXummClient;
 import org.json.JSONObject;
@@ -19,6 +20,11 @@ public class XummClient implements IXummClient {
         http = new HttpClient(credentials);
         mapper = new ObjectMapper();
         deserialize = new Deserialize();
+    }
+
+    private StorageDAO getStorageDao() {
+        StorageDAO storagedao = deserialize.Storage(response);
+        return storagedao;
     }
 
     private String getToPrettyString(String response) throws JsonProcessingException {
@@ -136,14 +142,15 @@ public class XummClient implements IXummClient {
         return response;
     }
 
-    public String setStorage(String json){
+    public boolean setStorage(String json){
         try {
             response = Objects.requireNonNull(http.doPost(ENDPOINT_STORE_APP_STORAGE, json).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return response;
+        StorageDAO storagedao = getStorageDao();
+        return storagedao.isStored();
     }
 
     public String getStorage(){
@@ -153,17 +160,19 @@ public class XummClient implements IXummClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return response;
+        StorageDAO storagedao = getStorageDao();
+        return storagedao.getData();
     }
 
-    public String deleteStorage(){
+    public boolean deleteStorage(){
         try {
             response = Objects.requireNonNull(http.doDelete(ENDPOINT_DELETE_APP_STORAGE).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return response;
+        StorageDAO storagedao = getStorageDao();
+        return storagedao.isStored();
     }
 
 }

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.api.IDeserialize;
-import com.fl.xumm4j.dao.CuratedAssetsDAO;
-import com.fl.xumm4j.dao.CurrenciesDAO;
-import com.fl.xumm4j.dao.DetailsDAO;
-import com.fl.xumm4j.dao.PingDAO;
+import com.fl.xumm4j.dao.*;
 
 public class Deserialize implements IDeserialize {
     private final ObjectMapper mapper;
@@ -91,6 +88,21 @@ public class Deserialize implements IDeserialize {
         CurrenciesDAO.setShortlist(jsonNode.findPath("shortlist").asInt());
 
         return CurrenciesDAO;
+    }
+
+    public StorageDAO Storage(String json){
+        final StorageDAO storageDAO = new StorageDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        storageDAO.setName(jsonNode.findPath("application").findPath("name").asText());
+        storageDAO.setUuidv4(jsonNode.findPath("application").findPath("uuidv4").asText());
+        storageDAO.setStored(jsonNode.findPath("stored").asBoolean());
+        storageDAO.setData(jsonNode.findPath("data").toString());
+
+        return storageDAO;
     }
 
 }
