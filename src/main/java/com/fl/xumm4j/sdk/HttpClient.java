@@ -37,13 +37,13 @@ public class HttpClient implements IHttpClient {
     }
 
     @Override
-    public Response doPost(String payload) {
+    public Response doPost(String payload, String url) {
         Response response = null;
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, payload);
 
         Request request = new Request.Builder()
-                .url("https://xumm.app/api/v1/platform/payload")
+                .url(url)
                 .addHeader("X-API-Key", credentials.getApiKey())
                 .addHeader("X-API-Secret", credentials.getSecretKey())
                 .method("POST", body)

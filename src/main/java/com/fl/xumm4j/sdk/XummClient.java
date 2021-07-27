@@ -46,7 +46,7 @@ public class XummClient implements IXummClient {
     @Override
     public String getRates(String currencyCode) {
         try {
-            response = Objects.requireNonNull(http.doGet(ENDPOINT_RATES +currencyCode).body()).string();
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_RATES + currencyCode).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,20 +55,30 @@ public class XummClient implements IXummClient {
     }
 
     @Override
-    public String getKycStatus(String accountAddress) {
-        try {
-            response = Objects.requireNonNull(http.doGet(ENDPOINT_KYC_STATUS +accountAddress).body()).string();
-            response = getToPrettyString(response);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public String getKycStatus(String UserToken_ClassicAddress) {
+        if(UserToken_ClassicAddress.length() <= 35 ){
+            try {
+                response = Objects.requireNonNull(http.doGet(ENDPOINT_KYC_STATUS_PUBLIC + UserToken_ClassicAddress).body()).string();
+                response = getToPrettyString(response);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                response = Objects.requireNonNull(http.doPost(UserToken_ClassicAddress, ENDPOINT_KYC_STATUS).body()).string();
+                response = getToPrettyString(response);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return response;
     }
+
 
     @Override
     public String getTransaction(String txHash) {
         try {
-            response = Objects.requireNonNull(http.doGet(ENDPOINT_TXID +txHash).body()).string();
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_TXID + txHash).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,9 +87,9 @@ public class XummClient implements IXummClient {
     }
 
     @Override
-    public String postPayload(String txJson) {
+    public String create(String txJson) {
         try {
-            response = Objects.requireNonNull(http.doPost(txJson).body()).string();
+            response = Objects.requireNonNull(http.doPost(txJson, ENDPOINT_PAYLOAD).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();

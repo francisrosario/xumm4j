@@ -14,5 +14,5 @@ public interface IHttpClient {
      * @param payload
      * @return
      */
-    Response doPost(String payload);
+    Response doPost(String payload, String url);
 }
