@@ -7,7 +7,7 @@ import com.fl.xumm4j.api.IPayloadBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
-public class PayloadBuilder {
+public class TXBuilder {
     private String json;
 
     public String getGeneratedPayload() {
@@ -103,20 +103,20 @@ public class PayloadBuilder {
         }
 
         @Override
-        public PayloadBuilder build(){
+        public TXBuilder build(){
             return getPayloadBuilder();
         }
 
         @NotNull
-        private PayloadBuilder getPayloadBuilder() {
-            StringBuilder sb = new StringBuilder();
-            ObjectMapper objectMapper = ObjectMapperFactory.create();
-            JSONObject main = new JSONObject();
-            JSONObject Option = new JSONObject();
-            JSONObject return_url = new JSONObject();
-            JSONObject custom_meta = new JSONObject();
+        private TXBuilder getPayloadBuilder() {
+            final StringBuilder sb = new StringBuilder();
+            final ObjectMapper objectMapper = ObjectMapperFactory.create();
+            final JSONObject main = new JSONObject();
+            final JSONObject Option = new JSONObject();
+            final JSONObject return_url = new JSONObject();
+            final JSONObject custom_meta = new JSONObject();
+            final TXBuilder payload = new TXBuilder();
 
-            PayloadBuilder payload = new PayloadBuilder();
             validate();
             try {
                 if (!user_token.equals("")) main.put(IPayloadBuilder.USER_TOKEN, user_token);
@@ -162,7 +162,7 @@ public class PayloadBuilder {
         }
 
     }
-    private PayloadBuilder() {
+    private TXBuilder() {
 
     }
 }

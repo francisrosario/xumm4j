@@ -1,6 +1,6 @@
 package com.fl.xumm4j.api;
 
-import com.fl.xumm4j.sdk.builder.PayloadBuilder;
+import com.fl.xumm4j.sdk.builder.TXBuilder;
 
 public interface IPayloadBuilder {
     String TXJSON_SIGNIN = "{\"TransactionType\": \"SignIn\"}";
@@ -30,70 +30,70 @@ public interface IPayloadBuilder {
      * @param identifier
      * @return
      */
-    PayloadBuilder.builder identifier(String identifier);
+    TXBuilder.builder identifier(String identifier);
 
     /**
      * @param blob
      * @return
      */
-    PayloadBuilder.builder blob(String blob);
+    TXBuilder.builder blob(String blob);
 
     /**
      * @param instruction
      * @return
      */
-    PayloadBuilder.builder instruction(String instruction);
+    TXBuilder.builder instruction(String instruction);
 
     /**
      * @param user_token
      * @return
      */
-    PayloadBuilder.builder user_token(String user_token);
+    TXBuilder.builder user_token(String user_token);
 
     /**
      * @param return_url
      * @return
      */
-    PayloadBuilder.builder returnURL_App(String return_url);
+    TXBuilder.builder returnURL_App(String return_url);
 
     /**
      * @param return_url
      * @return
      */
-    PayloadBuilder.builder returnURL_Web(String return_url);
+    TXBuilder.builder returnURL_Web(String return_url);
 
     /**
      * @param json
      * @return
      */
-    PayloadBuilder.builder txjson(String json);
+    TXBuilder.builder txjson(String json);
 
     /**
      * @param blob
      * @return
      */
-    PayloadBuilder.builder txblob(String blob);
+    TXBuilder.builder txblob(String blob);
 
     /**
      * @param submit
      * @return
      */
-    PayloadBuilder.builder submit(boolean submit);
+    TXBuilder.builder submit(boolean submit);
 
     /**
      * @param multisign
      * @return
      */
-    PayloadBuilder.builder multisign(boolean multisign);
+    TXBuilder.builder multisign(boolean multisign);
 
     /**
      * @param expire
      * @return
      */
-    PayloadBuilder.builder expire(double expire);
+    TXBuilder.builder expire(double expire);
 
     /**
      * @return
      */
-    PayloadBuilder build();
+    TXBuilder build();
 }
