@@ -24,21 +24,23 @@ CredentialsBuilder myAccess=new CredentialsBuilder.builder()
 
 // Interact with https://xumm.readme.io/ (Misc)
 // Pass the instance of CredentialBuilder to Misc.
-        Misc misc=new Misc(myAccess);
-
+        XummClient xummclient = new XummClient(myAccess);
+// Create an Instance of Deserialize
+        Deserialize deserialize = new Deserialize();
+        
 //Performs ping request https://xumm.readme.io/reference/testinput
-        String pingJSON=misc.doPing();
-
+        String pingJSON = xummclient.doPing();
+ 
 //Performs curated assets request https://xumm.readme.io/reference/curated-assets
-        String curatedJSON=misc.getCuratedAssets());
-        CuratedAssetsDAO curatedAssetsDAO=misc.deserializeCuratedAssets(curratedJSON);
+        String curatedJSON = xummclient.getCuratedAssets());
+        CuratedAssetsDAO curatedAssetsDAO = deserialize.CuratedAssets(curratedJSON);
         curatedAssetsDAO.forEachCurrencies(System.out::println);
         curatedAssetsDAO.forEachDetails(System.out::println);
         curatedAssetsDAO.forEachIssuer(System.out::println);
 //Other delegate methods are available such as ArrayList size, add, get.
 
 //Create JSON using modified xrp4j model.
-        Payment payment=Payment.builder()
+        Payment payment = Payment.builder()
         .fee(XrpCurrencyAmount.ofDrops(12))
         .destination(Address.of("ra5nK24KXen9AHvsdFTKHSANinZseWnPcX"))
         .amount(XrpCurrencyAmount.ofXrp(BigDecimal.valueOf(8787)))
@@ -47,7 +49,7 @@ CredentialsBuilder myAccess=new CredentialsBuilder.builder()
         String PaymentJSON=objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(payment);
 
 //Create a txjson using PayloadBuilder
-        PayloadBuilder payload=new PayloadBuilder.builder()
+        TXBuilder payload=new TXBuilder.builder()
         .txjson(PaymentJSON)
         .instruction("Hi!!")
         .expire(50)
@@ -58,5 +60,5 @@ CredentialsBuilder myAccess=new CredentialsBuilder.builder()
         .build();
 
 //Temporary stored postPayload method in com.fl.xumm4j.sdk.Misc
-        String Result=misc.postPayload(payload);
+        String Result = xummclient.postPayload(payload);
 ```
