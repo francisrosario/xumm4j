@@ -281,7 +281,7 @@ PayloadBuilder payloadTwo = new PayloadBuilder.builder()
 By using xrp4j JSON Builder + xumm4j PayloadBuilder we now have a payload object ready to be submmited using `postPayload` method.
 
 ```java
-String JSON = xummclient.postPayload(payload);
+String JSON = xummclient.postPayload(payload.getGeneratedPayload());
 ```
 Once `postPayload` method is executed you'll get a response similar below: 
 
