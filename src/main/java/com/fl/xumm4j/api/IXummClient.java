@@ -8,6 +8,9 @@ public interface IXummClient {
     String ENDPOINT_KYC_STATUS_PUBLIC = "https://xumm.app/api/v1/platform/kyc-status/";
     String ENDPOINT_RATES = "https://xumm.app/api/v1/platform/rates/";
     String ENDPOINT_PAYLOAD = "https://xumm.app/api/v1/platform/payload/";
+    String ENDPOINT_GET_PAYLOAD = "https://xumm.app/api/v1/platform/payload/";
+    String ENDPOINT_DELETE_PAYLOAD = "https://xumm.app/api/v1/platform/payload/";
+    String ENDPOINT_GET_PAYLOAD_CUSTOM_IDENTIFIER = "https://xumm.app/api/v1/platform/payload/ci/";
     String ENDPOINT_STORE_APP_STORAGE = "https://xumm.app/api/v1/platform/app-storage/";
     String ENDPOINT_GET_APP_STORAGE = "https://xumm.app/api/v1/platform/app-storage/";
     String ENDPOINT_DELETE_APP_STORAGE = "https://xumm.app/api/v1/platform/app-storage";
@@ -17,5 +20,11 @@ public interface IXummClient {
     String getRates(String currencyCode);
     String getKycStatus(String UserToken_ClassicAddress);
     String getTransaction(String txHash);
-    String create(String payload);
+    String postPayload(String payload);
+
+    String getPayload(String payloadUUID);
+
+    String getCustomIdentifier(String payloadUUID);
+
+    String deletePayload(String payloadUUID);
 }

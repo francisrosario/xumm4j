@@ -91,9 +91,42 @@ public class XummClient implements IXummClient {
     }
 
     @Override
-    public String create(String payload) {
+    public String postPayload(String payload) {
         try {
             response = Objects.requireNonNull(http.doPost(ENDPOINT_PAYLOAD, payload).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public String getPayload(String payloadUUID) {
+        try {
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_GET_PAYLOAD + payloadUUID).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public String getCustomIdentifier(String payloadUUID) {
+        try {
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_GET_PAYLOAD_CUSTOM_IDENTIFIER + payloadUUID).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public String deletePayload(String payloadUUID) {
+        try {
+            response = Objects.requireNonNull(http.doDelete(ENDPOINT_DELETE_PAYLOAD + payloadUUID).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();
