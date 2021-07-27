@@ -3,7 +3,7 @@ package com.fl.xumm4j.sdk.builder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
-import com.fl.xumm4j.api.ITXBuilder;
+import com.fl.xumm4j.api.builder.ITXBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
