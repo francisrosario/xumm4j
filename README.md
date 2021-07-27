@@ -1,40 +1,35 @@
-# XUMM SDK (JS/TS) [![npm version](https://badge.fury.io/js/xumm-sdk.svg)](https://www.npmjs.com/xumm-sdk) [![GitHub Actions NodeJS status](https://github.com/XRPL-Labs/XUMM-SDK/workflows/NodeJS/badge.svg?branch=master)](https://github.com/XRPL-Labs/XUMM-SDK/actions) [![GitHub Actions Deno status](https://github.com/XRPL-Labs/XUMM-SDK/workflows/Deno/badge.svg?branch=master)](https://github.com/XRPL-Labs/XUMM-SDK/actions)
+# XUMM SDK (JS/TS)
 
-Interact with the XUMM SDK from Javascript / Typescript environments.
+Interact with the XUMM SDK from Java environments.
 
-#### **Please note! The XUMM SDK (XUMM API in general) is for BACKEND USE only. Please DO NOT use your API credentials in a FRONTEND environment.**
+#### **Please note! The xumm4j SDK (XUMM API in general) is for BACKEND USE only. Please DO NOT use your API credentials in a FRONTEND environment.**
 
 <div class="alert alert-danger shadow-sm" style="color: #ca0000; border: 1px solid #ca0000; padding: 4px 6px; border-radius: 5px; background-color: rgba(200, 110, 50, .2)">To implement the XUMM SKD (or XUMM API directly) in your own web project, make sure your frontend calls your own backend, where the follow up
 communication with the XUMM SDK (or XUMM API) will take place. Your XUMM credentials should never be publicly available.</div>
 
-## How to use the XUMM SDK
+## How to use the xumm4j SDK
 
-Get the SDK straight from npm: `npm install xumm-sdk`. The SDK is [also available](https://deno.land/x/xumm) for [Deno](https://deno.land) ([XUMM SDK Deno Readme](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/deno/README.md)).
-
-Initialize the SDK in Javascript:
-```javascript
-const {XummSdk} = require('xumm-sdk')
+Import required class.
+```java
+import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
+import com.fl.xumm4j.sdk.XummClient;
+import com.fl.xumm4j.sdk.builder.TXBuilder;
 ```
 
-... or in Typescript:
+Now continue by creating an instance of CredentialsBuilder and XummClient:
+```java
+CredentialsBuilder myAccess = new CredentialsBuilder.builder()
+  .apiKey("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
+  .secretKey("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
+  .build();
 
-```typescript
-import {XummSdk} from 'xumm-sdk'
-// Or with types:
-//   import {XummSdk, XummTypes} from 'xumm-sdk'
-```
-
-Now continue by constructing the XummSdk object:
-
-```typescript
-const Sdk = new XummSdk()
-// Or with manually provided credentials (instead of using dotenv):
-//   const Sdk = new XummSdk('someAppKey', 'someAppSecret')
+//Pass the created CredentialsBuilder object to XummClient
+XummClient xummclient = new XummClient(myAccess);
 ```
 
 ### Credentials
 
-The SDK will look in your environment or dotenv file (`.env`) for the `XUMM_APIKEY` and `XUMM_APISECRET` values. A `.env.sample` file is provided in this repository. A [sample dotenv file looks like this](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/.env.sample). Alternatively you can provide your XUMM API Key & Secret by passing them to the XummSdk constructor. If both your environment and the SDK constructor contain credentials, the values provided to the constructor will be used.
+The XummClient will look in your CredentialsBuilder Object, It's highly recommended not to hard-code the API Key and Secret Key, You may use https://docs.oracle.com/javase/tutorial/essential/environment/env.html **Environment Variables** to hide your API Key and Secret Key.
 
 Create your app and get your XUMM API credentials at the XUMM Developer Console:
 
