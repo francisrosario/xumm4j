@@ -1,4 +1,5 @@
-# XUMM SDK (Java) WIP README
+# XUMM SDK (Java)
+####WIP README
 
 Interact with the XUMM SDK from Java environments.
 
@@ -317,40 +318,37 @@ Alternatively user routing / instruction flows can be custom built using the QR 
 String JSON = xummclient.deletePayload("Payload UUID");
 ```
 
-To cancel a payload, provide a payload UUID (string), a `<XummPayload>` (by performing a `Sdk.payload.get()` first) or a `<CreatedPayload>` (by using the response of a `Sdk.payload.create()` call). By cancelling an existing payload, the payload will be marked as expired and can no longer be opened by users. 
+To cancel a payload, provide a payload UUID (string), By performing a `xummclient.getPayload` first) or a `<CreatedPayload>` (by using the response of a `xummclient.postPayload` call). By cancelling an existing payload, the payload will be marked as expired and can no longer be opened by users. 
 
 **Please note**: *if a user already opened the payload in XUMM APP, the payload cannot be cancelled: the user may still be resolving the payload in the XUMM App, and should have a chance to complete that process*.
 
-A response (generic API types [here](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/src/types/xumm-api/index.ts)) looks like:
 ```java
+System.out.println(JSON);
+/*
 {
-  result: {
-    cancelled: boolean
-    reason: XummCancelReason
+  "result": {
+    "cancelled": true,
+    "reason": "OK"
+  },
+  "meta": {
+    "exists": true,
+    "uuid": "<some-uuid>",
+    "multisign": false,
+    "submit": true,
+    "destination": "rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY",
+    "resolved_destination": "XRP Tip Bot",
+    "finished": false,
+    "expired": true,
+    "pushed": true,
+    "app_opened": false,
+    "return_url_app": "<some-url-or-null>",
+    "return_url_web": "<some-url-or-null>"
+  },
+  "custom_meta": {
+    "identifier": "some_identifier_1337",
+    "blob": {},
+    "instruction": "Hey ❤️ ..."
   }
-  meta: XummPayloadMeta
-  custom_meta: XummCustomMeta
 }
+*/
 ```
-
-## Development
-
-Please note: you most likely just want to **use** the XUMM SDK, to do so, fetch the `xumm-sdk` package from NPM using `npm install --save xumm-sdk`.
-
-If you actually want to change/test/develop/build/contribute (to) the source of the XUMM SDK:
-
-##### Build
-
-Please note: at least Typescript version **3.8+** is required!
-
-To build the code, run `tsc`. To build automatically on file changes (watch): `tsc -w`.
-
-##### Lint & test
-
-Lint the code using `npm run lint`, run tests (jest) using `npm run test`
-
-##### Run development code:
-
-Build, run, show debug output & watch `dist/samples/dev.js`, compiled from `samples/dev.ts` using `npm run dev`. The `samples/dev.ts` file is **not included by default**.
-
-[Here's a sample `samples/dev.ts` file](https://gist.github.com/WietseWind/e2e9729619872cb736fe29b486e9c623).
