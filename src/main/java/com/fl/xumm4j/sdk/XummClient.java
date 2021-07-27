@@ -65,7 +65,7 @@ public class XummClient implements IXummClient {
             }
         }else{
             try {
-                response = Objects.requireNonNull(http.doPost(UserToken_ClassicAddress, ENDPOINT_KYC_STATUS).body()).string();
+                response = Objects.requireNonNull(http.doPost(ENDPOINT_KYC_STATUS, UserToken_ClassicAddress).body()).string();
                 response = getToPrettyString(response);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -87,9 +87,9 @@ public class XummClient implements IXummClient {
     }
 
     @Override
-    public String create(String txJson) {
+    public String create(String payload) {
         try {
-            response = Objects.requireNonNull(http.doPost(txJson, ENDPOINT_PAYLOAD).body()).string();
+            response = Objects.requireNonNull(http.doPost(ENDPOINT_PAYLOAD, payload).body()).string();
             response = getToPrettyString(response);
         } catch (IOException e) {
             e.printStackTrace();

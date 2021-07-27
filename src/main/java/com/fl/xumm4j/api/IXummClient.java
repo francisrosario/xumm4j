@@ -9,38 +9,10 @@ public interface IXummClient {
     String ENDPOINT_RATES = "https://xumm.app/api/v1/platform/rates/";
     String ENDPOINT_PAYLOAD = "https://xumm.app/api/v1/platform/payload/";
 
-    /**
-     * @return
-     */
     String doPing();
-
-    /**
-     * @return
-     */
     String getCuratedAssets();
-
-    /**
-     * @param currencyCode
-     * @return
-     */
     String getRates(String currencyCode);
-
-    /**
-     * @param accountAddress
-     * @return
-     */
-    String getKycStatus(String UserToken);
-
-    /**
-     * @param txHash
-     * @return
-     */
+    String getKycStatus(String UserToken_ClassicAddress);
     String getTransaction(String txHash);
-    //To do App-Storage
-
-    /**
-     * @param txJson
-     * @return
-     */
-    String create(String txJson);
+    String create(String payload);
 }
