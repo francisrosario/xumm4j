@@ -6,4 +6,6 @@ public interface IHttpClient {
 
     Response doGet(String url);
     Response doPost(String url, String data);
+
+    Response doDelete(String url);
 }

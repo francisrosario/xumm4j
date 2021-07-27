@@ -55,4 +55,21 @@ public class HttpClient implements IHttpClient {
         }
         return response;
     }
+
+    @Override
+    public Response doDelete(String url) {
+        Response response = null;
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("X-API-Key", credentials.getApiKey())
+                .addHeader("X-API-Secret", credentials.getSecretKey())
+                .delete()
+                .build();
+        try {
+            response = okHttpClient().newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
 }

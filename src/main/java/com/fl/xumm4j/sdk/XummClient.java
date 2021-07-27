@@ -101,4 +101,34 @@ public class XummClient implements IXummClient {
         return response;
     }
 
+    public String setStorage(String json){
+        try {
+            response = Objects.requireNonNull(http.doPost(ENDPOINT_STORE_APP_STORAGE, json).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public String getStorage(){
+        try {
+            response = Objects.requireNonNull(http.doGet(ENDPOINT_GET_APP_STORAGE).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public String deleteStorage(){
+        try {
+            response = Objects.requireNonNull(http.doDelete(ENDPOINT_DELETE_APP_STORAGE).body()).string();
+            response = getToPrettyString(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
 }
