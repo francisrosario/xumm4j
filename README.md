@@ -5,7 +5,7 @@ Interact with the XUMM SDK from Java environments.
 
 #### **Please note! The xumm4j SDK (XUMM API in general) is for BACKEND USE only. Please DO NOT use your API credentials in a FRONTEND environment.**
 
-<div class="alert alert-danger shadow-sm" style="color: #ca0000; border: 1px solid #ca0000; padding: 4px 6px; border-radius: 5px; background-color: rgba(200, 110, 50, .2)">To implement the XUMM SKD (or XUMM API directly) in your own web project, make sure your frontend calls your own backend, where the follow up
+<div class="alert alert-danger shadow-sm" style="color: #ca0000; border: 1px solid #ca0000; padding: 4px 6px; border-radius: 5px; background-color: rgba(200, 110, 50, .2)">To implement the XUMM SDK (or XUMM API directly) in your own web project, make sure your frontend calls your own backend, where the follow up
 communication with the XUMM SDK (or XUMM API) will take place. Your XUMM credentials should never be publicly available.</div>
 
 ## How to use the xumm4j SDK
