@@ -5,7 +5,7 @@ import com.fl.xumm4j.dao.CurrenciesDAO;
 import com.fl.xumm4j.dao.DetailsDAO;
 import com.fl.xumm4j.dao.PingDAO;
 
-public interface IMiscellaneous {
+public interface IXummClient {
     String PING_ENDPOINT = "https://xumm.app/api/v1/platform/ping";
     String CURRATED_ASSETS_ENDPOINT = "https://xumm.app/api/v1/platform/curated-assets";
     String TXID_ENDPOINT = "https://xumm.app/api/v1/platform/xrpl-tx/";
@@ -46,20 +46,4 @@ public interface IMiscellaneous {
      * @return
      */
     String postPayload(String txJson);
-
-    /**
-     * @param json
-     * @return
-     */
-    PingDAO deserializePing(String json);
-
-    /**
-     * @param json
-     * @return
-     */
-    CuratedAssetsDAO deserializeCuratedAssets(String json);
-
-    DetailsDAO deserializeDetails(String json);
-
-    CurrenciesDAO deserializeCurrencies(String json);
 }

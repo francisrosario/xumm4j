@@ -6,10 +6,12 @@ import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-class MiscTest {
+class testAll {
     CredentialsBuilder credentialsBuilder;
-    Misc misc;
-    public MiscTest() {
+    XummClient xummclient;
+    Deserialize deserialize;
+
+    public testAll() {
         String apiKey = "7208fca5-4ac3-4638-b006-897dfcc0ab29";
         String secretKey = "6dab854e-b317-47f7-8453-490b8bd171ad";
         credentialsBuilder = new CredentialsBuilder.builder()
@@ -18,29 +20,19 @@ class MiscTest {
                 .build();
         assertEquals(apiKey, credentialsBuilder.getApiKey());
         assertEquals(secretKey, credentialsBuilder.getSecretKey());
-
-        misc = new Misc(credentialsBuilder);
+        xummclient = new XummClient(credentialsBuilder);
+        deserialize = new Deserialize();
     }
 
     @Test
     void doPing() {
-        String expectedPingResponse = "{\n" +
-                "  \"pong\" : true,\n" +
-                "  \"auth\" : {\n" +
-                "    \"quota\" : { },\n" +
-                "    \"application\" : {\n" +
-                "      \"uuidv4\" : \"7208fca5-4ac3-4638-b006-897dfcc0ab29\",\n" +
-                "      \"name\" : \"XUMM4J\",\n" +
-                "      \"webhookurl\" : \"http://localhost:8080\",\n" +
-                "      \"disabled\" : 0\n" +
-                "    }";
-        String doPingResponse = misc.doPing();
-        assertTrue(doPingResponse.contains(expectedPingResponse));
+        String doPingResponse = xummclient.doPing();
+        assertNotNull(doPingResponse);
     }
 
     @Test
     void getCuratedAssets() {
-        String getCuratedAssets = misc.getCuratedAssets();
+        String getCuratedAssets = xummclient.getCuratedAssets();
         assertNotNull(getCuratedAssets);
     }
 
@@ -48,7 +40,7 @@ class MiscTest {
     void getRates() {
         String expectedRatesResponse = "{\n" +
                 "  \"USD\" : 1,";
-        String getRatesResponse = misc.getRates("USD");
+        String getRatesResponse = xummclient.getRates("USD");
         assertTrue(getRatesResponse.contains(expectedRatesResponse));
     }
 
@@ -73,15 +65,16 @@ class MiscTest {
                 "      }\n" +
                 "    } ]\n" +
                 "  }";
-        String getTransactionResponse = misc.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021");
+        String getTransactionResponse = xummclient.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021");
+        assertNotNull(getTransactionResponse);
         assertTrue(getTransactionResponse.contains(expectedTransactionResponse));
     }
 
 
     @Test
     void deserializePing() {
-        String JSON = misc.doPing();
-        PingDAO ping = misc.deserializePing(JSON);
+        String JSON = xummclient.doPing();
+        PingDAO ping = deserialize.Ping(JSON);
         assertNotNull(ping.getCall_uuidv4());
         assertNotNull(ping.getName());
         assertNotNull(ping.getUuidv4());
@@ -90,10 +83,10 @@ class MiscTest {
 
     @Test
     void deserializeCuratedAssets() {
-        String JSON = misc.getCuratedAssets();
-        CuratedAssetsDAO curatedAssets = misc.deserializeCuratedAssets(JSON);
-        assertNotNull(curatedAssets.getCurrencies(0));
-        assertNotNull(curatedAssets.getDetails(0));
-        assertNotNull(curatedAssets.getIssuer(0));
+        String JSON = xummclient.getCuratedAssets();
+        CuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
+        assertNotNull(curatedAssets.getCurrencies(3));
+        assertNotNull(curatedAssets.getDetails(3));
+        assertNotNull(curatedAssets.getIssuer(3));
     }
 }

@@ -6,11 +6,11 @@ import okhttp3.*;
 
 import java.io.IOException;
 
-public class Http implements IOkHttp {
+public class HttpClient implements IOkHttp {
     private OkHttpClient okHttpClient;
     private final CredentialsBuilder ic;
 
-    public Http(CredentialsBuilder iCredentials) {
+    public HttpClient(CredentialsBuilder iCredentials) {
         this.ic = iCredentials;
     }
 

@@ -2,15 +2,17 @@ package com.fl.xumm4j;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.jackson.CuratedAssets;
-import com.fl.xumm4j.sdk.Misc;
+import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
+import com.fl.xrpl4j.model.transactions.Address;
+import com.fl.xrpl4j.model.transactions.Payment;
+import com.fl.xrpl4j.model.transactions.XrpCurrencyAmount;
+import com.fl.xumm4j.sdk.XummClient;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
-import com.fl.xumm4j.sdk.builder.PayloadBuilder;
+import com.fl.xumm4j.sdk.builder.TXBuilder;
 import com.fl.xumm4j.api.IPayloadBuilder;
-import org.xrpl.xrpl4j.model.fl.jackson.ObjectMapperFactory;
-import org.xrpl.xrpl4j.model.fl.transactions.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class testMain {
 
@@ -21,7 +23,7 @@ public class testMain {
                 .apiKey("7208fca5-4ac3-4638-b006-897dfcc0ab29")
                 .secretKey("6dab854e-b317-47f7-8453-490b8bd171ad")
                 .build();
-        Misc misc = new Misc(myAccess);
+        XummClient misc = new XummClient(myAccess);
 
         Payment payment = Payment.builder()
                 .fee(XrpCurrencyAmount.ofDrops(12))
@@ -35,7 +37,7 @@ public class testMain {
             e.printStackTrace();
         }
 
-        PayloadBuilder payload = new PayloadBuilder.builder()
+        TXBuilder payload = new TXBuilder.builder()
                 .txjson(IPayloadBuilder.TXJSON_SIGNIN)
                 .instruction("This is a login transaction.")
                 .build();
@@ -47,21 +49,22 @@ public class testMain {
 
         //System.out.println(misc.getCuratedAssets());
         //System.out.println(misc.doPing());
-        //System.out.println(misc.deserializeCuratedAssets(jsonResponse));
+        //System.out.println(misc.CuratedAssets(jsonResponse));
 
-        //System.out.println(misc.deserializePing(jsonResponse).getUuidv4());
+        //System.out.println(misc.Ping(jsonResponse).getUuidv4());
         //System.out.println(misc.getRates("sar"));
         //System.out.println(misc.getKycStatus("rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB"));
         //System.out.println(misc.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021"));
 
-        String jsonResponse = misc.getCuratedAssets();
-        CuratedAssets result = misc.deserializeCuratedAssets(jsonResponse);
-        result.forEachCurrencies(System.out::println);
-        result.forEachDetails(System.out::println);
-        result.forEachIssuer(System.out::println);
+        //String jsonResponse = misc.getCuratedAssets();
+        //CuratedAssetsDAO result = misc.CuratedAssets(jsonResponse);
+        //result.forEachCurrencies(System.out::println);
+        //result.forEachDetails(System.out::println);
+        //result.forEachIssuer(System.out::println);
 
-        String Issuer = result.getIssuer(0);
-        System.out.println(Issuer);
+        //String Issuer = result.getIssuer(0);
+       // System.out.println(Issuer);
+        ArrayList<String> issuers = new ArrayList<>();
 
     }
 }
