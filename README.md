@@ -106,7 +106,7 @@ System.out.println(JSON);
 */
 ```
 
-##### Sdk.getKycStatus()
+##### xummclient.getKycStatus()
 
 The `getKycStatus` return the KYC status of a user based on a user_token, issued after the
 user signed a Sign Request (from your app) before (see Payloads - Intro).
@@ -118,17 +118,16 @@ from an invalid token.
 Alternatively, KYC status can be retrieved for an XPRL account address: the address selected in
 XUMM when the session KYC was initiated by.
 
-```typescript
-const kycStatus = await Sdk.getKycStatus('00000000-0000-0000-0000-000000000000')
+```java
+String JSON = xummclient.getKycStatus("00000000-0000-0000-0000-000000000000");
 ```
 
 ... or using an account address:
-```typescript
-const kycStatus = await Sdk.getKycStatus('rwu1dgaUq8DCj3ZLFXzRbc1Aco5xLykMMQ')
+```java
+String JSON = xummclient.getKycStatus("wu1dgaUq8DCj3ZLFXzRbc1Aco5xLykMMQ")
 ```
 
-Returns [`<keyof PossibleKycStatuses>`](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/src/types/Meta/KycStatusResponse.ts#L1).
-
+Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html):
 ###### Notes on KYC information
 
 - Once an account has successfully completed the XUMM KYC flow, the KYC flag will be applied to the account even if the identity document used to KYC expired. The flag shows that the account was **once** KYC'd by a real person with a real identity document.
@@ -138,9 +137,6 @@ Returns [`<keyof PossibleKycStatuses>`](https://github.com/XRPL-Labs/XUMM-SDK/bl
 
 The `getTransaction` method allows you to get the transaction outcome (mainnet)
 live from the XRP ledger, as fetched for you by the XUMM backend.
-
-**Note**: it's best to retrieve these results **yourself** instead of relying on the XUMM platform to get live XRPL transaction information! You can use the **[xrpl-txdata](https://www.npmjs.com/package/xrpl-txdata)** package to do this:  
-[![npm version](https://badge.fury.io/js/xrpl-txdata.svg)](https://www.npmjs.com/xrpl-txdata)
 
 ```java
 String JSON = xummclient.getTransaction();
@@ -184,7 +180,8 @@ Payloads are the primary reason for the XUMM API (thus this SDK) to exist. The [
 
 A payload can contain an XRPL transaction template. Some properties may be omitted, as they will be added by the XUMM app when a user signs a transaction. A simple payload may look like this:
 
-```javascript
+```java
+/*
 {
   txjson: {
     TransactionType : 'Payment',
@@ -192,17 +189,15 @@ A payload can contain an XRPL transaction template. Some properties may be omitt
     Amount: '1337'
   }
 }
+*/
 ```
 
 As you can see the payload looks like a regular XRPL transaction, wrapped in an `txjson` object, omitting the mandatory `Account`, `Fee` and `Sequence` properties. They will be added containing the correct values when the payload is signed by an app user.
 
-Optionally (besides `txjson`) a payload can contain these properties ([TS definition](https://github.com/XRPL-Labs/XUMM-SDK/blob/d2aae98eb8f496f4d77079c777aa41df754d4ebc/src/types/xumm-api/index.ts#L79)):
-
+Optionally (besides `txjson`) a payload can contain these properties ([XUMM API Postpayload](https://xumm.readme.io/reference/post-payload)):
 - `options` to define payload options like a return URL, expiration, etc.
 - `custom_meta` to add metadata, user insruction, your own unique ID, ...
 - `user_token` to push the payload to a user (after [obtaining a user specific token](https://xumm.readme.io/docs/pushing-sign-requests))
-
-A more complex payload [could look like this](https://gist.github.com/WietseWind/ecdfd58bece14e5d15e41138fa4b0f4a). A [reference for payload options & custom meta](https://xumm.readme.io/reference/post-payload) can be found in the [API Docs](https://xumm.readme.io/reference/post-payload).
 
 Instead of providing a `txjson` transaction, a transaction formatted as HEX blob (string) can be provided in a `txblob` property.
 
