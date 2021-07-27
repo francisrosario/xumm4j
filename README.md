@@ -33,6 +33,7 @@ CredentialsBuilder myAccess=new CredentialsBuilder.builder()
  
 //Performs curated assets request https://xumm.readme.io/reference/curated-assets
         String curatedJSON = xummclient.getCuratedAssets());
+//Deserialize curatedJSON using deserialize instance
         CuratedAssetsDAO curatedAssetsDAO = deserialize.CuratedAssets(curratedJSON);
         curatedAssetsDAO.forEachCurrencies(System.out::println);
         curatedAssetsDAO.forEachDetails(System.out::println);
@@ -48,7 +49,7 @@ CredentialsBuilder myAccess=new CredentialsBuilder.builder()
         ObjectMapper objectMapper=ObjectMapperFactory.create();
         String PaymentJSON=objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(payment);
 
-//Create a txjson using PayloadBuilder
+//Create a txjson using TXBuilder.
         TXBuilder payload=new TXBuilder.builder()
         .txjson(PaymentJSON)
         .instruction("Hi!!")
@@ -59,6 +60,6 @@ CredentialsBuilder myAccess=new CredentialsBuilder.builder()
         .returnURL_App("https://github.com/francisrosario/")
         .build();
 
-//Temporary stored postPayload method in com.fl.xumm4j.sdk.Misc
+//Submit a payload containing a sign request to the XUMM.
         String Result = xummclient.postPayload(payload);
 ```
