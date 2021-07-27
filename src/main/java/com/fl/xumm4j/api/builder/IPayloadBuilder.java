@@ -1,8 +1,8 @@
 package com.fl.xumm4j.api.builder;
 
-import com.fl.xumm4j.sdk.builder.TXBuilder;
+import com.fl.xumm4j.sdk.builder.PayloadBuilder;
 
-public interface ITXBuilder {
+public interface IPayloadBuilder {
     String TXJSON_SIGNIN = "{\"TransactionType\": \"SignIn\"}";
     String ERROR_AMBIGUOUS_PAYLOAD = "Error: Ambiguous payload, please specify either txblob or txjson";
     String ERROR_MISSING_PROPERTIES = "Error: txblob or txjson is missing, please add either one of txjson or txblob";
@@ -30,70 +30,70 @@ public interface ITXBuilder {
      * @param identifier
      * @return
      */
-    TXBuilder.builder identifier(String identifier);
+    PayloadBuilder.builder identifier(String identifier);
 
     /**
      * @param blob
      * @return
      */
-    TXBuilder.builder blob(String blob);
+    PayloadBuilder.builder blob(String blob);
 
     /**
      * @param instruction
      * @return
      */
-    TXBuilder.builder instruction(String instruction);
+    PayloadBuilder.builder instruction(String instruction);
 
     /**
      * @param user_token
      * @return
      */
-    TXBuilder.builder userToken(String user_token);
+    PayloadBuilder.builder userToken(String user_token);
 
     /**
      * @param return_url
      * @return
      */
-    TXBuilder.builder returnURL_App(String return_url);
+    PayloadBuilder.builder returnURL_App(String return_url);
 
     /**
      * @param return_url
      * @return
      */
-    TXBuilder.builder returnURL_Web(String return_url);
+    PayloadBuilder.builder returnURL_Web(String return_url);
 
     /**
      * @param json
      * @return
      */
-    TXBuilder.builder txjson(String json);
+    PayloadBuilder.builder txjson(String json);
 
     /**
      * @param blob
      * @return
      */
-    TXBuilder.builder txblob(String blob);
+    PayloadBuilder.builder txblob(String blob);
 
     /**
      * @param submit
      * @return
      */
-    TXBuilder.builder submit(boolean submit);
+    PayloadBuilder.builder submit(boolean submit);
 
     /**
      * @param multisign
      * @return
      */
-    TXBuilder.builder multisign(boolean multisign);
+    PayloadBuilder.builder multisign(boolean multisign);
 
     /**
      * @param expire
      * @return
      */
-    TXBuilder.builder expire(double expire);
+    PayloadBuilder.builder expire(double expire);
 
     /**
      * @return
      */
-    TXBuilder build();
+    PayloadBuilder build();
 }

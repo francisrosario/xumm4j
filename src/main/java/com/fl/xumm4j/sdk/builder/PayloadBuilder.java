@@ -3,21 +3,21 @@ package com.fl.xumm4j.sdk.builder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
-import com.fl.xumm4j.api.builder.ITXBuilder;
+import com.fl.xumm4j.api.builder.IPayloadBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
-public class TXBuilder {
+public class PayloadBuilder {
     private String json;
 
     public String getGeneratedPayload() {
         return json;
     }
 
-    public static class builder implements ITXBuilder {
-        private boolean submit = ITXBuilder.DEFAULT_SUBMIT_TRANSACTION;
-        private boolean multisign = ITXBuilder.DEFAULT_MULTISIGN;
-        private double expire = ITXBuilder.DEFAULT_EXPIRE;
+    public static class builder implements IPayloadBuilder {
+        private boolean submit = IPayloadBuilder.DEFAULT_SUBMIT_TRANSACTION;
+        private boolean multisign = IPayloadBuilder.DEFAULT_MULTISIGN;
+        private double expire = IPayloadBuilder.DEFAULT_EXPIRE;
         private String user_token = "";
         private String txjson = "";
         private String txblob = "";
@@ -95,50 +95,50 @@ public class TXBuilder {
 
         private void validate() {
             if (!txblob.equals("") && !txjson.equals("")) {
-                throw new IllegalStateException(ITXBuilder.ERROR_AMBIGUOUS_PAYLOAD);
+                throw new IllegalStateException(IPayloadBuilder.ERROR_AMBIGUOUS_PAYLOAD);
             }
             if (txblob.equals("") && txjson.equals("")) {
-                throw new IllegalStateException(ITXBuilder.ERROR_MISSING_PROPERTIES);
+                throw new IllegalStateException(IPayloadBuilder.ERROR_MISSING_PROPERTIES);
             }
         }
 
         @Override
-        public TXBuilder build(){
+        public PayloadBuilder build(){
             return getPayloadBuilder();
         }
 
         @NotNull
-        private TXBuilder getPayloadBuilder() {
+        private PayloadBuilder getPayloadBuilder() {
             final StringBuilder sb = new StringBuilder();
             final ObjectMapper objectMapper = ObjectMapperFactory.create();
             final JSONObject main = new JSONObject();
             final JSONObject Option = new JSONObject();
             final JSONObject return_url = new JSONObject();
             final JSONObject custom_meta = new JSONObject();
-            final TXBuilder payload = new TXBuilder();
+            final PayloadBuilder payload = new PayloadBuilder();
 
             validate();
             try {
-                if (!user_token.equals("")) main.put(ITXBuilder.KEY_USER_TOKEN, user_token);
-                if (!txblob.equals("")) main.put(ITXBuilder.KEY_TX_BLOB, txblob);
+                if (!user_token.equals("")) main.put(IPayloadBuilder.KEY_USER_TOKEN, user_token);
+                if (!txblob.equals("")) main.put(IPayloadBuilder.KEY_TX_BLOB, txblob);
 
-                Option.put(ITXBuilder.KEY_SUBMIT, submit);
-                Option.put(ITXBuilder.KEY_MULTISIGN, multisign);
-                Option.put(ITXBuilder.KEY_EXPIRE, expire);
+                Option.put(IPayloadBuilder.KEY_SUBMIT, submit);
+                Option.put(IPayloadBuilder.KEY_MULTISIGN, multisign);
+                Option.put(IPayloadBuilder.KEY_EXPIRE, expire);
 
                 if (!returnURL_Web.equals("") || !returnURL_App.equals("")) {
-                    if (!returnURL_App.equals("")) return_url.put(ITXBuilder.KEY_APP, returnURL_App);
-                    if (!returnURL_Web.equals("")) return_url.put(ITXBuilder.KEY_WEB, returnURL_Web);
-                    Option.put(ITXBuilder.KEY_RETURN_URL, return_url);
+                    if (!returnURL_App.equals("")) return_url.put(IPayloadBuilder.KEY_APP, returnURL_App);
+                    if (!returnURL_Web.equals("")) return_url.put(IPayloadBuilder.KEY_WEB, returnURL_Web);
+                    Option.put(IPayloadBuilder.KEY_RETURN_URL, return_url);
                 }
 
-                main.put(ITXBuilder.KEY_OPTIONS, Option);
+                main.put(IPayloadBuilder.KEY_OPTIONS, Option);
 
                 if (!identifier.equals("") || !blob.equals("") || !instruction.equals("")) {
-                    if (!identifier.equals("")) custom_meta.put(ITXBuilder.KEY_IDENTIFIER, identifier);
-                    if (!blob.equals("")) custom_meta.put(ITXBuilder.KEY_BLOB, blob);
-                    if (!instruction.equals("")) custom_meta.put(ITXBuilder.KEY_INSTRUCTION, instruction);
-                    main.put(ITXBuilder.KEY_CUSTOM_META, custom_meta);
+                    if (!identifier.equals("")) custom_meta.put(IPayloadBuilder.KEY_IDENTIFIER, identifier);
+                    if (!blob.equals("")) custom_meta.put(IPayloadBuilder.KEY_BLOB, blob);
+                    if (!instruction.equals("")) custom_meta.put(IPayloadBuilder.KEY_INSTRUCTION, instruction);
+                    main.put(IPayloadBuilder.KEY_CUSTOM_META, custom_meta);
                 }
 
                 String manipulateJSON = objectMapper.readTree(main.toString()).toPrettyString();
@@ -149,7 +149,7 @@ public class TXBuilder {
                     sb.setLength(0);
                     String stageTwo;
                     sb.append("{");
-                    sb.append("\""+ ITXBuilder.KEY_TXJSON +"\":");
+                    sb.append("\""+ IPayloadBuilder.KEY_TXJSON +"\":");
                     sb.append(txjson);
                     sb.append(",");
                     stageTwo = sb.toString();
@@ -162,7 +162,7 @@ public class TXBuilder {
         }
 
     }
-    private TXBuilder() {
+    private PayloadBuilder() {
 
     }
 }
