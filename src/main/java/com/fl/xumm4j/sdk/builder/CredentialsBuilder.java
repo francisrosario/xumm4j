@@ -1,6 +1,6 @@
 package com.fl.xumm4j.sdk.builder;
 
-import com.fl.xumm4j.api.ICredentialsBuilder;
+import com.fl.xumm4j.api.builder.ICredentialsBuilder;
 
 public class CredentialsBuilder {
     private String apiKey;
