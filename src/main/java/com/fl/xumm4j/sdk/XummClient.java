@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IXummClient;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -64,8 +66,10 @@ public class XummClient implements IXummClient {
                 e.printStackTrace();
             }
         }else{
+            final JSONObject data = new JSONObject();
+            data.put("user_token",UserToken_ClassicAddress);
             try {
-                response = Objects.requireNonNull(http.doPost(ENDPOINT_KYC_STATUS, UserToken_ClassicAddress).body()).string();
+                response = Objects.requireNonNull(http.doPost(ENDPOINT_KYC_STATUS, data.toString()).body()).string();
                 response = getToPrettyString(response);
             } catch (IOException e) {
                 e.printStackTrace();
