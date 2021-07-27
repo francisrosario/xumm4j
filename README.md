@@ -2,7 +2,7 @@ xumm4j
 =====
 
 ### What is xumm4j?
-xumm4j is a wrapper for the XUMM API written in Java. Project started by Francis Mico A. Rosario.
+xumm4j is a SDK for the XUMM API written in Java. Project started by Francis Mico A. Rosario.
 
 ### Current state of xumm4
 Currently, xumm4j is still in the development stage where some features of it are still work-in-progress. nightly builds will be released.
