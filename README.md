@@ -1,4 +1,4 @@
-# XUMM SDK (Java)
+# XUMM SDK (Java) WIP README
 
 Interact with the XUMM SDK from Java environments.
 
