@@ -22,8 +22,8 @@ CredentialsBuilder myAccess=new CredentialsBuilder.builder()
         .secretKey("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
         .build();
 
-// Interact with https://xumm.readme.io/ (Misc)
-// Pass the instance of CredentialBuilder to Misc.
+// Interact with https://xumm.readme.io/ (XummClient)
+// Pass the instance of CredentialBuilder to XummClient.
         XummClient xummclient = new XummClient(myAccess);
 // Create an Instance of Deserialize
         Deserialize deserialize = new Deserialize();
