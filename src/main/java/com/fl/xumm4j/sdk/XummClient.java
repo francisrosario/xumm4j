@@ -67,7 +67,7 @@ public class XummClient implements IXummClient {
             }
         }else{
             final JSONObject data = new JSONObject();
-            data.put("user_token",UserToken_ClassicAddress);
+            data.put("user_token", UserToken_ClassicAddress);
             try {
                 response = Objects.requireNonNull(http.doPost(ENDPOINT_KYC_STATUS, data.toString()).body()).string();
                 response = getToPrettyString(response);
