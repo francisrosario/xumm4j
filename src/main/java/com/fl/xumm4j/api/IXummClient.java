@@ -1,16 +1,11 @@
 package com.fl.xumm4j.api;
 
-import com.fl.xumm4j.dao.CuratedAssetsDAO;
-import com.fl.xumm4j.dao.CurrenciesDAO;
-import com.fl.xumm4j.dao.DetailsDAO;
-import com.fl.xumm4j.dao.PingDAO;
-
 public interface IXummClient {
-    String PING_ENDPOINT = "https://xumm.app/api/v1/platform/ping";
-    String CURRATED_ASSETS_ENDPOINT = "https://xumm.app/api/v1/platform/curated-assets";
-    String TXID_ENDPOINT = "https://xumm.app/api/v1/platform/xrpl-tx/";
-    String KYC_STATUS_ENDPOINT = "https://xumm.app/api/v1/platform/kyc-status/";
-    String RATES_ENDPOINT = "https://xumm.app/api/v1/platform/rates/";
+    String ENDPOINT_PING = "https://xumm.app/api/v1/platform/ping";
+    String ENDPOINT_CURATED_ASSETS = "https://xumm.app/api/v1/platform/curated-assets";
+    String ENDPOINT_TXID = "https://xumm.app/api/v1/platform/xrpl-tx/";
+    String ENDPOINT_KYC_STATUS = "https://xumm.app/api/v1/platform/kyc-status/";
+    String ENDPOINT_RATES = "https://xumm.app/api/v1/platform/rates/";
 
     /**
      * @return
