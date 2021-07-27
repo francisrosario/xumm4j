@@ -101,7 +101,6 @@ System.out.println(JSON);
 }
 ```
 
-
 ##### Sdk.getKycStatus()
 
 The `getKycStatus` return the KYC status of a user based on a user_token, issued after the
@@ -130,7 +129,7 @@ Returns [`<keyof PossibleKycStatuses>`](https://github.com/XRPL-Labs/XUMM-SDK/bl
 - Once an account has successfully completed the XUMM KYC flow, the KYC flag will be applied to the account even if the identity document used to KYC expired. The flag shows that the account was **once** KYC'd by a real person with a real identity document.
 - Please note that the KYC flag provided by XUMM can't be seen as a "all good, let's go ahead" flag: it should be used as **one of the data points** to determine if an account can be trusted. There are situations where the KYC flag is still `true`, but an account can no longer be trusted. Eg. when account keys are compromised and the account is now controlled by a 3rd party. While unlikely, depending on the level of trust required for your application you may want to mitigate against these kinds of fraud.
 
-##### Sdk.getTransaction()
+##### xummclient.getTransaction()
 
 The `getTransaction` method allows you to get the transaction outcome (mainnet)
 live from the XRP ledger, as fetched for you by the XUMM backend.
@@ -138,11 +137,11 @@ live from the XRP ledger, as fetched for you by the XUMM backend.
 **Note**: it's best to retrieve these results **yourself** instead of relying on the XUMM platform to get live XRPL transaction information! You can use the **[xrpl-txdata](https://www.npmjs.com/package/xrpl-txdata)** package to do this:  
 [![npm version](https://badge.fury.io/js/xrpl-txdata.svg)](https://www.npmjs.com/xrpl-txdata)
 
-```typescript
-const txInfo = await Sdk.getTransaction(txHash)
+```java
+String JSON = xummclient.getTransaction();
 ```
 
-Returns: `<XrplTransaction>`](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/src/types/Meta/XrplTransaction.ts)
+Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html):
 
 #### App Storage
 
@@ -292,58 +291,6 @@ A response (generic API types [here](https://github.com/XRPL-Labs/XUMM-SDK/blob/
   custom_meta: XummCustomMeta
 }
 ```
-
-#### Payload subscriptions: live updates
-
-To subscribe to live payload status updates, the XUMM SDK can setup a WebSocket connection and monitor live status events. Emitted events include:
-
-- The payload is opened by a XUMM App user (webpage)
-- The payload is opened by a XUMM App user (in the app)
-- Payload expiration updates (remaining time in seconds)
-- The payload was resolved by rejecting
-- The payload was resolved by accepting (signing)
-
-More information about the status update events & sample event data [can be found in the Developer Docs](https://xumm.readme.io/docs/payload-status).
-
-Status updates can be processed by providing a *callback function* to the `Sdk.payload.subscribe()` method. Alternatively, the (by the `Sdk.payload.subscribe()` method) returned raw websocket can be used to listen for WebSocket `onmessage` events.
-
-The subscription will be closed by either:
-
-- Returning non-void in the *callback function* passed to the `Sdk.payload.subscribe()` method
-- Manually calling `<PayloadSubscription>.resolve()` on the object returned by the `Sdk.payload.subscribe()` method
-
-##### Sdk.payload.subscribe
-
-```typescript
-async Sdk.payload.subscribe (
-  payload: string | XummPayload | CreatedPayload,
-  callback?: onPayloadEvent
-): Promise<PayloadSubscription>
-```
-
-If a callback function is not provided, the subscription will stay active until the `<PayloadSubscription>.resolve()` method is called manually, eg. based on handling `<PayloadSubscription>.websocket.onmessage` events.
-
-When a callback function is provided, for every paylaod specific event the callback function will be called with [`<SubscriptionCallbackParams>`](https://github.com/XRPL-Labs/XUMM-SDK/blob/651bd409ee2aab47fb9151513b8cf981cc1a4f30/src/types/Payload/SubscriptionCallbackParams.ts). The `<SubscriptionCallbackParams>.data` property contains parsed JSON containing event information. Either by calling `<SubscriptionCallbackParams>.resolve()` or by returning a non-void value in the *callback function* the subscription will be ended, and the `<PayloadSubscription>.resolved` promise will resolve with the value returned or passed to the `<SubscriptionCallbackParams>.resolve()` method.
-
-Resolving (by returning non-void in the callback or calling `resolve()` manually) closes the WebSocket client the XUMM SDK sets up 'under the hood'.
-
-The [`<PayloadSubscription>`](https://github.com/XRPL-Labs/XUMM-SDK/blob/master/src/types/Payload/PayloadSubscription.ts) object looks like this:
-
-```javascript
-{
-  payload: XummPayload,
-  resolved: Promise<unknown> | undefined
-  resolve: (resolveData?: unknown) => void
-  websocket: WebSocket
-}
-```
-
-Examples:
-
-- [Async process after returning data in the callback function](https://gist.github.com/WietseWind/e13ab068f06b5e9f2f4a0aeac96f6e2e)
-- [Await based on returning data in the callback function](https://gist.github.com/WietseWind/698ff9a5838e600a8ae36ddcc45d0793)
-- [Await based on resolving a callback event](https://gist.github.com/WietseWind/1afaf3a23b8ea18ded526bbbf1b577dd)
-- [Await based on resolving without using a callback function](https://gist.github.com/WietseWind/76890afd39a01e9876c8a629b3e58174)
 
 ##### Sdk.payload.createAndSubscribe
 
