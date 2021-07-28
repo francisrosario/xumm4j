@@ -50,7 +50,7 @@ For more information about the XUMM API, payloads, the API workflow, sending Pus
 - `xummclient.*` for the helper methods; Along with methods to get/update payloads for users to sign.
 - `deserialize.*` for JSON deserialization.
 
-Please note all snippets below assume you created an instance of the XummClient into the `xummclient` object name and Deserialize into the `deserialize` object name, as the [How to use the xumm4j](#how-to-use-the-xumm-sdk) section outlines.
+Please note all snippets below assume you created an instance of the XummClient into the `xummclient` object name and Deserialize into the `deserialize` object name, as the [How to use the xumm4j](#How-to-use-the-xumm4j-SDK) section outlines.
 
 #### XummClient methods
 
