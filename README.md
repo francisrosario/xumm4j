@@ -212,7 +212,7 @@ You can `get()` a payload by:
 
 Creating payload by using `PayloadBuilder` class and XRP4J JSON Builder.
 
-Import the following class
+Import the following class:
 ```java
 import com.fl.xumm4j.sdk.builder.PayloadBuilder;
 
@@ -235,7 +235,6 @@ Payment payment = Payment.builder()
 These objects can be serialized to and deserialized from the rippled JSON representations using the provided Jackson `ObjectMapper`, which can be instantiated using ObjectMapperFactory.
 
 Using the Payment object we just created, we can use the supplied ObjectMapper to serialize to JSON:
-
 ```java
 ObjectMapper objectMapper = ObjectMapperFactory.create();
 String JSON = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(payment);
@@ -251,14 +250,14 @@ System.out.println(JSON);
 */
 ```
 
-We now can now generate the payload object by using `PayloadBuilder` class
+We now can now generate the payload object by using `PayloadBuilder` class:
 ```java
 PayloadBuilder payload = new PayloadBuilder.builder()
   .txjson(JSON) //Pass the generated JSON Object.
   .build();
 ```
 
-You can also generate payload by using all the body params.
+You can also generate payload by using all of the body properties:
 ```java
 PayloadBuilder payloadTwo = new PayloadBuilder.builder()
   .userToken() //User (Push) token, to deliver a signing request directly to the mobile device of a user (Optional)
