@@ -44,7 +44,7 @@ public class DeserializeIT implements IDeserialize {
 
         jsonNode.withArray("issuers").elements().forEachRemaining(x -> curatedAssets.addIssuer(x.asText()));
         jsonNode.withArray("currencies").elements().forEachRemaining(x -> curatedAssets.addCurrencies(x.asText()));
-        jsonNode.findPath("details").iterator().forEachRemaining(x -> curatedAssets.addDetails(x.toString()));
+        jsonNode.findPath("details").iterator().forEachRemaining(x -> curatedAssets.addDetails(x.toPrettyString()));
 
         return curatedAssets;
     }
@@ -100,9 +100,34 @@ public class DeserializeIT implements IDeserialize {
         storageDAO.setName(jsonNode.findPath("application").findPath("name").asText());
         storageDAO.setUuidv4(jsonNode.findPath("application").findPath("uuidv4").asText());
         storageDAO.setStored(jsonNode.findPath("stored").asBoolean());
-        storageDAO.setData(jsonNode.findPath("data").toString());
+        storageDAO.setData(jsonNode.findPath("data").toPrettyString());
 
         return storageDAO;
     }
 
+    public KycPublicDAO KycPublic(String json){
+        final KycPublicDAO kycPublicDAO = new KycPublicDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        kycPublicDAO.setAccount(jsonNode.get("account").asText());
+        kycPublicDAO.setKycApproved(jsonNode.get("kycApproved").asBoolean());
+
+        return kycPublicDAO;
+    }
+
+    public KycStateDAO KycState(String json){
+        final KycStateDAO kycStateDAO = new KycStateDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        kycStateDAO.setKycStatus(jsonNode.get("kycStatus").asText());
+        kycStateDAO.setPossibleStatuses(jsonNode.get("kycApproved").toPrettyString());
+
+        return kycStateDAO;
+    }
 }
