@@ -1,4 +1,5 @@
 package com.fl.xumm4j.dao;
 
-public class KycStatusDAO {
+public class KycStateDAO {
+
 }
