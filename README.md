@@ -1,11 +1,10 @@
 # XUMM SDK (Java)
-####WIP README
 
 Interact with the XUMM SDK from Java environments.
 
 #### **Please note! The xumm4j SDK (XUMM API in general) is for BACKEND USE only. Please DO NOT use your API credentials in a FRONTEND environment.**
 
-<div class="alert alert-danger shadow-sm" style="color: #ca0000; border: 1px solid #ca0000; padding: 4px 6px; border-radius: 5px; background-color: rgba(200, 110, 50, .2)">To implement the xumm4j SDK (or XUMM API directly) in your own web project, make sure your frontend calls your own backend, where the follow up
+<div class="alert alert-danger shadow-sm" style="color: #ca0000; border: 1px solid #ca0000; padding: 4px 6px; border-radius: 5px; background-color: rgba(200, 110, 50, .2)">To implement the xumm4j SDK (or XUMM API directly) in your web project, make sure your frontend calls your backend, where the follow-up
 communication with the xumm4j SDK (or XUMM API) will take place. Your XUMM credentials should never be publicly available.</div>
 
 ## How to use the xumm4j SDK
@@ -17,7 +16,7 @@ import com.fl.xumm4j.sdk.XummClient;
 import com.fl.xumm4j.sdk.Deserialize;
 ```
 
-Now continue by creating an instance of CredentialsBuilder, XummClient and Deserialize:
+Now continue by creating an instance of CredentialsBuilder, XummClient, and Deserialize:
 ```java
 CredentialsBuilder myAccess = new CredentialsBuilder.builder()
   .apiKey("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
@@ -33,7 +32,7 @@ Deserialize deserialize = new Deserialize();
 
 ### Credentials
 
-The XummClient will look in your CredentialsBuilder Object, It's highly recommended not to hard-code the API Key and Secret Key, You may use https://docs.oracle.com/javase/tutorial/essential/environment/env.html **Environment Variables** to hide your API Key and Secret Key.
+The XummClient will look in your CredentialsBuilder Object, and It's highly recommended not to hard-code the API Key and Secret Key, You may use https://docs.oracle.com/javase/tutorial/essential/environment/env.html **Environment Variables** to hide your API Key and Secret Key.
 
 Create your app and get your XUMM API credentials at the XUMM Developer Console:
 
@@ -46,7 +45,7 @@ More information about the XUMM API, payloads, the API workflow, sending Push no
 
 ### Methods & params (+ samples)
 
-After creating an instance of XummClient and Deserialize, you can call the methods:
+For more information about the XUMM API, payloads, the API workflow, sending Push notifications, etc., please check the XUMM API Docs: 
 
 - `xummclient.*` for the helper methods; Along with methods to get/update payloads for users to sign.
 - `deserialize.*` for JSON deserialization.
@@ -82,8 +81,8 @@ System.out.println(JSON);
 
 ##### xummclient.getCuratedAssets
 
-The `getCuratedAssets` method allows you to get the list of trusted issuers and IOU's. This is the same list used to
-populate the "Add Asset" button at the XUMM home screan.
+The `getCuratedAssets` method allows you to get the list of trusted issuers and IOU. This is the same list used to
+populate the "Add Asset" button at the XUMM home screen.
 
 ```java
 String JSON = xummclient.getCuratedAssets();
@@ -108,15 +107,12 @@ System.out.println(JSON);
 
 ##### xummclient.getKycStatus
 
-The `getKycStatus` return the KYC status of a user based on a user_token, issued after the
-user signed a Sign Request (from your app) before (see Payloads - Intro).
+The `getKycStatus` return the KYC status of a user based on a user_token, issued after the user signed a Sign Request (from your app) before (see Payloads - Intro).
 
-If a user token specified is invalid, revoked, expired, etc. the method will always
-return `NONE`, just like when a user didn't go through KYC. You cannot distinct a non-KYC'd user
-from an invalid token.
+If a user token specified is invalid, revoked, expired, etc., the method will always
+return `NONE`, just like when a user didn't go through KYC. This is because you cannot see distinct a non-KYC'd user from an invalid token.
 
-Alternatively, KYC status can be retrieved for an XPRL account address: the address selected in
-XUMM when the session KYC was initiated by.
+Alternatively, KYC status can be retrieved for an XPRL account address: the address selected in XUMM when KYC was initiated.
 
 ```java
 String JSON = xummclient.getKycStatus("00000000-0000-0000-0000-000000000000");
@@ -130,8 +126,8 @@ String JSON = xummclient.getKycStatus("wu1dgaUq8DCj3ZLFXzRbc1Aco5xLykMMQ")
 Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html):
 ###### Notes on KYC information
 
-- Once an account has successfully completed the XUMM KYC flow, the KYC flag will be applied to the account even if the identity document used to KYC expired. The flag shows that the account was **once** KYC'd by a real person with a real identity document.
-- Please note that the KYC flag provided by XUMM can't be seen as a "all good, let's go ahead" flag: it should be used as **one of the data points** to determine if an account can be trusted. There are situations where the KYC flag is still `true`, but an account can no longer be trusted. Eg. when account keys are compromised and the account is now controlled by a 3rd party. While unlikely, depending on the level of trust required for your application you may want to mitigate against these kinds of fraud.
+- Once an account has completed the XUMM KYC flow, the KYC flag will be applied to the account even if the identity document used to KYC expired. The flag shows that the account was **once** KYC'd by a real person with an actual identity document.
+- Please note that the KYC flag provided by XUMM can't be seen as a "all good, let's go ahead" flag: it should be used as **one of the data points** to determine if an account can be trusted. There are situations where the KYC flag is still `true`, but an account can no longer be trusted. Eg. when account keys are compromised and a 3rd party now controls the account. While unlikely, depending on the level of trust required for your application you may want to mitigate against these kinds of fraud.
 
 ##### xummclient.getTransaction
 
@@ -146,10 +142,10 @@ Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.
 
 #### App Storage
 
-App Storage allows you to store a JSON object at the XUMM API platform, containing max 60KB of data.
+App Storage allows you to store a JSON object at the XUMM API platform, containing a max of 60KB of data.
 Your XUMM APP storage is stored at the XUMM API backend, meaning it persists until you overwrite or delete it.
 
-This data is private, and accessible only with your own API credentials. This private JSON data can be used to store credentials / config / bootstrap info / ... for your headless application (eg. POS device).
+This data is private and accessible only with your API credentials. This private JSON data can be used to store credentials/config/bootstrap info / ... for your headless application (e.g., POS device).
 
 ```java
 String storageSet =  xummclient.setStorage("{name: 'Francis', age: 22, male: true}");
@@ -174,9 +170,9 @@ System.out.println(storageGetAfterDelete)
 
 ##### Intro
 
-Payloads are the primary reason for the XUMM API (thus this SDK) to exist. The [XUMM API Docs explain '**Payloads**'](https://xumm.readme.io/docs/introduction) like this:
+Payloads are the primary reason for the XUMM API (thus, this SDK) to exist. The [XUMM API Docs explain '**Payloads**'](https://xumm.readme.io/docs/introduction) like this:
 
->  An XRPL transaction "template" can be posted to the XUMM API. Your transaction tample to sign (so: your "sign request") will be persisted at the XUMM API backend. We now call it a  a **Payload**. XUMM app user(s) can open the Payload (sign request) by scanning a QR code, opening deeplink or receiving push notification and resolve (reject or sign) on their own device.
+>  An XRPL transaction "template" can be posted to the XUMM API. Your transaction template to sign (so: your "sign request") will be persisted at the XUMM API backend. We now call it a **Payload**. XUMM app user(s) can open the Payload (sign request) by scanning a QR code, opening a deep link, or receiving push notifications and resolve (reject or sign) on their device.
 
 A payload can contain an XRPL transaction template. Some properties may be omitted, as they will be added by the XUMM app when a user signs a transaction. A simple payload may look like this:
 
@@ -192,7 +188,7 @@ A payload can contain an XRPL transaction template. Some properties may be omitt
 */
 ```
 
-As you can see the payload looks like a regular XRPL transaction, wrapped in an `txjson` object, omitting the mandatory `Account`, `Fee` and `Sequence` properties. They will be added containing the correct values when the payload is signed by an app user.
+As you can see, the payload looks like a regular XRPL transaction, wrapped in a `txjson` object, omitting the mandatory `Account`, `Fee` and `Sequence` properties. They will be added containing the correct values when an app user signs the payload.
 
 Optionally (besides `txjson`) a payload can contain these properties ([XUMM API Postpayload](https://xumm.readme.io/reference/post-payload)):
 - `options` to define payload options like a return URL, expiration, etc.
@@ -305,18 +301,19 @@ More information regarding payload **For more information about payloads.** Take
 }
 ```
 
-The `next.always` URL is the URL to send the end user to, to scan a QR code or automatically open the XUMM app (if on mobile). If a `user_token` has been provided as part of the payload data provided to `postPayload()`, you can see if the payload has been pushed to the end user. A button "didn't receive a push notification" could then take the user to the `next.no_push_msg_received` URL.
+The `next.always` URL is the URL to send the end-user to, scan a QR code or automatically open the XUMM app (if on mobile). If a `user_token` has been provided as part of the payload data provided to `postPayload()`, you can see if the payload has been pushed to the end user. A button "didn't receive a push notification" could then take the user to the `next.no_push_msg_received` URL.
 
-Alternatively user routing / instruction flows can be custom built using the QR information provided in the `refs` object. There's more information about the [payload workflow](https://xumm.readme.io/docs/payload-workflow) and a [paylaod lifecycle](https://xumm.readme.io/docs/doc-payload-life-cycle) in the Developer Docs.
+Alternatively, user routing/instruction flows can be custom-built using the QR information provided in the `refs` object. There's more information about the [payload workflow](https://xumm.readme.io/docs/payload-workflow) and a [paylaod lifecycle](https://xumm.readme.io/docs/doc-payload-life-cycle) in the Developer Docs.
 
 ##### xummclient.deletePayload
 ```java
 String JSON = xummclient.deletePayload("00000000-1111-2222-3333-aaaaaaaaaaaa");
 ```
 
-To cancel a payload, provide a payload UUID (string), By performing a `xummclient.getPayload` first) or a `<CreatedPayload>` (by using the response of a `xummclient.postPayload` call). By cancelling an existing payload, the payload will be marked as expired and can no longer be opened by users. 
+To cancel a payload, provide a payload UUID (string), By performing a `xummclient.getPayload();` first) or a `<CreatedPayload>` (by using the response of a `xummclient.postPayload();` call). By canceling an existing payload, the payload will be marked as expired and can no longer be opened by users. 
 
-**Please note**: *if a user already opened the payload in XUMM APP, the payload cannot be cancelled: the user may still be resolving the payload in the XUMM App, and should have a chance to complete that process*.
+**Please note**: *if a user already opened the payload in XUMM APP, the payload cannot be canceled: the user may still be resolving the payload in the XUMM App and should have a chance to complete that process*.
+
 
 ```java
 System.out.println(JSON);
