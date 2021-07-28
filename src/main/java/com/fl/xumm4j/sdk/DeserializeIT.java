@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.api.IDeserialize;
 import com.fl.xumm4j.dao.*;
 
-public class Deserialize implements IDeserialize {
+public class DeserializeIT implements IDeserialize {
     private final ObjectMapper mapper;
     private JsonNode jsonNode;
 
-    public Deserialize() {
+    public DeserializeIT() {
         mapper = new ObjectMapper();
     }
 

@@ -12,14 +12,14 @@ import java.util.Objects;
 
 public class XummClient implements IXummClient {
     private final HttpClient http;
-    private final Deserialize deserialize;
+    private final DeserializeIT deserialize;
     private final ObjectMapper mapper;
     private String response;
 
     public XummClient(CredentialsBuilder credentials) {
         http = new HttpClient(credentials);
         mapper = new ObjectMapper();
-        deserialize = new Deserialize();
+        deserialize = new DeserializeIT();
     }
 
     private StorageDAO getStorageDao() {
