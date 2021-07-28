@@ -13,7 +13,7 @@ Import required class.
 ```java
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.sdk.XummClient;
-import com.fl.xumm4j.sdk.Deserialize;
+import com.fl.xumm4j.sdk.DeserializeIT;
 ```
 
 Now continue by creating an instance of CredentialsBuilder, XummClient, and Deserialize:
@@ -27,7 +27,7 @@ CredentialsBuilder myAccess = new CredentialsBuilder.builder()
 XummClient xummclient = new XummClient(myAccess);
 
 //Use the instance of Deserialize for Deserializing JSON response.
-Deserialize deserialize = new Deserialize();
+DeserializeIT deserialize = new DeserializeIT();
 ```
 
 ### Credentials
@@ -50,7 +50,7 @@ For more information about the XUMM API, payloads, the API workflow, sending Pus
 - `xummclient.*` for the helper methods; Along with methods to get/update payloads for users to sign.
 - `deserialize.*` for JSON deserialization.
 
-Please note all snippets below assume you created an instance of the XummClient into the `xummclient` object name and Deserialize into the `deserialize` object name, as the [How to use the xumm4j](#how-to-use-the-xumm-sdk) section outlines.
+Please note all snippets below assume you created an instance of the XummClient into the `xummclient` object name and DeserializeIT into the `deserialize` object name, as the [How to use the xumm4j](#how-to-use-the-xumm-sdk) section outlines.
 
 #### XummClient methods
 
