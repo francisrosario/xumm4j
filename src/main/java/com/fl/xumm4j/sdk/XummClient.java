@@ -24,10 +24,6 @@ public class XummClient implements IXummClient {
         deserialize = new DeserializeIT();
     }
 
-    private StorageDAO getStorageDao() {
-        return deserialize.Storage(response);
-    }
-
     private String getToPrettyString(String response) throws JsonProcessingException {
         return mapper.readTree(response).toPrettyString();
     }
@@ -154,7 +150,7 @@ public class XummClient implements IXummClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StorageDAO storagedao = getStorageDao();
+        StorageDAO storagedao = deserialize.Storage(response);
         return storagedao.isStored();
     }
 
@@ -165,7 +161,7 @@ public class XummClient implements IXummClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StorageDAO storagedao = getStorageDao();
+        StorageDAO storagedao = deserialize.Storage(response);
         return storagedao.getData();
     }
 
@@ -176,7 +172,7 @@ public class XummClient implements IXummClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StorageDAO storagedao = getStorageDao();
+        StorageDAO storagedao = deserialize.Storage(response);
         return storagedao.isStored();
     }
 
