@@ -1,6 +1,6 @@
 # XUMM SDK (Java)
 
-Interact with the XUMM SDK from Java environments.
+Interact with the XUMM API from Java environments.
 
 #### **Please note! The xumm4j SDK (XUMM API in general) is for BACKEND USE only. Please DO NOT use your API credentials in a FRONTEND environment.**
 
