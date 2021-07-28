@@ -112,8 +112,8 @@ public class DeserializeIT implements IDeserialize {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        kycPublicDAO.setAccount(jsonNode.get("account").asText());
-        kycPublicDAO.setKycApproved(jsonNode.get("kycApproved").asBoolean());
+        kycPublicDAO.setAccount(jsonNode.findPath("account").asText());
+        kycPublicDAO.setKycApproved(jsonNode.findPath("kycApproved").asBoolean());
 
         return kycPublicDAO;
     }
@@ -125,8 +125,8 @@ public class DeserializeIT implements IDeserialize {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        kycStateDAO.setKycStatus(jsonNode.get("kycStatus").asText());
-        kycStateDAO.setPossibleStatuses(jsonNode.get("kycApproved").toPrettyString());
+        kycStateDAO.setKycStatus(jsonNode.findPath("kycStatus").asText());
+        kycStateDAO.setPossibleStatuses(jsonNode.findPath("kycApproved").toPrettyString());
 
         return kycStateDAO;
     }
