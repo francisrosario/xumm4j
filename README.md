@@ -5,8 +5,8 @@ Interact with the XUMM SDK from Java environments.
 
 #### **Please note! The xumm4j SDK (XUMM API in general) is for BACKEND USE only. Please DO NOT use your API credentials in a FRONTEND environment.**
 
-<div class="alert alert-danger shadow-sm" style="color: #ca0000; border: 1px solid #ca0000; padding: 4px 6px; border-radius: 5px; background-color: rgba(200, 110, 50, .2)">To implement the XUMM SDK (or XUMM API directly) in your own web project, make sure your frontend calls your own backend, where the follow up
-communication with the XUMM SDK (or XUMM API) will take place. Your XUMM credentials should never be publicly available.</div>
+<div class="alert alert-danger shadow-sm" style="color: #ca0000; border: 1px solid #ca0000; padding: 4px 6px; border-radius: 5px; background-color: rgba(200, 110, 50, .2)">To implement the xumm4j SDK (or XUMM API directly) in your own web project, make sure your frontend calls your own backend, where the follow up
+communication with the xumm4j SDK (or XUMM API) will take place. Your XUMM credentials should never be publicly available.</div>
 
 ## How to use the xumm4j SDK
 
@@ -14,7 +14,7 @@ Import required class.
 ```java
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.sdk.XummClient;
-import com.fl.xumm4j.sdk.Deserialize
+import com.fl.xumm4j.sdk.Deserialize;
 ```
 
 Now continue by creating an instance of CredentialsBuilder, XummClient and Deserialize:
@@ -55,7 +55,7 @@ Please note all snippets below assume you created an instance of the XummClient 
 
 #### XummClient methods
 
-##### xummclient.doPing()
+##### xummclient.doPing
 
 The `ping` method allows you to verify API access (valid credentials) and returns some info on your XUMM APP:
 
@@ -80,7 +80,7 @@ System.out.println(JSON);
 */
 ```
 
-##### xummclient.getCuratedAssets()
+##### xummclient.getCuratedAssets
 
 The `getCuratedAssets` method allows you to get the list of trusted issuers and IOU's. This is the same list used to
 populate the "Add Asset" button at the XUMM home screan.
@@ -106,7 +106,7 @@ System.out.println(JSON);
 */
 ```
 
-##### xummclient.getKycStatus()
+##### xummclient.getKycStatus
 
 The `getKycStatus` return the KYC status of a user based on a user_token, issued after the
 user signed a Sign Request (from your app) before (see Payloads - Intro).
@@ -133,13 +133,13 @@ Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.
 - Once an account has successfully completed the XUMM KYC flow, the KYC flag will be applied to the account even if the identity document used to KYC expired. The flag shows that the account was **once** KYC'd by a real person with a real identity document.
 - Please note that the KYC flag provided by XUMM can't be seen as a "all good, let's go ahead" flag: it should be used as **one of the data points** to determine if an account can be trusted. There are situations where the KYC flag is still `true`, but an account can no longer be trusted. Eg. when account keys are compromised and the account is now controlled by a 3rd party. While unlikely, depending on the level of trust required for your application you may want to mitigate against these kinds of fraud.
 
-##### xummclient.getTransaction()
+##### xummclient.getTransaction
 
 The `getTransaction` method allows you to get the transaction outcome (mainnet)
 live from the XRP ledger, as fetched for you by the XUMM backend.
 
 ```java
-String JSON = xummclient.getTransaction();
+String JSON = xummclient.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021");
 ```
 
 Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html):
@@ -152,19 +152,19 @@ Your XUMM APP storage is stored at the XUMM API backend, meaning it persists unt
 This data is private, and accessible only with your own API credentials. This private JSON data can be used to store credentials / config / bootstrap info / ... for your headless application (eg. POS device).
 
 ```java
-String storageSet =  xummclient.setStorage("{name: 'Francis', age: 22, male: true}")
+String storageSet =  xummclient.setStorage("{name: 'Francis', age: 22, male: true}");
 System.out.println(storageSet);
 // true
 
-String storageGet = xummclient.getStorage()
+String storageGet = xummclient.getStorage();
 System.out.println(storageGet)
 // {name: 'Francis', age: 22, male: true}
 
-String storageDelete = xummclient.deleteStorage()
+String storageDelete = xummclient.deleteStorage();
 System.out.println(storageDelete)
 // true
 
-String storageGetAfterDelete = xummclient.getStorage()
+String storageGetAfterDelete = xummclient.getStorage();
 System.out.println(storageGetAfterDelete)
 // null
 
@@ -214,7 +214,7 @@ You can `get()` a payload by:
 
 ##### xummclient.postPayload + PayloadBuilder + xrp4j JSON Builder
 
-Creating payload by using `TXBuilder` class and XRP4J JSON Builder.
+Creating payload by using `PayloadBuilder` class and XRP4J JSON Builder.
 
 Import the following class
 ```java
@@ -282,6 +282,7 @@ By using xrp4j JSON Builder + xumm4j PayloadBuilder we now have a payload object
 
 ```java
 String JSON = xummclient.postPayload(payload.getGeneratedPayload());
+//The getter method getGeneratedPayload will retrieve the generated payload object from the `PayloadBuilder`
 ```
 Once `postPayload` method is executed you'll get a response similar below: 
 
@@ -310,7 +311,7 @@ Alternatively user routing / instruction flows can be custom built using the QR 
 
 ##### xummclient.deletePayload
 ```java
-String JSON = xummclient.deletePayload("Payload UUID");
+String JSON = xummclient.deletePayload("00000000-1111-2222-3333-aaaaaaaaaaaa");
 ```
 
 To cancel a payload, provide a payload UUID (string), By performing a `xummclient.getPayload` first) or a `<CreatedPayload>` (by using the response of a `xummclient.postPayload` call). By cancelling an existing payload, the payload will be marked as expired and can no longer be opened by users. 
