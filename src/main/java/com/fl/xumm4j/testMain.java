@@ -6,12 +6,11 @@ import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
 import com.fl.xrpl4j.model.transactions.Address;
 import com.fl.xrpl4j.model.transactions.Payment;
 import com.fl.xrpl4j.model.transactions.XrpCurrencyAmount;
-import com.fl.xumm4j.api.builder.ITXBuilder;
 
+import com.fl.xumm4j.api.builder.IPayloadBuilder;
 import com.fl.xumm4j.sdk.XummClient;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
-import com.fl.xumm4j.sdk.builder.TXBuilder;
-import com.fl.xumm4j.sdk.Deserialize;
+import com.fl.xumm4j.sdk.builder.PayloadBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -35,27 +34,29 @@ public class testMain {
         String json = null;
         try {
             json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(payment);
+            System.out.println(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        TXBuilder payload = new TXBuilder.builder()
-                .txjson(ITXBuilder.TXJSON_SIGNIN)
-                .instruction("This is a login transaction.")
+        PayloadBuilder payload = new PayloadBuilder.builder()
+                .txjson(IPayloadBuilder.TXJSON_SIGNIN)
                 .build();
+        payload.getGeneratedPayload();
 
         //System.out.println("Generated Payload: \n" + payload.getGeneratedPayload());
         //String Payload = payload.getGeneratedPayload();
         //System.out.println(Payload+"\n");
-        //System.out.println(misc.create(Payload));
-
+        //misc.deleteStorage();
+        System.out.println(misc.deleteStorage());
+        System.out.println(misc.getStorage());
         //System.out.println(misc.getCuratedAssets());
         //System.out.println(misc.doPing());
         //System.out.println(misc.CuratedAssets(jsonResponse));
 
         //System.out.println(misc.Ping(jsonResponse).getUuidv4());
         //System.out.println(misc.getRates("sar"));
-        System.out.println(misc.getKycStatus("rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB"));
+        //System.out.println(misc.getKycStatus("rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB"));
         //System.out.println(misc.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021"));
 
         //String jsonResponse = misc.getCuratedAssets();

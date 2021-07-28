@@ -1,8 +1,10 @@
 package com.fl.xumm4j.sdk;
 
+import com.fl.xumm4j.api.builder.IPayloadBuilder;
 import com.fl.xumm4j.dao.CuratedAssetsDAO;
 import com.fl.xumm4j.dao.PingDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
+import com.fl.xumm4j.sdk.builder.PayloadBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -105,5 +107,44 @@ class testXummClient {
         String JSON = xummclient.getCuratedAssets();
         CuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
         assertEquals("USD", curatedAssets.getCurrencies(0));
+    }
+    /**
+    @Test
+    void getKycStatus() {
+    }
+    **/
+    @Test
+    void postPayload() {
+        String expectedPostPayloadResponse = "  \"pushed\" : false\n" +
+                "}";
+        PayloadBuilder payload = new PayloadBuilder.builder()
+                .txjson(IPayloadBuilder.TXJSON_SIGNIN)
+                .build();
+        String JSON = xummclient.postPayload(payload.getGeneratedPayload());
+        assertTrue(JSON.contains(expectedPostPayloadResponse));
+    }
+
+    @Test
+    void getPayload() {
+    }
+
+    @Test
+    void getCustomIdentifier() {
+    }
+
+    @Test
+    void deletePayload() {
+    }
+
+    @Test
+    void setStorage() {
+    }
+
+    @Test
+    void getStorage() {
+    }
+
+    @Test
+    void deleteStorage() {
     }
 }
