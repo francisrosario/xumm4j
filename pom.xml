@@ -13,9 +13,20 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <junit.version>5.7.1</junit.version>
+        <repositories>
+            <repository>
+                <id>jitpack.io</id>
+                <url>https://jitpack.io</url>
+            </repository>
+        </repositories>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.francisrosario</groupId>
+            <artifactId>xumm4j</artifactId>
+            <version>development-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
