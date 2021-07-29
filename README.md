@@ -30,9 +30,31 @@ XummClient xummclient = new XummClient(myAccess);
 DeserializeIT deserialize = new DeserializeIT();
 ```
 
-#### Payloads
+### Credentials
 
-##### Intro
+The XummClient will look in your CredentialsBuilder Object, and It's highly recommended not to hard-code the API Key and Secret Key, You may use https://docs.oracle.com/javase/tutorial/essential/environment/env.html **Environment Variables** to hide your API Key and Secret Key.
+
+Create your app and get your XUMM API credentials at the XUMM Developer Console:
+
+- https://apps.xumm.dev
+
+More information about the XUMM API, payloads, the API workflow, sending Push notifications, etc. please check the XUMM API Docs: 
+
+- https://xumm.readme.io/docs
+
+
+### Methods & params (+ samples)
+
+For more information about the XUMM API, payloads, the API workflow, sending Push notifications, etc., please check the XUMM API Docs: 
+
+- `xummclient.*` for the helper methods; Along with methods to get/update payloads for users to sign.
+- `deserialize.*` for JSON deserialization.
+
+Please note all snippets below assume you created an instance of the XummClient into the `xummclient` object name and DeserializeIT into the `deserialize` object name, as the [How to use the xumm4j](#how-to-use-the-xumm-sdk) section outlines.
+
+#### XummClient methods
+
+#### Payloads
 
 Payloads are the primary reason for the XUMM API (thus, this SDK) to exist. The [XUMM API Docs explain '**Payloads**'](https://xumm.readme.io/docs/introduction) like this:
 
@@ -208,30 +230,6 @@ System.out.println(JSON);
 }
 */
 ```
-
-### Credentials
-
-The XummClient will look in your CredentialsBuilder Object, and It's highly recommended not to hard-code the API Key and Secret Key, You may use https://docs.oracle.com/javase/tutorial/essential/environment/env.html **Environment Variables** to hide your API Key and Secret Key.
-
-Create your app and get your XUMM API credentials at the XUMM Developer Console:
-
-- https://apps.xumm.dev
-
-More information about the XUMM API, payloads, the API workflow, sending Push notifications, etc. please check the XUMM API Docs: 
-
-- https://xumm.readme.io/docs
-
-
-### Methods & params (+ samples)
-
-For more information about the XUMM API, payloads, the API workflow, sending Push notifications, etc., please check the XUMM API Docs: 
-
-- `xummclient.*` for the helper methods; Along with methods to get/update payloads for users to sign.
-- `deserialize.*` for JSON deserialization.
-
-Please note all snippets below assume you created an instance of the XummClient into the `xummclient` object name and DeserializeIT into the `deserialize` object name, as the [How to use the xumm4j](#how-to-use-the-xumm-sdk) section outlines.
-
-#### XummClient methods
 
 ##### xummclient.doPing
 
