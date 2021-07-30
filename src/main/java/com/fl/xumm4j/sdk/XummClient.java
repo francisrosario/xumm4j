@@ -2,8 +2,7 @@ package com.fl.xumm4j.sdk;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xumm4j.dao.KycPublicDAO;
-import com.fl.xumm4j.dao.KycStateDAO;
+import com.fl.xumm4j.dao.KycStatusDAO;
 import com.fl.xumm4j.dao.StorageDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IXummClient;
@@ -63,7 +62,7 @@ public class XummClient implements IXummClient {
         if(UserToken_ClassicAddress.length() <= 35 ){
             try {
                 response = getToPrettyString(Objects.requireNonNull(http.doGet(ENDPOINT_KYC_STATUS_PUBLIC + UserToken_ClassicAddress).body()).string());
-                KycPublicDAO kycPublicDAO = deserialize.KycPublic(response);
+                KycStatusDAO.Public kycPublicDAO = deserialize.KycPublic(response);
                 response = String.valueOf(kycPublicDAO.isKycApproved());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -73,7 +72,7 @@ public class XummClient implements IXummClient {
             data.put("user_token", UserToken_ClassicAddress);
             try {
                 response = getToPrettyString(Objects.requireNonNull(http.doPost(ENDPOINT_KYC_STATUS, data.toString()).body()).string());
-                KycStateDAO kycStateDAO = deserialize.KycState(response);
+                KycStatusDAO kycStateDAO = deserialize.KycState(response);
                 response = kycStateDAO.getKycStatus();
             } catch (IOException e) {
                 e.printStackTrace();

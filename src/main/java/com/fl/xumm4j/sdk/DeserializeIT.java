@@ -34,8 +34,8 @@ public class DeserializeIT implements IDeserialize {
     }
 
     @Override
-    public CuratedAssetsDAO CuratedAssets(String json) {
-        final CuratedAssetsDAO curatedAssets = new CuratedAssetsDAO();
+    public GetCuratedAssetsDAO CuratedAssets(String json) {
+        final GetCuratedAssetsDAO curatedAssets = new GetCuratedAssetsDAO();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
@@ -50,44 +50,44 @@ public class DeserializeIT implements IDeserialize {
     }
 
     @Override
-    public DetailsDAO Details(String json) {
-        final DetailsDAO detailsDAO = new DetailsDAO();
+    public GetCuratedAssetsDAO.Details Details(String json) {
+        final GetCuratedAssetsDAO.Details curatedAssets = new GetCuratedAssetsDAO.Details();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        detailsDAO.setId(jsonNode.findPath("id").asInt());
-        detailsDAO.setName(jsonNode.findPath("name").asText());
-        detailsDAO.setDomain(jsonNode.findPath("domain").asText());
-        detailsDAO.setAvatar(jsonNode.findPath("avatar").asText());
-        detailsDAO.setShortlist(jsonNode.findPath("shortlist").asInt());
+        curatedAssets.setId(jsonNode.findPath("id").asInt());
+        curatedAssets.setName(jsonNode.findPath("name").asText());
+        curatedAssets.setDomain(jsonNode.findPath("domain").asText());
+        curatedAssets.setAvatar(jsonNode.findPath("avatar").asText());
+        curatedAssets.setShortlist(jsonNode.findPath("shortlist").asInt());
 
-        jsonNode.findPath("currencies").fieldNames().forEachRemaining(detailsDAO::addCurrenciesFieldNames);
-        jsonNode.findPath("currencies").iterator().forEachRemaining(x -> detailsDAO.addCurrencies(x.toPrettyString()));
+        jsonNode.findPath("currencies").fieldNames().forEachRemaining(curatedAssets::addCurrenciesFieldNames);
+        jsonNode.findPath("currencies").iterator().forEachRemaining(x -> curatedAssets.addCurrencies(x.toPrettyString()));
 
-        return detailsDAO;
+        return curatedAssets;
     }
 
     @Override
-    public CurrenciesDAO Currencies(String json){
-        final CurrenciesDAO CurrenciesDAO = new CurrenciesDAO();
+    public GetCuratedAssetsDAO.Details.Currencies Currencies(String json){
+        final GetCuratedAssetsDAO.Details.Currencies curatedAssets = new GetCuratedAssetsDAO.Details.Currencies();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        CurrenciesDAO.setId(jsonNode.findPath("id").asInt());
-        CurrenciesDAO.setIssuerId(jsonNode.findPath("issuer_id").asInt());
-        CurrenciesDAO.setIssuer(jsonNode.findPath("issuer").asText());
-        CurrenciesDAO.setCurrency(jsonNode.findPath("currency").asText());
-        CurrenciesDAO.setName(jsonNode.findPath("name").asText());
-        CurrenciesDAO.setAvatar(jsonNode.findPath("avatar").asText());
-        CurrenciesDAO.setShortlist(jsonNode.findPath("shortlist").asInt());
+        curatedAssets.setId(jsonNode.findPath("id").asInt());
+        curatedAssets.setIssuerId(jsonNode.findPath("issuer_id").asInt());
+        curatedAssets.setIssuer(jsonNode.findPath("issuer").asText());
+        curatedAssets.setCurrency(jsonNode.findPath("currency").asText());
+        curatedAssets.setName(jsonNode.findPath("name").asText());
+        curatedAssets.setAvatar(jsonNode.findPath("avatar").asText());
+        curatedAssets.setShortlist(jsonNode.findPath("shortlist").asInt());
 
-        return CurrenciesDAO;
+        return curatedAssets;
     }
 
     @Override
@@ -98,6 +98,7 @@ public class DeserializeIT implements IDeserialize {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
         storageDAO.setName(jsonNode.findPath("application").findPath("name").asText());
         storageDAO.setUuidv4(jsonNode.findPath("application").findPath("uuidv4").asText());
         storageDAO.setStored(jsonNode.findPath("stored").asBoolean());
@@ -107,13 +108,14 @@ public class DeserializeIT implements IDeserialize {
     }
 
     @Override
-    public KycPublicDAO KycPublic(String json){
-        final KycPublicDAO kycPublicDAO = new KycPublicDAO();
+    public KycStatusDAO.Public KycPublic(String json){
+        final KycStatusDAO.Public kycPublicDAO = new KycStatusDAO.Public();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
         kycPublicDAO.setAccount(jsonNode.findPath("account").asText());
         kycPublicDAO.setKycApproved(jsonNode.findPath("kycApproved").asBoolean());
 
@@ -121,16 +123,75 @@ public class DeserializeIT implements IDeserialize {
     }
 
     @Override
-    public KycStateDAO KycState(String json){
-        final KycStateDAO kycStateDAO = new KycStateDAO();
+    public KycStatusDAO KycState(String json){
+        final KycStatusDAO kycStateDAO = new KycStatusDAO();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
         kycStateDAO.setKycStatus(jsonNode.findPath("kycStatus").asText());
         kycStateDAO.setPossibleStatuses(jsonNode.findPath("kycApproved").toPrettyString());
 
         return kycStateDAO;
+    }
+
+    public GetPayloadDAO getPayload(String json){
+        final GetPayloadDAO payloadDAO = new GetPayloadDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        payloadDAO.setExists(jsonNode.findPath("meta").findPath("exists").asBoolean());
+        payloadDAO.setUuid(jsonNode.findPath("meta").findPath("uuid").asText());
+        payloadDAO.setExists(jsonNode.findPath("meta").findPath("multisign").asBoolean());
+        payloadDAO.setExists(jsonNode.findPath("meta").findPath("submit").asBoolean());
+        payloadDAO.setDestination(jsonNode.findPath("meta").findPath("destination").asText());
+        payloadDAO.setResolved_destination(jsonNode.findPath("meta").findPath("resolved_destination").asText());
+        payloadDAO.setResolved(jsonNode.findPath("meta").findPath("resolved").asBoolean());
+        payloadDAO.setSigned(jsonNode.findPath("meta").findPath("signed").asBoolean());
+        payloadDAO.setCancelled(jsonNode.findPath("meta").findPath("cancelled").asBoolean());
+        payloadDAO.setExpired(jsonNode.findPath("meta").findPath("expired").asBoolean());
+        payloadDAO.setPushed(jsonNode.findPath("meta").findPath("pushed").asBoolean());
+        payloadDAO.setApp_opened(jsonNode.findPath("meta").findPath("app_opened").asBoolean());
+        payloadDAO.setOpened_by_deeplink(jsonNode.findPath("meta").findPath("opened_by_deeplink").asText());
+        payloadDAO.setReturn_url_app(jsonNode.findPath("meta").findPath("return_url_app").asText());
+        payloadDAO.setGetReturn_url_web(jsonNode.findPath("meta").findPath("return_url_web").asText());
+        payloadDAO.setIs_xapp(jsonNode.findPath("meta").findPath("is_xapp").asBoolean());
+
+        payloadDAO.setPayload(jsonNode.findPath("payload").toPrettyString());
+        payloadDAO.setResponse(jsonNode.findPath("response").toPrettyString());
+        payloadDAO.setCustom_meta(jsonNode.findPath("custom_meta").toPrettyString());
+
+        payloadDAO.setName(jsonNode.findPath("application").findPath("name").asText());
+        payloadDAO.setDescription(jsonNode.findPath("application").findPath("description").asText());
+        payloadDAO.setDisabled(jsonNode.findPath("application").findPath("disabled").asInt());
+        payloadDAO.setUuidv4(jsonNode.findPath("application").findPath("uuidv4").asText());
+        payloadDAO.setIcon_url(jsonNode.findPath("application").findPath("icon_url").asText());
+        payloadDAO.setIssued_user_token(jsonNode.findPath("application").findPath("issued_user_token").asText());
+
+        return payloadDAO;
+    }
+
+    public PostPayloadDAO Payload(String json){
+        final PostPayloadDAO postPayloadDAO = new PostPayloadDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        postPayloadDAO.setUuid(jsonNode.findPath("uuid").asText());
+        postPayloadDAO.setAlways(jsonNode.findPath("next").findPath("always").asText());
+        postPayloadDAO.setNo_push_msg_received(jsonNode.findPath("next").findPath("no_push_msg_received").asText());
+        postPayloadDAO.setQr_png(jsonNode.findPath("refs").findPath("qr_png").asText());
+        postPayloadDAO.setQr_matrix(jsonNode.findPath("refs").findPath("qr_matrix").asText());
+        postPayloadDAO.setWebsocket_status(jsonNode.findPath("refs").findPath("websocket_status").asText());
+        postPayloadDAO.setPushed(jsonNode.findPath("pushed").asBoolean());
+
+        return postPayloadDAO;
     }
 }

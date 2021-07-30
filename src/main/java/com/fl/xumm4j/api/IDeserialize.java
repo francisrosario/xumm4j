@@ -5,15 +5,15 @@ import com.fl.xumm4j.dao.*;
 public interface IDeserialize {
     PingDAO Ping(String json);
 
-    CuratedAssetsDAO CuratedAssets(String json);
+    GetCuratedAssetsDAO CuratedAssets(String json);
 
-    DetailsDAO Details(String json);
+    GetCuratedAssetsDAO.Details Details(String json);
 
-    CurrenciesDAO Currencies(String json);
+    GetCuratedAssetsDAO.Details.Currencies Currencies(String json);
 
     StorageDAO Storage(String json);
 
-    KycPublicDAO KycPublic(String json);
+    KycStatusDAO.Public KycPublic(String json);
 
-    KycStateDAO KycState(String json);
+    KycStatusDAO KycState(String json);
 }
