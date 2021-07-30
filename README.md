@@ -110,7 +110,7 @@ You can `get()` a payload by:
 
 - Payload UUID  
   ```java
-  String JSON = xummclient.getPayload('aaaaaaaa-bbbb-cccc-dddd-1234567890ab')
+  String JSON = xummclient.getPayload("aaaaaaaa-bbbb-cccc-dddd-1234567890ab");
   ```
 
 ##### xummclient.postPayload + PayloadBuilder + xrpl4j JSON Builder
@@ -157,14 +157,14 @@ System.out.println(JSON);
 
 We now can now generate the payload object by using `PayloadBuilder` class:
 ```java
-PayloadBuilder payload = new PayloadBuilder.builder()
+String payload = new PayloadBuilder.builder()
   .txjson(JSON) //Pass the generated JSON Object.
   .build();
 ```
 
 You can also generate payload by using all of the body properties:
 ```java
-PayloadBuilder payloadTwo = new PayloadBuilder.builder()
+String payloadTwo = new PayloadBuilder.builder()
   .userToken() //User (Push) token, to deliver a signing request directly to the mobile device of a user (Optional)
   .txjson(JSON) //Mandatory JSON transaction template to sign. Alternatively a HEX string could be posted in a txblob field.
   .txblob() // You can provide a HEX transaction template instead of a JSON formatted one here.
@@ -181,8 +181,7 @@ PayloadBuilder payloadTwo = new PayloadBuilder.builder()
 By using xrp4j JSON Builder + xumm4j PayloadBuilder we now have a payload object ready to be submmited using `postPayload` method.
 
 ```java
-String JSON = xummclient.postPayload(payload.getGeneratedPayload());
-//The getter method getGeneratedPayload will retrieve the generated payload object from the `PayloadBuilder`
+String JSON = xummclient.postPayload(payload);
 ```
 Once `postPayload` method is executed you'll get a response similar below: 
 
