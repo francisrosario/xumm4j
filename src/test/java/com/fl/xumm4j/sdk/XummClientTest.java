@@ -1,8 +1,10 @@
 package com.fl.xumm4j.sdk;
 
+import com.fl.xumm4j.api.builder.IPayloadBuilder;
 import com.fl.xumm4j.dao.CuratedAssetsDAO;
 import com.fl.xumm4j.dao.PingDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
+import com.fl.xumm4j.sdk.builder.PayloadBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,7 +59,7 @@ class XummClientTest {
     }
 
     @Test
-    void getKycPublic() {
+    void getKycStatus() {
         String getKYCResponse = xummclient.getKycStatus("rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB");
         assertEquals(String.valueOf(true), getKYCResponse);
     }
@@ -94,5 +96,54 @@ class XummClientTest {
         String JSON = xummclient.getCuratedAssets();
         CuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
         assertNotNull(curatedAssets.getCurrencies(0));
+    }
+
+    @Test
+    void postPayload() {
+        String postPayloadTest = new PayloadBuilder.builder()
+                .txjson(IPayloadBuilder.TXJSON_SIGNIN)
+                .build();
+        String response = xummclient.postPayload(postPayloadTest);
+        assertTrue(response.contains("},\n" +
+                "  \"pushed\" : false\n" +
+                "}"));
+    }
+
+    @Test
+    void getPayload() {
+        String getPayloadTest = xummclient.getPayload("3211f3b4-9a4b-4c32-bbe7-ab52cfceedcb");
+        assertTrue(getPayloadTest.contains("\"custom_meta\" : {\n" +
+                "    \"identifier\" : null,\n" +
+                "    \"blob\" : null,\n" +
+                "    \"instruction\" : null\n" +
+                "  }"));
+    }
+
+    @Test
+    void getCustomIdentifier() {
+        String getCustomIdentifierTest = xummclient.getCustomIdentifier("3211f3b4-9a4b-4c32-bbe7-ab52cfceedcb");
+        assertTrue(getCustomIdentifierTest.contains("\"custom_meta\" : {\n" +
+                "    \"identifier\" : null,\n" +
+                "    \"blob\" : null,\n" +
+                "    \"instruction\" : null\n" +
+                "  }"));
+    }
+
+    @Test
+    void setStorage() {
+        boolean isStoredTest = xummclient.setStorage(IPayloadBuilder.TXJSON_SIGNIN);
+        assertTrue(isStoredTest);
+    }
+
+    @Test
+    void getStorage() {
+        String getStorageTest = xummclient.getStorage();
+        assertNotNull(getStorageTest);
+    }
+
+    @Test
+    void deleteStorage() {
+        boolean deleteStorageTest = xummclient.deleteStorage();
+        assertTrue(deleteStorageTest);
     }
 }
