@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.api.IDeserialize;
 import com.fl.xumm4j.dao.*;
 
+import java.math.BigInteger;
+
 public class DeserializeIT implements IDeserialize {
     private final ObjectMapper mapper;
     private JsonNode jsonNode;
@@ -193,5 +195,21 @@ public class DeserializeIT implements IDeserialize {
         postPayloadDAO.setPushed(jsonNode.findPath("pushed").asBoolean());
 
         return postPayloadDAO;
+    }
+
+    public RatesDAO Rates(String json){
+        final RatesDAO ratesDAO = new RatesDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        ratesDAO.setUsd(BigInteger.valueOf(Long.parseLong(jsonNode.findPath("USD").asText())));
+        ratesDAO.setXrp(BigInteger.valueOf(Long.parseLong(jsonNode.findPath("XRP").asText())));
+        ratesDAO.setEn(jsonNode.findPath("__meta").findPath("currency").findPath("en").asText());
+        ratesDAO.setCode(jsonNode.findPath("__meta").findPath("currency").findPath("code").asText());
+        ratesDAO.setSymbol(jsonNode.findPath("__meta").findPath("currency").findPath("symbol").asText());
+
+        return ratesDAO;
     }
 }

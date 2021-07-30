@@ -1,25 +1,27 @@
 package com.fl.xumm4j.dao;
 
+import java.math.BigInteger;
+
 public class RatesDAO {
-    private String usd;
-    private String xrp;
+    private BigInteger usd;
+    private BigInteger xrp;
     private String en;
     private String code;
     private String symbol;
 
-    public String getUsd() {
+    public BigInteger getUsd() {
         return usd;
     }
 
-    public void setUsd(String usd) {
+    public void setUsd(BigInteger usd) {
         this.usd = usd;
     }
 
-    public String getXrp() {
+    public BigInteger getXrp() {
         return xrp;
     }
 
-    public void setXrp(String xrp) {
+    public void setXrp(BigInteger xrp) {
         this.xrp = xrp;
     }
 
