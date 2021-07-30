@@ -1,4 +1,4 @@
-# XUMM SDK (Java)
+# XUMM SDK (Java)(Development Branch)
 
 Interact with the XUMM API from Java environments.
 
@@ -6,6 +6,25 @@ Interact with the XUMM API from Java environments.
 
 <div class="alert alert-danger shadow-sm" style="color: #ca0000; border: 1px solid #ca0000; padding: 4px 6px; border-radius: 5px; background-color: rgba(200, 110, 50, .2)">To implement the xumm4j SDK (or XUMM API directly) in your web project, make sure your frontend calls your backend, where the follow-up
 communication with the xumm4j SDK (or XUMM API) will take place. Your XUMM credentials should never be publicly available.</div>
+
+## Installation
+Use this XUMM SDK in your project by adding the following to your `pom.xml`:
+```
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>com.github.francisrosario</groupId>
+    <artifactId>xumm4j</artifactId>
+    <version>development</version>
+  </dependency>
+</dependencies>
+```
 
 ## How to use the xumm4j SDK
 
