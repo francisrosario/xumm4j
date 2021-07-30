@@ -1,0 +1,31 @@
+name: xumm4j-CI
+
+on:
+  push:
+  pull_request:
+    types: [assigned]
+jobs:
+  build_other_java:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # test against each major Java version
+        java: [ 9, 10, 11, 12, 13, 14, 15 ]
+    steps:
+      # Checks-out the repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v2
+      # Set up Java version
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      - name: Cache mvn dependencies
+        uses: actions/cache@v2
+        env:
+          cache-name: mvn-deps
+        with:
+          path: ~/.m2
+          key: ${{ env.cache-name }}-${{ hashFiles('pom.xml') }}
+          restore-keys: ${{ env.cache-name }}-
+      - name: Build
+        run: mvn dependency:go-offline install -Dmaven.javadoc.skip=true
