@@ -9,7 +9,7 @@ import org.json.JSONObject;
 public class PayloadBuilder {
     private String json;
 
-    public String getGeneratedPayload() {
+    private String getGeneratedPayload() {
         return json;
     }
 
