@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.github.francisrosario.xrpl4j</groupId>
             <artifactId>xrpl4j-model</artifactId>
-            <version>ae72ba0060</version>
+            <version>v2.0.1</version>
         </dependency>
     </dependencies>
     <build>
