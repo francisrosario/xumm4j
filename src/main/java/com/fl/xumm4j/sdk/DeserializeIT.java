@@ -212,4 +212,18 @@ public class DeserializeIT implements IDeserialize {
 
         return ratesDAO;
     }
+
+    public DeletePayloadDAO deletePayload(String json){
+        DeletePayloadDAO deletepayloadDAO = new DeletePayloadDAO();
+        try {
+            jsonNode = mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        deletepayloadDAO.setCancelled(jsonNode.findPath("result").findPath("cancelled").asBoolean());
+        deletepayloadDAO.setReason(jsonNode.findPath("result").findPath("reason").asText());
+        deletepayloadDAO.setMeta((jsonNode.findPath("meta").toPrettyString()));
+
+        return deletepayloadDAO;
+    }
 }
