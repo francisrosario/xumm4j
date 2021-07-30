@@ -82,22 +82,6 @@ class XummClientTest {
                 "  }"));
     }
 
-    ///////////
-    //Temp. deserializeTest zone
-    @Test
-    void deserializePing() {
-        String JSON = xummclient.doPing();
-        PingDAO ping = deserialize.Ping(JSON);
-        assertEquals("http://localhost:8080", ping.getWebhookurl());
-    }
-
-    @Test
-    void deserializeCuratedAssets() {
-        String JSON = xummclient.getCuratedAssets();
-        CuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
-        assertNotNull(curatedAssets.getCurrencies(0));
-    }
-
     @Test
     void postPayload() {
         String postPayloadTest = new PayloadBuilder.builder()
@@ -145,5 +129,21 @@ class XummClientTest {
     void deleteStorage() {
         boolean deleteStorageTest = xummclient.deleteStorage();
         assertTrue(deleteStorageTest);
+    }
+
+    ///////////
+    //Temp. deserializeTest zone
+    @Test
+    void deserializePing() {
+        String JSON = xummclient.doPing();
+        PingDAO ping = deserialize.Ping(JSON);
+        assertEquals("http://localhost:8080", ping.getWebhookurl());
+    }
+
+    @Test
+    void deserializeCuratedAssets() {
+        String JSON = xummclient.getCuratedAssets();
+        CuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
+        assertNotNull(curatedAssets.getCurrencies(0));
     }
 }
