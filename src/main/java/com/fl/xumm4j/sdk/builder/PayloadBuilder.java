@@ -102,12 +102,12 @@ public class PayloadBuilder {
         }
 
         @Override
-        public PayloadBuilder build(){
+        public String build(){
             return getPayloadBuilder();
         }
 
         @NotNull
-        private PayloadBuilder getPayloadBuilder() {
+        private String getPayloadBuilder() {
             final StringBuilder sb = new StringBuilder();
             final ObjectMapper objectMapper = new ObjectMapper();
             final JSONObject main = new JSONObject();
@@ -157,7 +157,7 @@ public class PayloadBuilder {
             }catch(IllegalStateException | JsonProcessingException err){
                 err.printStackTrace();
             }
-            return payload;
+            return payload.getGeneratedPayload();
         }
 
     }

@@ -95,5 +95,5 @@ public interface IPayloadBuilder {
     /**
      * @return
      */
-    PayloadBuilder build();
+    String build();
 }
