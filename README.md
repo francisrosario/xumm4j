@@ -23,7 +23,7 @@ Use this XUMM SDK in your project by adding the following to your `pom.xml`:
   <dependency>
     <groupId>com.github.francisrosario</groupId>
     <artifactId>xumm4j</artifactId>
-    <version>625eed66ce</version>
+    <version>0.2.1</version>
   </dependency>
 </dependencies>
 ```
