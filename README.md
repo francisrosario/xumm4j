@@ -26,6 +26,15 @@ Use this XUMM SDK in your project by adding the following to your `pom.xml`:
 </dependencies>
 ```
 
+Optional dependecy if you want to use modified version of xrpl4j model:
+```
+<dependency>
+  <groupId>com.github.francisrosario.xrpl4j</groupId>
+  <artifactId>xrpl4j-model</artifactId>
+  <version>v2.0.1</version>
+</dependency>
+```
+
 ## How to use the xumm4j SDK
 
 Import required class.
