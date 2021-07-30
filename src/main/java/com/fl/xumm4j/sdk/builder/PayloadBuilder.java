@@ -11,14 +11,14 @@ public class PayloadBuilder {
         private boolean submit = IPayloadBuilder.DEFAULT_SUBMIT_TRANSACTION;
         private boolean multisign = IPayloadBuilder.DEFAULT_MULTISIGN;
         private double expire = IPayloadBuilder.DEFAULT_EXPIRE;
-        private String user_token = "";
-        private String txjson = "";
-        private String txblob = "";
-        private String returnURL_App = "";
-        private String returnURL_Web = "";
-        private String identifier = "";
-        private String blob = "";
-        private String instruction = "";
+        private String user_token;
+        private String txjson;
+        private String txblob;
+        private String returnURL_App;
+        private String returnURL_Web;
+        private String identifier;
+        private String blob;
+        private String instruction;
 
         @Override
         public builder identifier(String identifier){
@@ -87,10 +87,10 @@ public class PayloadBuilder {
         }
 
         private void validate() {
-            if (!txblob.equals("") && !txjson.equals("")) {
+            if (txblob != null && txjson != null) {
                 throw new IllegalStateException(IPayloadBuilder.ERROR_AMBIGUOUS_PAYLOAD);
             }
-            if (txblob.equals("") && txjson.equals("")) {
+            if (txblob == null && txjson == null) {
                 throw new IllegalStateException(IPayloadBuilder.ERROR_MISSING_PROPERTIES);
             }
         }
@@ -112,30 +112,30 @@ public class PayloadBuilder {
             String mainPayload = null;
             validate();
             try {
-                if (!user_token.equals("")) main.put(IPayloadBuilder.KEY_USER_TOKEN, user_token);
-                if (!txblob.equals("")) main.put(IPayloadBuilder.KEY_TX_BLOB, txblob);
+                if (user_token != null) main.put(IPayloadBuilder.KEY_USER_TOKEN, user_token);
+                if (txblob != null) main.put(IPayloadBuilder.KEY_TX_BLOB, txblob);
 
                 Option.put(IPayloadBuilder.KEY_SUBMIT, submit);
                 Option.put(IPayloadBuilder.KEY_MULTISIGN, multisign);
                 Option.put(IPayloadBuilder.KEY_EXPIRE, expire);
 
-                if (!returnURL_Web.equals("") || !returnURL_App.equals("")) {
-                    if (!returnURL_App.equals("")) return_url.put(IPayloadBuilder.KEY_APP, returnURL_App);
-                    if (!returnURL_Web.equals("")) return_url.put(IPayloadBuilder.KEY_WEB, returnURL_Web);
+                if (returnURL_Web != null || returnURL_App != null) {
+                    if (returnURL_App != null) return_url.put(IPayloadBuilder.KEY_APP, returnURL_App);
+                    if (returnURL_Web != null) return_url.put(IPayloadBuilder.KEY_WEB, returnURL_Web);
                     Option.put(IPayloadBuilder.KEY_RETURN_URL, return_url);
                 }
 
                 main.put(IPayloadBuilder.KEY_OPTIONS, Option);
 
-                if (!identifier.equals("") || !blob.equals("") || !instruction.equals("")) {
-                    if (!identifier.equals("")) custom_meta.put(IPayloadBuilder.KEY_IDENTIFIER, identifier);
-                    if (!blob.equals("")) custom_meta.put(IPayloadBuilder.KEY_BLOB, blob);
-                    if (!instruction.equals("")) custom_meta.put(IPayloadBuilder.KEY_INSTRUCTION, instruction);
+                if (identifier != null || blob != null || instruction != null) {
+                    if (identifier != null) custom_meta.put(IPayloadBuilder.KEY_IDENTIFIER, identifier);
+                    if (blob != null) custom_meta.put(IPayloadBuilder.KEY_BLOB, blob);
+                    if (instruction != null) custom_meta.put(IPayloadBuilder.KEY_INSTRUCTION, instruction);
                     main.put(IPayloadBuilder.KEY_CUSTOM_META, custom_meta);
                 }
 
                 String manipulateJSON = objectMapper.readTree(main.toString()).toPrettyString();
-                if (!txjson.equals("") && txblob.equals("")) {
+                if (txjson != null && txblob == null) {
                     String[] JSONParts = manipulateJSON.split("\n");
                     for (int x = 1; x < JSONParts.length; x++) sb.append(JSONParts[x]);
                     String stageOne = sb.toString();
