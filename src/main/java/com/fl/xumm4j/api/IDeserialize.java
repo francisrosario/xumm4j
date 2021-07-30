@@ -16,4 +16,12 @@ public interface IDeserialize {
     KycStatusDAO.Public KycPublic(String json);
 
     KycStatusDAO KycState(String json);
+
+    GetPayloadDAO getPayload(String json);
+
+    PostPayloadDAO Payload(String json);
+
+    RatesDAO Rates(String json);
+
+    DeletePayloadDAO deletePayload(String json);
 }

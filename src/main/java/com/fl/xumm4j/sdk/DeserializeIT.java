@@ -139,6 +139,7 @@ public class DeserializeIT implements IDeserialize {
         return kycStateDAO;
     }
 
+    @Override
     public GetPayloadDAO getPayload(String json){
         final GetPayloadDAO payloadDAO = new GetPayloadDAO();
         try {
@@ -178,6 +179,7 @@ public class DeserializeIT implements IDeserialize {
         return payloadDAO;
     }
 
+    @Override
     public PostPayloadDAO Payload(String json){
         final PostPayloadDAO postPayloadDAO = new PostPayloadDAO();
         try {
@@ -197,6 +199,7 @@ public class DeserializeIT implements IDeserialize {
         return postPayloadDAO;
     }
 
+    @Override
     public RatesDAO Rates(String json){
         final RatesDAO ratesDAO = new RatesDAO();
         try {
@@ -213,6 +216,7 @@ public class DeserializeIT implements IDeserialize {
         return ratesDAO;
     }
 
+    @Override
     public DeletePayloadDAO deletePayload(String json){
         DeletePayloadDAO deletepayloadDAO = new DeletePayloadDAO();
         try {
