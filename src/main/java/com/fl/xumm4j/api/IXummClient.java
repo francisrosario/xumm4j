@@ -24,4 +24,10 @@ public interface IXummClient {
     String getPayload(String payloadUUID);
     String getCustomIdentifier(String payloadUUID);
     String deletePayload(String payloadUUID);
+
+    boolean setStorage(String json);
+
+    String getStorage();
+
+    boolean deleteStorage();
 }

@@ -1,9 +1,6 @@
 package com.fl.xumm4j.api;
 
-import com.fl.xumm4j.dao.CuratedAssetsDAO;
-import com.fl.xumm4j.dao.CurrenciesDAO;
-import com.fl.xumm4j.dao.DetailsDAO;
-import com.fl.xumm4j.dao.PingDAO;
+import com.fl.xumm4j.dao.*;
 
 public interface IDeserialize {
     PingDAO Ping(String json);
@@ -13,4 +10,10 @@ public interface IDeserialize {
     DetailsDAO Details(String json);
 
     CurrenciesDAO Currencies(String json);
+
+    StorageDAO Storage(String json);
+
+    KycPublicDAO KycPublic(String json);
+
+    KycStateDAO KycState(String json);
 }

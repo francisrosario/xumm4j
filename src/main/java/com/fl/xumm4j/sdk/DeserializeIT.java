@@ -90,6 +90,7 @@ public class DeserializeIT implements IDeserialize {
         return CurrenciesDAO;
     }
 
+    @Override
     public StorageDAO Storage(String json){
         final StorageDAO storageDAO = new StorageDAO();
         try {
@@ -105,6 +106,7 @@ public class DeserializeIT implements IDeserialize {
         return storageDAO;
     }
 
+    @Override
     public KycPublicDAO KycPublic(String json){
         final KycPublicDAO kycPublicDAO = new KycPublicDAO();
         try {
@@ -118,6 +120,7 @@ public class DeserializeIT implements IDeserialize {
         return kycPublicDAO;
     }
 
+    @Override
     public KycStateDAO KycState(String json){
         final KycStateDAO kycStateDAO = new KycStateDAO();
         try {

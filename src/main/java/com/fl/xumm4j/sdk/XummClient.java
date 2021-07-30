@@ -143,6 +143,7 @@ public class XummClient implements IXummClient {
         return response;
     }
 
+    @Override
     public boolean setStorage(String json){
         try {
             response = Objects.requireNonNull(http.doPost(ENDPOINT_STORE_APP_STORAGE, json).body()).string();
@@ -154,6 +155,7 @@ public class XummClient implements IXummClient {
         return storagedao.isStored();
     }
 
+    @Override
     public String getStorage(){
         try {
             response = Objects.requireNonNull(http.doGet(ENDPOINT_GET_APP_STORAGE).body()).string();
@@ -165,6 +167,7 @@ public class XummClient implements IXummClient {
         return storagedao.getData();
     }
 
+    @Override
     public boolean deleteStorage(){
         try {
             response = Objects.requireNonNull(http.doDelete(ENDPOINT_DELETE_APP_STORAGE).body()).string();
