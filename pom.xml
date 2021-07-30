@@ -16,18 +16,9 @@
     </properties>
 
     <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.francisrosario</groupId>
-            <artifactId>xumm4j</artifactId>
-            <version>development-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
