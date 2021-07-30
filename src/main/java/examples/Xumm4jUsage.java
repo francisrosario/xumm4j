@@ -1,4 +1,4 @@
-package com.fl.xumm4j.example;
+package examples;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
