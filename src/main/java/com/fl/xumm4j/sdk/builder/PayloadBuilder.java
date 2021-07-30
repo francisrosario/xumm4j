@@ -108,7 +108,7 @@ public class PayloadBuilder {
             final JSONObject Option = new JSONObject();
             final JSONObject return_url = new JSONObject();
             final JSONObject custom_meta = new JSONObject();
-            final PayloadBuilder payload = new PayloadBuilder();
+
             String mainPayload = null;
             validate();
             try {
