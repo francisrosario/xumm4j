@@ -16,6 +16,10 @@
     </properties>
 
     <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -72,6 +76,11 @@
             <groupId>org.xrpl</groupId>
             <artifactId>xrpl4j-keypairs</artifactId>
             <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.francisrosario.xrpl4j</groupId>
+            <artifactId>xrpl4j-model</artifactId>
+            <version>ae72ba0060</version>
         </dependency>
     </dependencies>
     <build>
