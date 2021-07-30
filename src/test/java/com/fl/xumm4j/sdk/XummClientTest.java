@@ -12,16 +12,13 @@ class XummClientTest {
     DeserializeIT deserialize;
 
     public XummClientTest() {
-        //These Keys aren't used for production only in TESTING purposes.
-        String ExpectedApiKey = "7208fca5-4ac3-4638-b006-897dfcc0ab29";
-        String ExptectedSecretKey = "6dab854e-b317-47f7-8453-490b8bd171ad";
-
+        //These Keys aren't used for production, only in TESTING and DEMONSTRATION purposes.
         credentialsBuilder = new CredentialsBuilder.builder()
                 .apiKey("7208fca5-4ac3-4638-b006-897dfcc0ab29")
                 .secretKey("6dab854e-b317-47f7-8453-490b8bd171ad")
                 .build();
-        assertEquals(ExpectedApiKey, credentialsBuilder.getApiKey());
-        assertEquals(ExptectedSecretKey, credentialsBuilder.getSecretKey());
+        assertEquals("7208fca5-4ac3-4638-b006-897dfcc0ab29", credentialsBuilder.getApiKey());
+        assertEquals("6dab854e-b317-47f7-8453-490b8bd171ad", credentialsBuilder.getSecretKey());
 
         xummclient = new XummClient(credentialsBuilder);
         deserialize = new DeserializeIT();
