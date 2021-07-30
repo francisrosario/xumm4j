@@ -21,7 +21,7 @@ Use this XUMM SDK in your project by adding the following to your `pom.xml`:
   <dependency>
     <groupId>com.github.francisrosario</groupId>
     <artifactId>xumm4j</artifactId>
-    <version>development</version>
+    <version>625eed66ce</version>
   </dependency>
 </dependencies>
 ```
