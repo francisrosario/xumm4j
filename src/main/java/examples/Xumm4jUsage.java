@@ -15,7 +15,7 @@ import com.fl.xumm4j.sdk.builder.PayloadBuilder;
 
 import java.math.BigDecimal;
 
-public class Xumm4jUsage {
+class Xumm4jUsage {
     public static void main(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = ObjectMapperFactory.create();
         // Don't worry about this key being exposed... I built it for testing, demonstration purposes. keys not being used in production env.
