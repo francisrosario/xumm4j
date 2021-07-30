@@ -64,12 +64,8 @@ class testXummClient {
 
     @Test
     void getKycPublic() {
-        String expectedKYCResponse = "{\n" +
-                "  \"account\" : \"rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB\",\n" +
-                "  \"kycApproved\" : true\n" +
-                "}";
         String getKYCResponse = xummclient.getKycStatus("rDWLGshgAxSX2G4TEv3gA6QhtLgiXrWQXB");
-        assertEquals(expectedKYCResponse, getKYCResponse);
+        assertEquals(String.valueOf(true), getKYCResponse);
     }
 
     @Test
