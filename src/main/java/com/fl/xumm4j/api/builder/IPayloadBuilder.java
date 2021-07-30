@@ -7,7 +7,7 @@ public interface IPayloadBuilder {
     String ERROR_AMBIGUOUS_PAYLOAD = "Error: Ambiguous payload, please specify either txblob or txjson";
     String ERROR_MISSING_PROPERTIES = "Error: txblob or txjson is missing, please add either one of txjson or txblob";
 
-    String KEY_USER_TOKEN = "userToken";
+    String KEY_USER_TOKEN = "user_token";
     String KEY_TX_BLOB = "txblob";
     String KEY_TXJSON = "txjson";
     String KEY_SUBMIT = "submit";
