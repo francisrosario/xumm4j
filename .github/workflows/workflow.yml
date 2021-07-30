@@ -29,3 +29,22 @@ jobs:
           restore-keys: ${{ env.cache-name }}-
       - name: Build
         run: mvn dependency:go-offline install -Dmaven.javadoc.skip=true
+
+  build_android:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out the repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v2
+      # Set up Android
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+      - name: Cache mvn dependencies
+        uses: actions/cache@v2
+        env:
+          cache-name: mvn-deps
+        with:
+          path: ~/.m2
+          key: ${{ env.cache-name }}-${{ hashFiles('pom.xml') }}
+          restore-keys: ${{ env.cache-name }}-
+      - name: Build
+        run: mvn dependency:go-offline install -Dmaven.javadoc.skip=true -Pandroid
