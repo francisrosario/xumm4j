@@ -2,7 +2,6 @@ package com.fl.xumm4j.sdk.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
 import com.fl.xumm4j.api.builder.IPayloadBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -110,7 +109,7 @@ public class PayloadBuilder {
         @NotNull
         private PayloadBuilder getPayloadBuilder() {
             final StringBuilder sb = new StringBuilder();
-            final ObjectMapper objectMapper = ObjectMapperFactory.create();
+            final ObjectMapper objectMapper = new ObjectMapper();
             final JSONObject main = new JSONObject();
             final JSONObject Option = new JSONObject();
             final JSONObject return_url = new JSONObject();
