@@ -7,12 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 public class PayloadBuilder {
-    private String json;
-
-    private String getGeneratedPayload() {
-        return json;
-    }
-
     public static class builder implements IPayloadBuilder {
         private boolean submit = IPayloadBuilder.DEFAULT_SUBMIT_TRANSACTION;
         private boolean multisign = IPayloadBuilder.DEFAULT_MULTISIGN;
@@ -115,7 +109,7 @@ public class PayloadBuilder {
             final JSONObject return_url = new JSONObject();
             final JSONObject custom_meta = new JSONObject();
             final PayloadBuilder payload = new PayloadBuilder();
-
+            String mainPayload = null;
             validate();
             try {
                 if (!user_token.equals("")) main.put(IPayloadBuilder.KEY_USER_TOKEN, user_token);
@@ -152,12 +146,13 @@ public class PayloadBuilder {
                     sb.append(txjson);
                     sb.append(",");
                     stageTwo = sb.toString();
-                    payload.json = objectMapper.readTree(stageTwo + stageOne).toPrettyString();
+                    mainPayload = objectMapper.readTree(stageTwo + stageOne).toPrettyString();
                 }
             }catch(IllegalStateException | JsonProcessingException err){
                 err.printStackTrace();
             }
-            return payload.getGeneratedPayload();
+            assert mainPayload != null;
+            return mainPayload;
         }
 
     }
