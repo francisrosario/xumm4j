@@ -1,7 +1,7 @@
 package com.fl.xumm4j.sdk;
 
 import com.fl.xumm4j.api.builder.IPayloadBuilder;
-import com.fl.xumm4j.dao.GetCuratedAssetsDAO;
+import com.fl.xumm4j.dao.CuratedAssetsDAO;
 import com.fl.xumm4j.dao.PingDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.sdk.builder.PayloadBuilder;
@@ -147,7 +147,7 @@ class XummClientTest {
     @Test
     void deserializeCuratedAssets() {
         String JSON = xummclient.getCuratedAssets();
-        GetCuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
+        CuratedAssetsDAO curatedAssets = deserialize.CuratedAssets(JSON);
         assertNotNull(curatedAssets.getCurrencies(0));
     }
 }

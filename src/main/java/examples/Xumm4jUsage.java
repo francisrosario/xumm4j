@@ -7,7 +7,7 @@ import com.fl.xrpl4j.model.jackson.ObjectMapperFactory;
 import com.fl.xrpl4j.model.transactions.Address;
 import com.fl.xrpl4j.model.transactions.Payment;
 import com.fl.xrpl4j.model.transactions.XrpCurrencyAmount;
-import com.fl.xumm4j.dao.CuratedAssetsDAO;
+import com.fl.xumm4j.dao.GetPayloadDAO;
 import com.fl.xumm4j.sdk.DeserializeIT;
 import com.fl.xumm4j.sdk.XummClient;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 
 class Xumm4jUsage {
     public static void main(String[] args) throws JsonProcessingException {
+        /*
         ObjectMapper objectMapper = ObjectMapperFactory.create();
         // Don't worry about this key being exposed... I built it for testing, demonstration purposes. keys not being used in production env.
         CredentialsBuilder myAccess = new CredentialsBuilder.builder()
@@ -44,7 +45,7 @@ class Xumm4jUsage {
                 .txjson(JSON)
                 .instruction("This is a payment transaction")
                 .build();
-
+        /*
         System.out.println("Generated Payload: \n" + payload);
         String Payload = payload;
         System.out.println(Payload+"\n");
@@ -66,9 +67,16 @@ class Xumm4jUsage {
         String jsonResponse = xummClient.getCuratedAssets();
         DeserializeIT deserialize = new DeserializeIT();
         //Other DAO are available under com.fl.xumm4j.dao.*
-        CuratedAssetsDAO result = deserialize.CuratedAssets(jsonResponse);
+        GetCuratedAssetsDAO result = deserialize.CuratedAssets(jsonResponse);
         result.forEachCurrencies(System.out::println);
         result.forEachDetails(System.out::println);
         result.forEachIssuer(System.out::println);
+
+        DeserializeIT deserialize = new DeserializeIT();
+        String Response = xummClient.getPayload("3211f3b4-9a4b-4c32-bbe7-ab52cfceedcb");
+        System.out.println(Response);
+        GetPayloadDAO result = deserialize.getPayload(Response);
+        System.out.println(result.getResponse());
+        */
     }
 }

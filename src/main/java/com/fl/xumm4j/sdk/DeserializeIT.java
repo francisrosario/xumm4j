@@ -34,8 +34,8 @@ public class DeserializeIT implements IDeserialize {
     }
 
     @Override
-    public GetCuratedAssetsDAO CuratedAssets(String json) {
-        final GetCuratedAssetsDAO curatedAssets = new GetCuratedAssetsDAO();
+    public CuratedAssetsDAO CuratedAssets(String json) {
+        final CuratedAssetsDAO curatedAssets = new CuratedAssetsDAO();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
@@ -50,8 +50,8 @@ public class DeserializeIT implements IDeserialize {
     }
 
     @Override
-    public GetCuratedAssetsDAO.Details Details(String json) {
-        final GetCuratedAssetsDAO.Details curatedAssets = new GetCuratedAssetsDAO.Details();
+    public CuratedAssetsDAO.Details Details(String json) {
+        final CuratedAssetsDAO.Details curatedAssets = new CuratedAssetsDAO.Details();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
@@ -71,8 +71,8 @@ public class DeserializeIT implements IDeserialize {
     }
 
     @Override
-    public GetCuratedAssetsDAO.Details.Currencies Currencies(String json){
-        final GetCuratedAssetsDAO.Details.Currencies curatedAssets = new GetCuratedAssetsDAO.Details.Currencies();
+    public CuratedAssetsDAO.Details.Currencies Currencies(String json){
+        final CuratedAssetsDAO.Details.Currencies curatedAssets = new CuratedAssetsDAO.Details.Currencies();
         try {
             jsonNode = mapper.readTree(json);
         } catch (JsonProcessingException e) {
