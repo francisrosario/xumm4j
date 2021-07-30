@@ -86,6 +86,10 @@ class XummClientTest {
     void postPayload() {
         String postPayloadTest = new PayloadBuilder.builder()
                 .txjson(IPayloadBuilder.TXJSON_SIGNIN)
+                .submit(false)
+                .returnURL_App("www.google.com")
+                .returnURL_Web("www.google.com")
+                .instruction("Hello World!")
                 .build();
         String response = xummclient.postPayload(postPayloadTest);
         assertTrue(response.contains("},\n" +
