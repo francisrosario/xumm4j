@@ -1,4 +1,5 @@
-# XUMM SDK (Java)(Development Branch)
+# XUMM SDK (Java)(Development Branch)[![](https://jitpack.io/v/francisrosario/xumm4j.svg)](https://jitpack.io/#francisrosario/xumm4j) [![DeepSource](https://deepsource.io/gh/francisrosario/xumm4j.svg/?label=active+issues&show_trend=true&token=E60qi8NmLp4upvGod8CDnNEX)](https://deepsource.io/gh/francisrosario/xumm4j/?ref=repository-badge)
+
 
 Interact with the XUMM API from Java environments.
 
