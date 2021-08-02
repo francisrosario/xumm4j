@@ -176,7 +176,7 @@ String payload = new PayloadBuilder.builder()
   .build();
 ```
 
-You can also generate payload by using all of the body properties:
+You can also generate payload by using all of the attributes:
 ```java
 String payloadTwo = new PayloadBuilder.builder()
   .userToken() //User (Push) token, to deliver a signing request directly to the mobile device of a user (Optional)
