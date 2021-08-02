@@ -122,6 +122,9 @@ You can `get()` a payload by:
 - Payload UUID  
   ```java
   String JSON = xummclient.getPayload("aaaaaaaa-bbbb-cccc-dddd-1234567890ab");
+  
+  //Alternatively after getting the Response from xummclient.getPayload(), You can now use the DeserializeIT instance.
+  String userToken = deserialize.getPayload(JSON).getIssued_user_token();
   ```
 
 ##### xummclient.postPayload + PayloadBuilder + xrpl4j JSON Builder
