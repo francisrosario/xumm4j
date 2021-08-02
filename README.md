@@ -202,6 +202,7 @@ Once `postPayload` method is executed you'll get a response similar below:
 More information regarding payload **For more information about payloads.** Take a look at the [Developer Docs for more information about payloads](https://xumm.readme.io/docs/your-first-payload).
 
 ```json
+System.out.println(JSON);
 {
   "uuid": "1289e9ae-7d5d-4d5f-b89c-18633112ce09",
   "next": {
