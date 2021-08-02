@@ -139,8 +139,7 @@ public class XummClient implements IXummClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StorageDAO storagedao = deserialize.Storage(response);
-        return storagedao.isStored();
+        return deserialize.Storage(response).isStored();
     }
 
     @Override
@@ -150,8 +149,7 @@ public class XummClient implements IXummClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StorageDAO storagedao = deserialize.Storage(response);
-        return storagedao.getData();
+        return deserialize.Storage(response).getData();
     }
 
     @Override
@@ -161,8 +159,7 @@ public class XummClient implements IXummClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        StorageDAO storagedao = deserialize.Storage(response);
-        return storagedao.isStored();
+        return deserialize.Storage(response).isStored();
     }
 
 }
