@@ -91,7 +91,7 @@ public class PayloadBuilder {
                 throw new IllegalStateException(IPayloadBuilder.ERROR_AMBIGUOUS_PAYLOAD);
             }
             if (txblob == null && txjson == null) {
-                throw new IllegalStateException(IPayloadBuilder.ERROR_MISSING_PROPERTIES);
+                throw new IllegalStateException(IPayloadBuilder.ERROR_MISSING_ATTRIBUTE);
             }
         }
 
