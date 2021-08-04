@@ -137,6 +137,10 @@ public class PayloadBuilder {
                     String stageOne = sb.toString();
                     sb.setLength(0);
                     String stageTwo;
+                    sb.append("{");
+                    sb.append("\""+ IPayloadBuilder.KEY_TXJSON +"\":");
+                    sb.append(txjson);
+                    sb.append(",");
                     stageTwo = sb.toString();
                     mainPayload = objectMapper.readTree(stageTwo + stageOne).toPrettyString();
                 }
