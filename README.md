@@ -115,9 +115,9 @@ Instead of providing a `txjson` transaction, a transaction formatted as HEX blob
 
 ##### xummclient.getPayload
 
-To get payload details, status and if resolved & signed: results (transaction, transaction hash, etc.) you can `get()` a payload.
+To get payload details, status and if resolved & signed: results (transaction, transaction hash, etc.) you can `.getPayload(UUID)` a payload.
 
-You can `get()` a payload by:
+You can `.getPayload(UUID)` a payload by:
 
 - Payload UUID  
   ```java
@@ -176,7 +176,7 @@ String payload = new PayloadBuilder.builder()
   .build();
 ```
 
-You can also generate payload by using all of the attributes:
+You can also generate payload by using all of the attributes available:
 ```java
 String payloadTwo = new PayloadBuilder.builder()
   .userToken() //User (Push) token, to deliver a signing request directly to the mobile device of a user (Optional)
@@ -192,12 +192,12 @@ String payloadTwo = new PayloadBuilder.builder()
   .instruction() //A message (instruction, reason for signing) to display to the XUMM (signing) user (max 280 positions)
   .build();
 ```
-By using xrp4j JSON Builder + xumm4j PayloadBuilder we now have a payload object ready to be submmited using `postPayload` method.
+By using xrpl4j JSON Builder + xumm4j PayloadBuilder we now have a payload object ready to be submmited using `.postPayload(JSON)` method.
 
 ```java
 String JSON = xummclient.postPayload(payload);
 ```
-Once `postPayload` method is executed you'll get a response similar below: 
+Once `.postPayload(JSON)` method is executed you'll get a response similar below: 
 
 More information regarding payload **For more information about payloads.** Take a look at the [Developer Docs for more information about payloads](https://xumm.readme.io/docs/your-first-payload).
 
@@ -291,7 +291,7 @@ System.out.println(JSON);
 
 ##### xummclient.getCuratedAssets
 
-The `getCuratedAssets` method allows you to get the list of trusted issuers and IOU. This is the same list used to
+The `.getCuratedAssets()` method allows you to get the list of trusted issuers and IOU. This is the same list used to
 populate the "Add Asset" button at the XUMM home screen.
 
 ```java
@@ -317,7 +317,7 @@ System.out.println(JSON);
 
 ##### xummclient.getKycStatus
 
-The `getKycStatus` return the KYC status of a user based on a user_token, issued after the user signed a Sign Request (from your app) before (see Payloads - Intro).
+The `.getKycStatus(user_token)` return the KYC status of a user based on a user_token, issued after the user signed a Sign Request (from your app) before (see Payloads - Intro).
 
 If a user token specified is invalid, revoked, expired, etc., the method will always
 return `NONE`, just like when a user didn't go through KYC. This is because you cannot see distinct a non-KYC'd user from an invalid token.
@@ -341,7 +341,7 @@ Returns [`<String>`](https://docs.oracle.com/javase/7/docs/api/java/lang/String.
 
 ##### xummclient.getTransaction
 
-The `getTransaction` method allows you to get the transaction outcome (mainnet)
+The `.getTransaction(txid)` method allows you to get the transaction outcome (mainnet)
 live from the XRP ledger, as fetched for you by the XUMM backend.
 
 ```java
