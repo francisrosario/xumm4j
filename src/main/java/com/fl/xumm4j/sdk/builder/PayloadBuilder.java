@@ -87,12 +87,8 @@ public class PayloadBuilder {
         }
 
         private void validate() {
-            if (txblob != null && txjson != null) {
-                throw new IllegalStateException(IPayloadBuilder.ERROR_AMBIGUOUS_PAYLOAD);
-            }
-            if (txblob == null && txjson == null) {
-                throw new IllegalStateException(IPayloadBuilder.ERROR_MISSING_ATTRIBUTE);
-            }
+            if (txblob != null && txjson != null) throw new IllegalStateException(IPayloadBuilder.ERROR_AMBIGUOUS_PAYLOAD);
+            if (txblob == null && txjson == null) throw new IllegalStateException(IPayloadBuilder.ERROR_MISSING_ATTRIBUTE);
         }
 
         @Override
@@ -141,10 +137,6 @@ public class PayloadBuilder {
                     String stageOne = sb.toString();
                     sb.setLength(0);
                     String stageTwo;
-                    sb.append("{");
-                    sb.append("\""+ IPayloadBuilder.KEY_TXJSON +"\":");
-                    sb.append(txjson);
-                    sb.append(",");
                     stageTwo = sb.toString();
                     mainPayload = objectMapper.readTree(stageTwo + stageOne).toPrettyString();
                 }
