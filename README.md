@@ -56,7 +56,7 @@ CredentialsBuilder myAccess = new CredentialsBuilder.builder()
 //Pass the created CredentialsBuilder object to XummClient.
 XummClient xummclient = new XummClient(myAccess);
 
-//Use the instance of Deserialize for Deserializing JSON response.
+//Use the instance of DeserializeIT for Deserializing JSON response.
 DeserializeIT deserialize = new DeserializeIT();
 ```
 
