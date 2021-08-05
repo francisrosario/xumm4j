@@ -23,7 +23,7 @@ public interface IPayloadBuilder {
     String KEY_CUSTOM_META = "custom_meta";
 
     boolean DEFAULT_SUBMIT_TRANSACTION = true;
-    boolean DEFAULT_MULTISIGN = true;
+    boolean DEFAULT_MULTISIGN = false;
     double DEFAULT_EXPIRE = 60;
 
     /**
