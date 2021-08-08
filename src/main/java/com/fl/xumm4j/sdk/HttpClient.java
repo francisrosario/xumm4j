@@ -1,5 +1,6 @@
 package com.fl.xumm4j.sdk;
 
+import com.fl.xumm4j.api.IXummClient;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IHttpClient;
 import okhttp3.*;
@@ -25,6 +26,7 @@ public class HttpClient implements IHttpClient {
         Response response = null;
         Request request = new Request.Builder()
                 .url(url)
+                .header("User-Agent", IXummClient.DEFAULT_USERAGENT)
                 .addHeader("X-API-Key", credentials.getApiKey())
                 .addHeader("X-API-Secret", credentials.getSecretKey())
                 .build();
@@ -44,6 +46,7 @@ public class HttpClient implements IHttpClient {
 
         Request request = new Request.Builder()
                 .url(url)
+                .header("User-Agent", IXummClient.DEFAULT_USERAGENT)
                 .addHeader("X-API-Key", credentials.getApiKey())
                 .addHeader("X-API-Secret", credentials.getSecretKey())
                 .method("POST", body)
@@ -61,6 +64,7 @@ public class HttpClient implements IHttpClient {
         Response response = null;
         Request request = new Request.Builder()
                 .url(url)
+                .header("User-Agent", IXummClient.DEFAULT_USERAGENT)
                 .addHeader("X-API-Key", credentials.getApiKey())
                 .addHeader("X-API-Secret", credentials.getSecretKey())
                 .delete()

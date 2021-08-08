@@ -1,6 +1,7 @@
 package com.fl.xumm4j.api;
 
 public interface IXummClient {
+    String DEFAULT_USERAGENT = "xumm4j";
     String ENDPOINT_PING = "https://xumm.app/api/v1/platform/ping";
     String ENDPOINT_CURATED_ASSETS = "https://xumm.app/api/v1/platform/curated-assets/";
     String ENDPOINT_TXID = "https://xumm.app/api/v1/platform/xrpl-tx/";
