@@ -23,7 +23,7 @@ Use this XUMM SDK in your project by adding the following to your `pom.xml`:
   <dependency>
     <groupId>com.github.francisrosario</groupId>
     <artifactId>xumm4j</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
   </dependency>
 </dependencies>
 ```
@@ -56,7 +56,7 @@ CredentialsBuilder myAccess = new CredentialsBuilder.builder()
 //Pass the created CredentialsBuilder object to XummClient.
 XummClient xummclient = new XummClient(myAccess);
 
-//Use the instance of Deserialize for Deserializing JSON response.
+//Use the instance of DeserializeIT for Deserializing JSON response.
 DeserializeIT deserialize = new DeserializeIT();
 ```
 
