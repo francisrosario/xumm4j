@@ -24,7 +24,7 @@ public interface IPayloadBuilder {
 
     boolean DEFAULT_SUBMIT_TRANSACTION = true;
     boolean DEFAULT_MULTISIGN = false;
-    double DEFAULT_EXPIRE = 60;
+    double DEFAULT_EXPIRE = 1440;
 
     /**
      * @param identifier
