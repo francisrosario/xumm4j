@@ -3,7 +3,6 @@ package com.fl.xumm4j.sdk;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fl.xumm4j.dao.KycStatusDAO;
-import com.fl.xumm4j.dao.StorageDAO;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.api.IXummClient;
 import org.json.JSONObject;
@@ -13,14 +12,14 @@ import java.util.Objects;
 
 public class XummClient implements IXummClient {
     private final HttpClient http;
-    private final DeserializeIT deserialize;
+    private final Deserialize deserialize;
     private final ObjectMapper mapper;
     private String response;
 
     public XummClient(CredentialsBuilder credentials) {
         http = new HttpClient(credentials);
         mapper = new ObjectMapper();
-        deserialize = new DeserializeIT();
+        deserialize = new Deserialize();
     }
 
     private String getToPrettyString(String response) throws JsonProcessingException {

@@ -9,7 +9,7 @@ import com.fl.xrpl4j.model.transactions.Payment;
 import com.fl.xrpl4j.model.transactions.XrpCurrencyAmount;
 import com.fl.xumm4j.dao.CuratedAssetsDAO;
 import com.fl.xumm4j.dao.GetPayloadDAO;
-import com.fl.xumm4j.sdk.DeserializeIT;
+import com.fl.xumm4j.sdk.Deserialize;
 import com.fl.xumm4j.sdk.XummClient;
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.sdk.builder.PayloadBuilder;
@@ -65,7 +65,7 @@ class Xumm4jUsage {
         System.out.println(xummClient.getTransaction("DA66B07C9FE0876A3447DE4C57D565FC9C5324485912D10B48C0507F191A4021"));
 
         String jsonResponse = xummClient.getCuratedAssets();
-        DeserializeIT deserialize = new DeserializeIT();
+        Deserialize deserialize = new Deserialize();
         //Other DAO are available under com.fl.xumm4j.dao.*
         CuratedAssetsDAO result = deserialize.CuratedAssets(jsonResponse);
         result.forEachCurrencies(System.out::println);

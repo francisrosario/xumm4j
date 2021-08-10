@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class XummClientTest {
     CredentialsBuilder credentialsBuilder;
     XummClient xummclient;
-    DeserializeIT deserialize;
+    Deserialize deserialize;
 
     public XummClientTest() {
         //These Keys aren't used for production, only in TESTING and DEMONSTRATION purposes.
@@ -23,7 +23,7 @@ class XummClientTest {
         assertEquals("6dab854e-b317-47f7-8453-490b8bd171ad", credentialsBuilder.getSecretKey());
 
         xummclient = new XummClient(credentialsBuilder);
-        deserialize = new DeserializeIT();
+        deserialize = new Deserialize();
     }
 
     @Test

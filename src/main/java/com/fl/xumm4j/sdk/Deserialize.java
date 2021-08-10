@@ -8,11 +8,11 @@ import com.fl.xumm4j.dao.*;
 
 import java.math.BigInteger;
 
-public class DeserializeIT implements IDeserialize {
+public class Deserialize implements IDeserialize {
     private final ObjectMapper mapper;
     private JsonNode jsonNode;
 
-    public DeserializeIT() {
+    public Deserialize() {
         mapper = new ObjectMapper();
     }
 
