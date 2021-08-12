@@ -30,7 +30,8 @@ public class CredentialsBuilder {
             return this;
         }
 
-        private void validate() {
+        @Override
+        public void validate() {
             try {
                 if (apiKey == null || apiKey.equals("")) throw new Exception(ICredentialsBuilder.ERROR_APIKEY);
                 else if (secretKey == null || secretKey.equals(""))

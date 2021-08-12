@@ -7,11 +7,11 @@ import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
  */
 public interface ICredentialsBuilder {
     /**
-     * The constant ERROR_APIKEY.
+     * The constant ERROR_APIKEY contains the error message whenever {@link CredentialsBuilder.builder#validate() is invoked and API Key is missing.}
      */
     String ERROR_APIKEY = "Empty API Key";
     /**
-     * The constant ERROR_SECRET_KEY.
+     * The constant ERROR_SECRET_KEY contains the error message whenever {@link CredentialsBuilder.builder#validate() is invoked and API Secret is missing.}
      */
     String ERROR_SECRET_KEY = "Empty Secret Key";
 
@@ -30,6 +30,11 @@ public interface ICredentialsBuilder {
      * @return the credentials builder . builder
      */
     CredentialsBuilder.builder secretKey(String secretKey);
+
+    /**
+     * Validate checks the API Key and Secret key if either one of them is missing from the builder attribute.
+     */
+    void validate();
 
     /**
      * Build credentials builder.
