@@ -207,8 +207,8 @@ public class Deserialize implements IDeserialize {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        ratesDAO.setUsd(BigInteger.valueOf(Long.parseLong(jsonNode.findPath("USD").asText())));
-        ratesDAO.setXrp(BigInteger.valueOf(Long.parseLong(jsonNode.findPath("XRP").asText())));
+        ratesDAO.setUsd(jsonNode.findPath("USD").asText());
+        ratesDAO.setXrp(jsonNode.findPath("XRP").asText());
         ratesDAO.setEn(jsonNode.findPath("__meta").findPath("currency").findPath("en").asText());
         ratesDAO.setCode(jsonNode.findPath("__meta").findPath("currency").findPath("code").asText());
         ratesDAO.setSymbol(jsonNode.findPath("__meta").findPath("currency").findPath("symbol").asText());
