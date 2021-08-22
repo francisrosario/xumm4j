@@ -1,4 +1,4 @@
-# XUMM SDK (Java)(Development Branch)
+# XUMM SDK (Java)
 [![](https://jitpack.io/v/francisrosario/xumm4j.svg)](https://jitpack.io/#francisrosario/xumm4j) [![DeepSource](https://deepsource.io/gh/francisrosario/xumm4j.svg/?label=active+issues&show_trend=true&token=E60qi8NmLp4upvGod8CDnNEX)](https://deepsource.io/gh/francisrosario/xumm4j/?ref=repository-badge)
 
 
@@ -23,7 +23,7 @@ Use this XUMM SDK in your project by adding the following to your `pom.xml`:
   <dependency>
     <groupId>com.github.francisrosario</groupId>
     <artifactId>xumm4j</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
   </dependency>
 </dependencies>
 ```
@@ -43,7 +43,7 @@ Import required class.
 ```java
 import com.fl.xumm4j.sdk.builder.CredentialsBuilder;
 import com.fl.xumm4j.sdk.XummClient;
-import com.fl.xumm4j.sdk.DeserializeIT;
+import com.fl.xumm4j.sdk.Deserialize;
 ```
 
 Now continue by creating an instance of CredentialsBuilder, XummClient, and Deserialize:
@@ -56,8 +56,8 @@ CredentialsBuilder myAccess = new CredentialsBuilder.builder()
 //Pass the created CredentialsBuilder object to XummClient.
 XummClient xummclient = new XummClient(myAccess);
 
-//Use the instance of DeserializeIT for Deserializing JSON response.
-DeserializeIT deserialize = new DeserializeIT();
+//Use the instance of Deserialize for Deserializing JSON response.
+Deserialize deserialize = new Deserialize();
 ```
 
 ### Credentials
