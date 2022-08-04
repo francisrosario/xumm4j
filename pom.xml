@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-aspects</artifactId>
-            <version>0.23.2</version>
+            <version>0.24.1</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
